@@ -1,0 +1,156 @@
+name: SAP BI Tools
+description: Collection of SAP Business Intelligence tools and APIs for analytics, reporting, and data visualization
+image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+created: '2024-01-20'
+modified: '2024-01-20'
+specificationVersion: '0.18'
+url: https://api.sap.com/bi-tools
+tags:
+- business intelligence
+- analytics
+- reporting
+- data visualization
+- SAP
+apis:
+- name: SAP Analytics Cloud API
+  description: RESTful API for SAP Analytics Cloud enabling data manipulation, story creation, and model management
+  image: https://www.sap.com/dam/application/shared/logos/sap-analytics-cloud.svg
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://api.sapanalytics.cloud
+  version: '1.0'
+  tags:
+  - analytics
+  - cloud
+  - stories
+  - models
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/
+  - type: OpenAPI
+    url: https://api.sap.com/api/SACOpenAPI/overview
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/b4f4d1e6e7fb4c08b0964e0b6d14d849.html
+  - type: Rate Limits
+    url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/rate-limits
+  contact:
+  - type: Support
+    url: https://support.sap.com/en/index.html
+- name: SAP BusinessObjects BI Platform RESTful Web Services
+  description: REST API for SAP BusinessObjects BI Platform for managing documents, users, and scheduling reports
+  humanURL: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM
+  baseURL: https://server:port/biprws
+  version: '4.3'
+  tags:
+  - businessobjects
+  - reports
+  - scheduling
+  - documents
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/
+  - type: API Reference
+    url: https://help.sap.com/doc/e39d9c134f1f4634addd5161f93dbf25/4.3/en-US/RESTful_Web_Services_User_Guide.pdf
+  - type: SDK
+    url: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/sdk
+  - type: Authentication
+    url: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/authentication
+  contact:
+  - type: Support
+    url: https://support.sap.com/en/index.html
+- name: SAP Crystal Reports API
+  description: SDK and APIs for embedding and automating SAP Crystal Reports
+  humanURL: https://help.sap.com/docs/CRYSTAL_REPORTS
+  version: '2020'
+  tags:
+  - crystal reports
+  - reporting
+  - embedded analytics
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/CRYSTAL_REPORTS/c5fb6213b96b4cc1bf43a55d68d9d87b/
+  - type: SDK Download
+    url: https://support.sap.com/en/product/analytics/crystal-reports.html
+  - type: Developer Guide
+    url: https://help.sap.com/docs/CRYSTAL_REPORTS/developer-guide
+  contact:
+  - type: Support
+    url: https://support.sap.com/en/index.html
+- name: SAP Lumira Discovery Extensions API
+  description: JavaScript API for creating custom visualizations and extensions in SAP Lumira
+  humanURL: https://help.sap.com/docs/LUMIRA
+  version: '2.4'
+  tags:
+  - lumira
+  - visualization
+  - extensions
+  - javascript
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/LUMIRA/82b8ad67e9b74a48bad806dc52c96fcc/
+  - type: Extension API
+    url: https://help.sap.com/docs/LUMIRA/extensions-api
+  - type: Samples
+    url: https://github.com/SAP/lumira-extension-viz
+  contact:
+  - type: GitHub
+    url: https://github.com/SAP/lumira-extension-viz
+- name: SAP HANA Cloud Data Lake API
+  description: RESTful API for accessing and managing data in SAP HANA Cloud Data Lake for BI workloads
+  humanURL: https://help.sap.com/docs/HANA_CLOUD_DATA_LAKE
+  baseURL: https://api.hana.ondemand.com
+  version: '1.0'
+  tags:
+  - hana
+  - data lake
+  - cloud
+  - data access
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/HANA_CLOUD_DATA_LAKE/REST_API
+  - type: OpenAPI
+    url: https://api.sap.com/api/HanaCloudDataLake/overview
+  - type: Getting Started
+    url: https://help.sap.com/docs/HANA_CLOUD_DATA_LAKE/getting-started
+  contact:
+  - type: Support
+    url: https://support.sap.com/en/index.html
+- name: SAP Datasphere API
+  description: API for SAP Datasphere (formerly SAP Data Warehouse Cloud) for data integration and modeling
+  humanURL: https://help.sap.com/docs/SAP_DATASPHERE
+  baseURL: https://datasphere-api.cfapps.eu10.hana.ondemand.com
+  version: '2023'
+  tags:
+  - datasphere
+  - data warehouse
+  - data modeling
+  - integration
+  properties:
+  - type: Documentation
+    url: https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/
+  - type: API Reference
+    url: https://help.sap.com/docs/SAP_DATASPHERE/api-reference
+  - type: OpenAPI
+    url: https://api.sap.com/api/Datasphere/overview
+  contact:
+  - type: Support
+    url: https://support.sap.com/en/index.html
+maintainers:
+- name: SAP SE
+  email: support@sap.com
+  url: https://www.sap.com
+common:
+- type: Portal
+  url: https://api.sap.com
+- type: Authentication
+  url: https://help.sap.com/docs/authentication
+- type: Terms of Service
+  url: https://www.sap.com/about/legal/terms-of-use.html
+- type: Privacy Policy
+  url: https://www.sap.com/about/legal/privacy.html
+- type: Support
+  url: https://support.sap.com
+- type: Community
+  url: https://community.sap.com
+- type: Learning
+  url: https://learning.sap.com
+include: []
