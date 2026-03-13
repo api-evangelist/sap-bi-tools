@@ -1,0 +1,333 @@
+openapi: 3.1.0
+info:
+  title: SAP Analytics Cloud Data Export API
+  description: >-
+    OData-based API for exporting fact data and master data from SAP Analytics
+    Cloud models. The API consists of two services: the Administration service
+    for discovering available models (providers) and namespaces, and the
+    Provider service for retrieving metadata, fact data, and master data from
+    specific planning models. Supports standard OData query parameters for
+    filtering, selecting, and paging data. Enables programmatic extraction
+    of underlying data for integration with external systems and data
+    pipelines.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+externalDocs:
+  description: SAP Analytics Cloud Data Export API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/db62fd76514b48f8b71d695360320f4a.html
+servers:
+  - url: https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/dataexport
+    description: SAP Analytics Cloud Data Export Service
+    variables:
+      tenant:
+        default: my-tenant
+        description: The SAP Analytics Cloud tenant name
+      datacenter:
+        default: eu1
+        description: >-
+          The data center region (e.g., eu1, eu10, us1, us10, ap1)
+tags:
+  - name: Administration
+    description: >-
+      Administration service endpoints for discovering available namespaces
+      and providers (models) on the SAP Analytics Cloud tenant.
+  - name: Fact Data
+    description: >-
+      Provider service endpoints for retrieving fact data from specific
+      models. Fact data includes the transactional records with associated
+      dimension values and measures.
+  - name: Master Data
+    description: >-
+      Provider service endpoints for retrieving master data from specific
+      model dimensions. Master data includes the dimension member lists
+      with their attributes and hierarchies.
+  - name: Metadata
+    description: >-
+      Provider service endpoints for retrieving OData metadata documents
+      describing the structure of models, dimensions, and measures.
+security:
+  - oauth2: []
+paths:
+  /administration/Namespaces:
+    get:
+      operationId: listNamespaces
+      summary: List available namespaces
+      description: >-
+        Retrieves a list of namespaces available for data export. The
+        primary namespace is 'sac' which contains all SAP Analytics Cloud
+        models.
+      tags:
+        - Administration
+      parameters:
+        - $ref: '#/components/parameters/FormatParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of namespaces
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+  /administration/Namespaces(NamespaceID='{namespaceId}')/Providers:
+    get:
+      operationId: listProviders
+      summary: List available providers (models)
+      description: >-
+        Retrieves a list of providers (models) available for data export
+        within a specific namespace. Each provider represents an SAP
+        Analytics Cloud model with its name, description, and provider ID
+        that can be used to access its data.
+      tags:
+        - Administration
+      parameters:
+        - $ref: '#/components/parameters/NamespaceIdParam'
+        - $ref: '#/components/parameters/FormatParam'
+        - $ref: '#/components/parameters/ODataTopParam'
+        - $ref: '#/components/parameters/ODataSkipParam'
+        - $ref: '#/components/parameters/ODataFilterParam'
+        - $ref: '#/components/parameters/ODataSelectParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of providers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderCollection'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: Namespace not found
+  /providers/sac/{modelId}/$metadata:
+    get:
+      operationId: getModelMetadata
+      summary: Get model metadata
+      description: >-
+        Retrieves the OData metadata document for a specific model. The
+        metadata describes the structure of the model including its
+        dimensions, measures, and available entity sets for querying fact
+        data and master data.
+      tags:
+        - Metadata
+      parameters:
+        - $ref: '#/components/parameters/ModelIdParam'
+        - $ref: '#/components/parameters/FormatParam'
+      responses:
+        '200':
+          description: Successfully retrieved model metadata
+          content:
+            application/xml:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: Model not found
+  /providers/sac/{modelId}/FactData:
+    get:
+      operationId: getFactData
+      summary: Get fact data from a model
+      description: >-
+        Retrieves fact data (transactional records) from a specific SAP
+        Analytics Cloud model. Fact data includes dimension member values
+        and measure values. Supports OData query parameters for filtering,
+        selecting specific columns, ordering, and pagination.
+      tags:
+        - Fact Data
+      parameters:
+        - $ref: '#/components/parameters/ModelIdParam'
+        - $ref: '#/components/parameters/FormatParam'
+        - $ref: '#/components/parameters/ODataTopParam'
+        - $ref: '#/components/parameters/ODataSkipParam'
+        - $ref: '#/components/parameters/ODataFilterParam'
+        - $ref: '#/components/parameters/ODataSelectParam'
+        - $ref: '#/components/parameters/ODataOrderByParam'
+      responses:
+        '200':
+          description: Successfully retrieved fact data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: Model not found
+  /providers/sac/{modelId}/MasterData:
+    get:
+      operationId: getMasterDataOverview
+      summary: Get master data overview
+      description: >-
+        Retrieves an overview of available master data (dimension members
+        with navigation attributes) from a specific model. Returns fact
+        data enriched with dimension property values.
+      tags:
+        - Master Data
+      parameters:
+        - $ref: '#/components/parameters/ModelIdParam'
+        - $ref: '#/components/parameters/FormatParam'
+        - $ref: '#/components/parameters/ODataTopParam'
+        - $ref: '#/components/parameters/ODataSkipParam'
+      responses:
+        '200':
+          description: Successfully retrieved master data overview
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: Model not found
+  /providers/sac/{modelId}/{dimensionName}Master:
+    get:
+      operationId: getDimensionMasterData
+      summary: Get master data for a dimension
+      description: >-
+        Retrieves the master data (member list with attributes) for a
+        specific dimension within a model. The dimension name is appended
+        with 'Master' to form the entity set name. Supports OData query
+        parameters for filtering and pagination.
+      tags:
+        - Master Data
+      parameters:
+        - $ref: '#/components/parameters/ModelIdParam'
+        - name: dimensionName
+          in: path
+          required: true
+          description: >-
+            The technical name of the dimension whose master data to
+            retrieve
+          schema:
+            type: string
+        - $ref: '#/components/parameters/FormatParam'
+        - $ref: '#/components/parameters/ODataTopParam'
+        - $ref: '#/components/parameters/ODataSkipParam'
+        - $ref: '#/components/parameters/ODataFilterParam'
+        - $ref: '#/components/parameters/ODataSelectParam'
+      responses:
+        '200':
+          description: Successfully retrieved dimension master data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: Model or dimension not found
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: >-
+        OAuth 2.0 authentication using SAML bearer assertion or
+        authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+          tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+          scopes: {}
+  parameters:
+    NamespaceIdParam:
+      name: namespaceId
+      in: path
+      required: true
+      description: The namespace identifier (typically 'sac')
+      schema:
+        type: string
+        default: sac
+    ModelIdParam:
+      name: modelId
+      in: path
+      required: true
+      description: The unique provider (model) identifier
+      schema:
+        type: string
+    FormatParam:
+      name: $format
+      in: query
+      description: The response format (JSON or XML)
+      schema:
+        type: string
+        enum:
+          - JSON
+          - XML
+        default: JSON
+    ODataTopParam:
+      name: $top
+      in: query
+      description: Maximum number of records to return
+      schema:
+        type: integer
+    ODataSkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+    ODataFilterParam:
+      name: $filter
+      in: query
+      description: OData filter expression to apply
+      schema:
+        type: string
+    ODataSelectParam:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include
+      schema:
+        type: string
+    ODataOrderByParam:
+      name: $orderby
+      in: query
+      description: Property name and direction to sort by
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      description: A standard OData collection response wrapper
+      properties:
+        '@odata.context':
+          type: string
+          description: The OData context URL
+        value:
+          type: array
+          description: The collection of results
+          items:
+            type: object
+    ProviderCollection:
+      type: object
+      description: A collection of providers (models) available for export
+      properties:
+        '@odata.context':
+          type: string
+          description: The OData context URL
+        value:
+          type: array
+          description: The list of providers
+          items:
+            $ref: '#/components/schemas/Provider'
+    Provider:
+      type: object
+      description: >-
+        Represents an SAP Analytics Cloud model available for data export.
+        Providers contain fact data and master data that can be queried
+        via the Provider service endpoints.
+      properties:
+        ProviderID:
+          type: string
+          description: The unique provider identifier for the model
+        Description:
+          type: string
+          description: The human-readable description of the model
+        ProviderName:
+          type: string
+          description: The display name of the model

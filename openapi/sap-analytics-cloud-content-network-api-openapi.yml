@@ -1,0 +1,294 @@
+openapi: 3.1.0
+info:
+  title: SAP Analytics Cloud Content Network REST API
+  description: >-
+    REST API for managing content in the SAP Analytics Cloud Content Network.
+    Enables programmatic access to get, publish, and delete private and public
+    content items available through the Content Network. Content items include
+    stories, models, and other analytics artifacts that can be shared across
+    SAP Analytics Cloud tenants. The API supports OAuth 2.0 Authorization Code
+    Grant authentication flows.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+externalDocs:
+  description: SAP Analytics Cloud Content Network REST API Developer Guide
+  url: https://help.sap.com/doc/9825c700f68e489ca5634a3da101a94c/release/en-US/ca804ae1c3874053a1e140e7c9cea019.pdf
+servers:
+  - url: https://{tenant}.{datacenter}.sapanalytics.cloud
+    description: SAP Analytics Cloud Tenant
+    variables:
+      tenant:
+        default: my-tenant
+        description: The SAP Analytics Cloud tenant name
+      datacenter:
+        default: eu1
+        description: >-
+          The data center region (e.g., eu1, eu10, us1, us10, ap1)
+tags:
+  - name: Content Items
+    description: >-
+      Manage content items in the Content Network including retrieving,
+      publishing, and deleting both private and public content packages.
+  - name: Import
+    description: >-
+      Import content items from the Content Network into the local SAP
+      Analytics Cloud tenant.
+security:
+  - oauth2: []
+paths:
+  /api/v1/contentnetwork/items:
+    get:
+      operationId: listContentItems
+      summary: List content items
+      description: >-
+        Retrieves a list of content items available in the Content Network.
+        Returns both private and public content items with their metadata
+        including name, description, type, and version information.
+      tags:
+        - Content Items
+      parameters:
+        - name: type
+          in: query
+          description: >-
+            Filter by content item type (e.g., STORY, MODEL, PACKAGE)
+          schema:
+            type: string
+        - name: visibility
+          in: query
+          description: Filter by visibility (PRIVATE or PUBLIC)
+          schema:
+            type: string
+            enum:
+              - PRIVATE
+              - PUBLIC
+      responses:
+        '200':
+          description: Successfully retrieved list of content items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContentItem'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+    post:
+      operationId: publishContentItem
+      summary: Publish a content item
+      description: >-
+        Publishes a content item to the Content Network making it available
+        for other tenants to discover and import. The content item is
+        packaged with its dependencies and metadata.
+      tags:
+        - Content Items
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentItemPublish'
+      responses:
+        '201':
+          description: Content item published successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentItem'
+        '400':
+          description: Bad request - invalid content item data
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+  /api/v1/contentnetwork/items/{itemId}:
+    get:
+      operationId: getContentItem
+      summary: Get a content item by ID
+      description: >-
+        Retrieves detailed information about a specific content item from
+        the Content Network identified by its unique item ID.
+      tags:
+        - Content Items
+      parameters:
+        - $ref: '#/components/parameters/ItemIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved content item details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentItem'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: Content item not found
+    delete:
+      operationId: deleteContentItem
+      summary: Delete a content item
+      description: >-
+        Deletes a content item from the Content Network. Only private
+        content items owned by the current tenant can be deleted.
+      tags:
+        - Content Items
+      parameters:
+        - $ref: '#/components/parameters/ItemIdParam'
+      responses:
+        '204':
+          description: Content item deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '403':
+          description: Forbidden - insufficient permissions to delete
+        '404':
+          description: Content item not found
+  /api/v1/contentnetwork/items/{itemId}/import:
+    post:
+      operationId: importContentItem
+      summary: Import a content item
+      description: >-
+        Imports a content item from the Content Network into the local SAP
+        Analytics Cloud tenant. The imported content and its dependencies
+        are created in the tenant's file repository.
+      tags:
+        - Import
+      parameters:
+        - $ref: '#/components/parameters/ItemIdParam'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportOptions'
+      responses:
+        '200':
+          description: Content item imported successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResult'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: Content item not found
+        '409':
+          description: Conflict - content item already exists in tenant
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: >-
+        OAuth 2.0 authentication using authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+          tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+          scopes: {}
+  parameters:
+    ItemIdParam:
+      name: itemId
+      in: path
+      required: true
+      description: The unique identifier of the content item
+      schema:
+        type: string
+  schemas:
+    ContentItem:
+      type: object
+      description: >-
+        Represents a content item in the SAP Analytics Cloud Content
+        Network. Content items are shareable artifacts such as stories,
+        models, and packages.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the content item
+        name:
+          type: string
+          description: The display name of the content item
+        description:
+          type: string
+          description: A text description of the content item
+        type:
+          type: string
+          description: The type of content item (e.g., STORY, MODEL, PACKAGE)
+        visibility:
+          type: string
+          description: The visibility scope (PRIVATE or PUBLIC)
+          enum:
+            - PRIVATE
+            - PUBLIC
+        version:
+          type: string
+          description: The version of the content item
+        createdTime:
+          type: string
+          format: date-time
+          description: The timestamp when the item was published
+        modifiedTime:
+          type: string
+          format: date-time
+          description: The timestamp when the item was last modified
+        owner:
+          type: string
+          description: The tenant that published the content item
+    ContentItemPublish:
+      type: object
+      description: Request body for publishing a content item
+      required:
+        - name
+        - resourceId
+      properties:
+        name:
+          type: string
+          description: The display name for the published content item
+        description:
+          type: string
+          description: A description of the content item
+        resourceId:
+          type: string
+          description: The ID of the local resource to publish
+        visibility:
+          type: string
+          description: The visibility scope for the published item
+          enum:
+            - PRIVATE
+            - PUBLIC
+          default: PRIVATE
+    ImportOptions:
+      type: object
+      description: Options for importing a content item
+      properties:
+        targetFolderId:
+          type: string
+          description: The target folder ID for the imported content
+        overwrite:
+          type: boolean
+          description: Whether to overwrite existing content
+          default: false
+    ImportResult:
+      type: object
+      description: The result of a content import operation
+      properties:
+        status:
+          type: string
+          description: The status of the import operation
+          enum:
+            - SUCCESS
+            - PARTIAL
+            - FAILED
+        importedResources:
+          type: array
+          description: List of resources that were imported
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the imported resource
+              name:
+                type: string
+                description: The name of the imported resource
+              type:
+                type: string
+                description: The type of the imported resource

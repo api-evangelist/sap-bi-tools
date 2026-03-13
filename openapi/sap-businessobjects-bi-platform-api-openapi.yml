@@ -1,0 +1,456 @@
+openapi: 3.1.0
+info:
+  title: SAP BusinessObjects BI Platform RESTful Web Services
+  description: >-
+    REST API for SAP BusinessObjects BI Platform (biprws) for managing
+    documents, users, scheduling reports, and querying the CMS repository.
+    The API provides endpoints for authentication via logon tokens,
+    browsing the InfoStore repository, managing BI Inbox items, scheduling
+    report execution, and performing CMS queries. Supports both JSON and
+    XML response formats. Requires a logon token obtained through the
+    logon endpoint for subsequent API calls.
+  version: '4.3'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+externalDocs:
+  description: SAP BusinessObjects BI Platform RESTful Web Services Documentation
+  url: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/
+servers:
+  - url: http://{server}:{port}/biprws
+    description: SAP BusinessObjects BI Platform Server
+    variables:
+      server:
+        default: localhost
+        description: The BI Platform server hostname
+      port:
+        default: '6405'
+        description: The WACS port number
+tags:
+  - name: Authentication
+    description: >-
+      Logon and logoff endpoints for obtaining and invalidating session
+      tokens required for all subsequent API calls.
+  - name: InfoStore
+    description: >-
+      Browse and query the CMS InfoStore repository to access documents,
+      folders, users, groups, and other BI Platform objects.
+  - name: CMS Query
+    description: >-
+      Execute CMS queries against the BI Platform repository to search
+      for objects using CMS query language syntax.
+  - name: Documents
+    description: >-
+      Manage BI documents including retrieving document metadata and
+      scheduling document execution.
+  - name: Inbox
+    description: >-
+      Manage BI Inbox items including viewing received reports and
+      scheduled instances.
+  - name: Scheduling
+    description: >-
+      Schedule reports and documents for execution with configurable
+      parameters, recurrence, and destination options.
+security:
+  - logonToken: []
+paths:
+  /logon/long:
+    post:
+      operationId: logon
+      summary: Log on to BI Platform
+      description: >-
+        Authenticates a user against the BI Platform and returns a logon
+        token that must be included in subsequent API requests. Supports
+        Enterprise, LDAP, and Windows AD authentication types.
+      tags:
+        - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogonRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/LogonRequest'
+      responses:
+        '200':
+          description: Successfully authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogonResponse'
+        '401':
+          description: Authentication failed - invalid credentials
+  /logoff:
+    post:
+      operationId: logoff
+      summary: Log off from BI Platform
+      description: >-
+        Invalidates the current logon token and terminates the session.
+        The logon token provided in the header is no longer valid after
+        this call.
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: Successfully logged off
+        '401':
+          description: Invalid or expired logon token
+  /v1/infostore:
+    get:
+      operationId: getInfoStoreRoot
+      summary: Get InfoStore root
+      description: >-
+        Retrieves the root entry of the InfoStore repository. The
+        InfoStore is the central object repository of the BI Platform
+        containing all documents, folders, users, and other managed objects.
+      tags:
+        - InfoStore
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+      responses:
+        '200':
+          description: Successfully retrieved InfoStore root
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoStoreEntry'
+        '401':
+          description: Invalid or expired logon token
+  /v1/infostore/{objectId}:
+    get:
+      operationId: getInfoStoreObject
+      summary: Get an InfoStore object by ID
+      description: >-
+        Retrieves a specific object from the InfoStore repository by its
+        unique CMS object identifier. Returns the object metadata
+        including name, type, creation date, and parent folder.
+      tags:
+        - InfoStore
+      parameters:
+        - $ref: '#/components/parameters/ObjectIdParam'
+        - $ref: '#/components/parameters/AcceptHeader'
+      responses:
+        '200':
+          description: Successfully retrieved object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoStoreEntry'
+        '401':
+          description: Invalid or expired logon token
+        '404':
+          description: Object not found
+  /v1/infostore/{objectId}/children:
+    get:
+      operationId: getInfoStoreChildren
+      summary: List children of an InfoStore object
+      description: >-
+        Retrieves the child objects of a specific InfoStore folder or
+        container object. Supports pagination with page and pageSize
+        query parameters. Commonly used to browse the folder hierarchy.
+      tags:
+        - InfoStore
+      parameters:
+        - $ref: '#/components/parameters/ObjectIdParam'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+        - $ref: '#/components/parameters/AcceptHeader'
+      responses:
+        '200':
+          description: Successfully retrieved children
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoStoreCollection'
+        '401':
+          description: Invalid or expired logon token
+        '404':
+          description: Parent object not found
+  /v1/cmsquery:
+    get:
+      operationId: executeCmsQueryGet
+      summary: Execute a CMS query (GET)
+      description: >-
+        Executes a CMS query against the BI Platform repository using the
+        query parameter. CMS queries use a SQL-like syntax to search for
+        objects by type, name, and other properties.
+      tags:
+        - CMS Query
+      parameters:
+        - name: query
+          in: query
+          required: true
+          description: >-
+            The CMS query string (e.g., SELECT * FROM CI_INFOOBJECTS
+            WHERE SI_KIND='Webi')
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+        - $ref: '#/components/parameters/AcceptHeader'
+      responses:
+        '200':
+          description: Successfully executed query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoStoreCollection'
+        '400':
+          description: Invalid query syntax
+        '401':
+          description: Invalid or expired logon token
+    post:
+      operationId: executeCmsQueryPost
+      summary: Execute a CMS query (POST)
+      description: >-
+        Executes a CMS query against the BI Platform repository using a
+        POST request body. Preferred for complex queries that may exceed
+        URL length limits.
+      tags:
+        - CMS Query
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The CMS query string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The CMS query string
+      responses:
+        '200':
+          description: Successfully executed query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoStoreCollection'
+        '400':
+          description: Invalid query syntax
+        '401':
+          description: Invalid or expired logon token
+  /v1/infostore/{documentId}/scheduleForms/now:
+    post:
+      operationId: scheduleDocumentNow
+      summary: Schedule a document for immediate execution
+      description: >-
+        Schedules a document for immediate execution on the BI Platform.
+        Creates a new scheduled instance that runs the document with the
+        specified parameters and delivers the output to the configured
+        destination.
+      tags:
+        - Scheduling
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: The CMS ID of the document to schedule
+          schema:
+            type: string
+        - $ref: '#/components/parameters/AcceptHeader'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleRequest'
+      responses:
+        '200':
+          description: Document scheduled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleResponse'
+        '401':
+          description: Invalid or expired logon token
+        '404':
+          description: Document not found
+  /v1/inbox:
+    get:
+      operationId: listInboxItems
+      summary: List BI Inbox items
+      description: >-
+        Retrieves a list of items in the authenticated user's BI Inbox.
+        The inbox contains reports and documents that have been sent to
+        the user or scheduled instances that have completed.
+      tags:
+        - Inbox
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+        - $ref: '#/components/parameters/AcceptHeader'
+      responses:
+        '200':
+          description: Successfully retrieved inbox items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoStoreCollection'
+        '401':
+          description: Invalid or expired logon token
+components:
+  securitySchemes:
+    logonToken:
+      type: apiKey
+      in: header
+      name: X-SAP-LogonToken
+      description: >-
+        Logon token obtained from the /logon/long endpoint. Must be
+        included in all subsequent API requests.
+  parameters:
+    ObjectIdParam:
+      name: objectId
+      in: path
+      required: true
+      description: The CMS object identifier
+      schema:
+        type: string
+    AcceptHeader:
+      name: Accept
+      in: header
+      description: The desired response format
+      schema:
+        type: string
+        enum:
+          - application/json
+          - application/xml
+        default: application/json
+    PageParam:
+      name: page
+      in: query
+      description: The page number for pagination (1-based)
+      schema:
+        type: integer
+        default: 1
+    PageSizeParam:
+      name: pageSize
+      in: query
+      description: The number of items per page
+      schema:
+        type: integer
+        default: 50
+  schemas:
+    LogonRequest:
+      type: object
+      description: Authentication credentials for logging on to the BI Platform
+      required:
+        - userName
+        - password
+        - auth
+      properties:
+        userName:
+          type: string
+          description: The username for authentication
+        password:
+          type: string
+          description: The password for authentication
+          format: password
+        auth:
+          type: string
+          description: >-
+            The authentication type (secEnterprise, secLDAP, secWinAD)
+          enum:
+            - secEnterprise
+            - secLDAP
+            - secWinAD
+          default: secEnterprise
+    LogonResponse:
+      type: object
+      description: Response containing the logon token and session information
+      properties:
+        logonToken:
+          type: string
+          description: >-
+            The logon token to use in subsequent API requests via the
+            X-SAP-LogonToken header
+    InfoStoreEntry:
+      type: object
+      description: >-
+        Represents an object in the BI Platform CMS InfoStore repository.
+        All managed objects including documents, folders, users, and
+        groups are represented as InfoStore entries.
+      properties:
+        SI_ID:
+          type: integer
+          description: The unique CMS object identifier
+        SI_NAME:
+          type: string
+          description: The display name of the object
+        SI_KIND:
+          type: string
+          description: >-
+            The object type (e.g., Webi, CrystalReport, Folder,
+            FullClient, Publication)
+        SI_DESCRIPTION:
+          type: string
+          description: A text description of the object
+        SI_CREATION_TIME:
+          type: string
+          format: date-time
+          description: The timestamp when the object was created
+        SI_UPDATE_TS:
+          type: string
+          format: date-time
+          description: The timestamp when the object was last updated
+        SI_OWNER:
+          type: string
+          description: The owner of the object
+        SI_PARENTID:
+          type: integer
+          description: The CMS ID of the parent folder
+        SI_PATH:
+          type: string
+          description: The full path to the object in the repository
+    InfoStoreCollection:
+      type: object
+      description: A paginated collection of InfoStore entries
+      properties:
+        entries:
+          type: array
+          description: The list of InfoStore entries in this page
+          items:
+            $ref: '#/components/schemas/InfoStoreEntry'
+        __count:
+          type: integer
+          description: Total number of matching entries
+    ScheduleRequest:
+      type: object
+      description: Request parameters for scheduling a document
+      properties:
+        parameters:
+          type: array
+          description: Report parameters to set before execution
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The parameter name
+              value:
+                type: string
+                description: The parameter value
+        format:
+          type: string
+          description: >-
+            The output format for the scheduled instance (e.g., pdf, xlsx)
+    ScheduleResponse:
+      type: object
+      description: Response from scheduling a document
+      properties:
+        SI_ID:
+          type: integer
+          description: The CMS ID of the scheduled instance
+        status:
+          type: string
+          description: The scheduling status

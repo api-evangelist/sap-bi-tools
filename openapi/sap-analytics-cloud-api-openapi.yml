@@ -1,0 +1,663 @@
+openapi: 3.1.0
+info:
+  title: SAP Analytics Cloud API
+  description: >-
+    RESTful API for SAP Analytics Cloud enabling programmatic access to system
+    data stored on an SAP Analytics Cloud tenant. The API provides endpoints
+    for managing stories, models, users, teams, calendars, and other
+    resources. It supports SCIM 2.0 for user provisioning, OData for data
+    access, and standard REST patterns for content management. Authentication
+    uses OAuth 2.0 with SAML bearer assertion or authorization code grant
+    flows.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+externalDocs:
+  description: SAP Analytics Cloud REST API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html
+servers:
+  - url: https://{tenant}.{datacenter}.sapanalytics.cloud
+    description: SAP Analytics Cloud Tenant
+    variables:
+      tenant:
+        default: my-tenant
+        description: The SAP Analytics Cloud tenant name
+      datacenter:
+        default: eu1
+        description: >-
+          The data center region (e.g., eu1, eu10, us1, us10, ap1)
+tags:
+  - name: Stories
+    description: >-
+      Manage analytic stories including dashboards and reports. Stories are
+      the primary visualization artifact in SAP Analytics Cloud.
+  - name: Models
+    description: >-
+      Access and manage planning and analytic models that store and organize
+      data in SAP Analytics Cloud.
+  - name: Resources
+    description: >-
+      Browse and manage resources within the SAP Analytics Cloud file
+      repository including stories, models, and folders.
+  - name: Users
+    description: >-
+      SCIM 2.0 endpoints for managing user accounts, provisioning, and
+      deprovisioning in SAP Analytics Cloud.
+  - name: Teams
+    description: >-
+      SCIM 2.0 endpoints for managing teams and group memberships for
+      access control in SAP Analytics Cloud.
+  - name: Calendars
+    description: >-
+      Manage calendar events and tasks used for planning workflows and
+      scheduling in SAP Analytics Cloud.
+security:
+  - oauth2: []
+paths:
+  /api/v1/stories:
+    get:
+      operationId: listStories
+      summary: List stories
+      description: >-
+        Retrieves a list of stories available on the SAP Analytics Cloud
+        tenant. Supports query parameters to include additional metadata
+        such as models used in each story. Returns a JSON array of story
+        objects with their identifiers, names, descriptions, and metadata.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of stories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Story'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '403':
+          description: Forbidden - insufficient permissions
+  /api/v1/stories/{storyId}:
+    get:
+      operationId: getStory
+      summary: Get a story by ID
+      description: >-
+        Retrieves detailed information about a specific story identified by
+        its unique story ID. Returns the story metadata, structure, and
+        optionally the models used within it.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/StoryIdParam'
+        - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successfully retrieved story details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: Story not found
+  /api/v1/Resources:
+    get:
+      operationId: listResources
+      summary: List resources
+      description: >-
+        Retrieves a list of resources from the SAP Analytics Cloud file
+        repository. Resources include stories, models, folders, and other
+        artifacts. Supports filtering by resource type and pagination.
+      tags:
+        - Resources
+      parameters:
+        - name: resourceType
+          in: query
+          description: Filter resources by type (e.g., STORY, MODEL, FOLDER)
+          schema:
+            type: string
+        - name: resourceSubType
+          in: query
+          description: Filter resources by sub-type
+          schema:
+            type: string
+        - $ref: '#/components/parameters/TopParam'
+        - $ref: '#/components/parameters/SkipParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of resources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resource'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+  /api/v1/scim/Users:
+    get:
+      operationId: listUsersScim1
+      summary: List users (SCIM 1.1)
+      description: >-
+        Retrieves a list of users provisioned in SAP Analytics Cloud using
+        SCIM 1.1 protocol. Supports filtering by user attributes such as
+        userName and email. Returns user records with profile information,
+        roles, and team memberships.
+      tags:
+        - Users
+      parameters:
+        - name: filter
+          in: query
+          description: >-
+            SCIM filter expression (e.g., userName eq "john.doe")
+          schema:
+            type: string
+        - $ref: '#/components/parameters/CountParam'
+        - name: startIndex
+          in: query
+          description: The starting index for pagination (1-based)
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Successfully retrieved list of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimListResponse'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+  /api/v1/scim2/Users:
+    get:
+      operationId: listUsersScim2
+      summary: List users (SCIM 2.0)
+      description: >-
+        Retrieves a list of users provisioned in SAP Analytics Cloud using
+        SCIM 2.0 protocol. Supports filtering by user attributes such as
+        userName, email, and custom attributes. Returns user records with
+        profile information, roles, and team memberships.
+      tags:
+        - Users
+      parameters:
+        - name: filter
+          in: query
+          description: >-
+            SCIM 2.0 filter expression (e.g., userName eq "john.doe")
+          schema:
+            type: string
+        - $ref: '#/components/parameters/CountParam'
+        - name: startIndex
+          in: query
+          description: The starting index for pagination (1-based)
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Successfully retrieved list of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimListResponse'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+    post:
+      operationId: createUserScim2
+      summary: Create a user (SCIM 2.0)
+      description: >-
+        Creates a new user in SAP Analytics Cloud using SCIM 2.0 protocol.
+        Requires user profile attributes including userName, name, and
+        email. Returns the created user record with its assigned ID.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScimUser'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '400':
+          description: Bad request - invalid user data
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '409':
+          description: Conflict - user already exists
+  /api/v1/scim2/Users/{userId}:
+    get:
+      operationId: getUserScim2
+      summary: Get a user by ID (SCIM 2.0)
+      description: >-
+        Retrieves detailed information about a specific user identified by
+        their unique user ID using SCIM 2.0 protocol.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/UserIdParam'
+      responses:
+        '200':
+          description: Successfully retrieved user details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: User not found
+    put:
+      operationId: updateUserScim2
+      summary: Update a user (SCIM 2.0)
+      description: >-
+        Updates an existing user in SAP Analytics Cloud using SCIM 2.0
+        protocol. Replaces the entire user record with the provided data.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/UserIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScimUser'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '400':
+          description: Bad request - invalid user data
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: User not found
+    delete:
+      operationId: deleteUserScim2
+      summary: Delete a user (SCIM 2.0)
+      description: >-
+        Deletes a user from SAP Analytics Cloud using SCIM 2.0 protocol.
+        Permanently removes the user account and associated data.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/UserIdParam'
+      responses:
+        '204':
+          description: User deleted successfully
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: User not found
+  /api/v1/scim2/Groups:
+    get:
+      operationId: listTeams
+      summary: List teams (SCIM 2.0)
+      description: >-
+        Retrieves a list of teams (groups) configured in SAP Analytics Cloud
+        using SCIM 2.0 protocol. Teams are used for organizing users and
+        managing access control to content.
+      tags:
+        - Teams
+      parameters:
+        - name: filter
+          in: query
+          description: SCIM 2.0 filter expression for teams
+          schema:
+            type: string
+        - $ref: '#/components/parameters/CountParam'
+        - name: startIndex
+          in: query
+          description: The starting index for pagination (1-based)
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Successfully retrieved list of teams
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimListResponse'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+    post:
+      operationId: createTeam
+      summary: Create a team (SCIM 2.0)
+      description: >-
+        Creates a new team (group) in SAP Analytics Cloud using SCIM 2.0
+        protocol. Teams can be assigned members and used for content sharing
+        and access control.
+      tags:
+        - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScimGroup'
+      responses:
+        '201':
+          description: Team created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimGroup'
+        '400':
+          description: Bad request - invalid team data
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+  /api/v1/calendars:
+    get:
+      operationId: listCalendars
+      summary: List calendar events
+      description: >-
+        Retrieves a list of calendar events and tasks configured in SAP
+        Analytics Cloud. Calendars support planning workflows, scheduling
+        notifications, and organizing collaborative tasks.
+      tags:
+        - Calendars
+      responses:
+        '200':
+          description: Successfully retrieved calendar events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CalendarEvent'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: >-
+        OAuth 2.0 authentication using SAML bearer assertion or
+        authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+          tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+          scopes: {}
+  parameters:
+    StoryIdParam:
+      name: storyId
+      in: path
+      required: true
+      description: The unique identifier of the story
+      schema:
+        type: string
+    UserIdParam:
+      name: userId
+      in: path
+      required: true
+      description: The unique identifier of the user
+      schema:
+        type: string
+    IncludeParam:
+      name: include
+      in: query
+      description: >-
+        Comma-separated list of related resources to include in the
+        response (e.g., models)
+      schema:
+        type: string
+    TopParam:
+      name: $top
+      in: query
+      description: Maximum number of records to return
+      schema:
+        type: integer
+    SkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+    CountParam:
+      name: count
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+  schemas:
+    Story:
+      type: object
+      description: >-
+        Represents an analytic story in SAP Analytics Cloud. Stories are
+        the primary visualization artifact containing charts, tables, and
+        other components for data analysis.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the story
+        name:
+          type: string
+          description: The display name of the story
+        description:
+          type: string
+          description: A text description of the story
+        createdTime:
+          type: string
+          format: date-time
+          description: The timestamp when the story was created
+        modifiedTime:
+          type: string
+          format: date-time
+          description: The timestamp when the story was last modified
+        createdBy:
+          type: string
+          description: The user ID of the story creator
+        modifiedBy:
+          type: string
+          description: The user ID of the last modifier
+        resourceType:
+          type: string
+          description: The type of resource (STORY)
+        models:
+          type: array
+          description: List of models used in the story
+          items:
+            $ref: '#/components/schemas/ModelReference'
+    ModelReference:
+      type: object
+      description: A reference to a model used within a story
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the model
+        name:
+          type: string
+          description: The display name of the model
+        description:
+          type: string
+          description: A text description of the model
+    Resource:
+      type: object
+      description: >-
+        Represents a resource in the SAP Analytics Cloud file repository.
+        Resources can be stories, models, folders, or other content types.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the resource
+        name:
+          type: string
+          description: The display name of the resource
+        description:
+          type: string
+          description: A text description of the resource
+        resourceType:
+          type: string
+          description: The type of resource (e.g., STORY, MODEL, FOLDER)
+        resourceSubType:
+          type: string
+          description: The sub-type of the resource
+        createdTime:
+          type: string
+          format: date-time
+          description: The timestamp when the resource was created
+        modifiedTime:
+          type: string
+          format: date-time
+          description: The timestamp when the resource was last modified
+        parentId:
+          type: string
+          description: The ID of the parent folder
+    ScimUser:
+      type: object
+      description: >-
+        A user record conforming to SCIM 2.0 protocol. Contains user
+        profile attributes, roles, and team memberships.
+      properties:
+        id:
+          type: string
+          description: The unique identifier assigned to the user
+        userName:
+          type: string
+          description: The login username for the user
+        name:
+          type: object
+          description: The user's name components
+          properties:
+            givenName:
+              type: string
+              description: The first name of the user
+            familyName:
+              type: string
+              description: The last name of the user
+            formatted:
+              type: string
+              description: The full formatted name of the user
+        displayName:
+          type: string
+          description: The display name of the user
+        emails:
+          type: array
+          description: The email addresses for the user
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: email
+                description: The email address
+              primary:
+                type: boolean
+                description: Whether this is the primary email
+        active:
+          type: boolean
+          description: Whether the user account is active
+        roles:
+          type: array
+          description: The roles assigned to the user
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: The role identifier
+        groups:
+          type: array
+          description: The teams the user belongs to
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: The team (group) identifier
+              display:
+                type: string
+                description: The team display name
+    ScimGroup:
+      type: object
+      description: >-
+        A team (group) record conforming to SCIM 2.0 protocol. Used for
+        organizing users and managing content access control.
+      properties:
+        id:
+          type: string
+          description: The unique identifier assigned to the team
+        displayName:
+          type: string
+          description: The display name of the team
+        members:
+          type: array
+          description: The members of the team
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: The member user ID
+              display:
+                type: string
+                description: The member display name
+    ScimListResponse:
+      type: object
+      description: >-
+        A paginated list response conforming to SCIM 2.0 protocol.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results matching the query
+        itemsPerPage:
+          type: integer
+          description: The number of results returned per page
+        startIndex:
+          type: integer
+          description: The starting index of the returned results
+        Resources:
+          type: array
+          description: The list of resources in the current page
+          items:
+            type: object
+    CalendarEvent:
+      type: object
+      description: >-
+        Represents a calendar event or task in SAP Analytics Cloud used
+        for planning workflows and scheduling.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the calendar event
+        name:
+          type: string
+          description: The name of the calendar event
+        description:
+          type: string
+          description: A description of the event
+        startDate:
+          type: string
+          format: date-time
+          description: The start date and time of the event
+        endDate:
+          type: string
+          format: date-time
+          description: The end date and time of the event
+        status:
+          type: string
+          description: The current status of the event
+          enum:
+            - NOT_STARTED
+            - IN_PROGRESS
+            - COMPLETED
+        assignee:
+          type: string
+          description: The user assigned to the event
