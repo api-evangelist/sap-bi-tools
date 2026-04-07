@@ -32,22 +32,18 @@ tags:
     description: >-
       Logon and logoff endpoints for obtaining and invalidating session
       tokens required for all subsequent API calls.
-  - name: InfoStore
-    description: >-
-      Browse and query the CMS InfoStore repository to access documents,
-      folders, users, groups, and other BI Platform objects.
   - name: CMS Query
     description: >-
       Execute CMS queries against the BI Platform repository to search
       for objects using CMS query language syntax.
-  - name: Documents
-    description: >-
-      Manage BI documents including retrieving document metadata and
-      scheduling document execution.
   - name: Inbox
     description: >-
       Manage BI Inbox items including viewing received reports and
       scheduled instances.
+  - name: InfoStore
+    description: >-
+      Browse and query the CMS InfoStore repository to access documents,
+      folders, users, groups, and other BI Platform objects.
   - name: Scheduling
     description: >-
       Schedule reports and documents for execution with configurable

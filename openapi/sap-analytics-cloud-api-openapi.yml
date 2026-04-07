@@ -29,30 +29,26 @@ servers:
         description: >-
           The data center region (e.g., eu1, eu10, us1, us10, ap1)
 tags:
-  - name: Stories
-    description: >-
-      Manage analytic stories including dashboards and reports. Stories are
-      the primary visualization artifact in SAP Analytics Cloud.
-  - name: Models
-    description: >-
-      Access and manage planning and analytic models that store and organize
-      data in SAP Analytics Cloud.
-  - name: Resources
-    description: >-
-      Browse and manage resources within the SAP Analytics Cloud file
-      repository including stories, models, and folders.
-  - name: Users
-    description: >-
-      SCIM 2.0 endpoints for managing user accounts, provisioning, and
-      deprovisioning in SAP Analytics Cloud.
-  - name: Teams
-    description: >-
-      SCIM 2.0 endpoints for managing teams and group memberships for
-      access control in SAP Analytics Cloud.
   - name: Calendars
     description: >-
       Manage calendar events and tasks used for planning workflows and
       scheduling in SAP Analytics Cloud.
+  - name: Resources
+    description: >-
+      Browse and manage resources within the SAP Analytics Cloud file
+      repository including stories, models, and folders.
+  - name: Stories
+    description: >-
+      Manage analytic stories including dashboards and reports. Stories are
+      the primary visualization artifact in SAP Analytics Cloud.
+  - name: Teams
+    description: >-
+      SCIM 2.0 endpoints for managing teams and group memberships for
+      access control in SAP Analytics Cloud.
+  - name: Users
+    description: >-
+      SCIM 2.0 endpoints for managing user accounts, provisioning, and
+      deprovisioning in SAP Analytics Cloud.
 security:
   - oauth2: []
 paths:
