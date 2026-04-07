@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: SAP Analytics Cloud Data Export API
+  title: SAP BI Tools SAP Analytics Cloud Data Export API
   description: >-
     OData-based API for exporting fact data and master data from SAP Analytics
     Cloud models. The API consists of two services: the Administration service
@@ -54,7 +54,7 @@ paths:
   /administration/Namespaces:
     get:
       operationId: listNamespaces
-      summary: List available namespaces
+      summary: SAP BI Tools List available namespaces
       description: >-
         Retrieves a list of namespaces available for data export. The
         primary namespace is 'sac' which contains all SAP Analytics Cloud
@@ -75,7 +75,7 @@ paths:
   /administration/Namespaces(NamespaceID='{namespaceId}')/Providers:
     get:
       operationId: listProviders
-      summary: List available providers (models)
+      summary: SAP BI Tools List available providers (models)
       description: >-
         Retrieves a list of providers (models) available for data export
         within a specific namespace. Each provider represents an SAP
@@ -104,7 +104,7 @@ paths:
   /providers/sac/{modelId}/$metadata:
     get:
       operationId: getModelMetadata
-      summary: Get model metadata
+      summary: SAP BI Tools Get model metadata
       description: >-
         Retrieves the OData metadata document for a specific model. The
         metadata describes the structure of the model including its
@@ -132,7 +132,7 @@ paths:
   /providers/sac/{modelId}/FactData:
     get:
       operationId: getFactData
-      summary: Get fact data from a model
+      summary: SAP BI Tools Get fact data from a model
       description: >-
         Retrieves fact data (transactional records) from a specific SAP
         Analytics Cloud model. Fact data includes dimension member values
@@ -162,7 +162,7 @@ paths:
   /providers/sac/{modelId}/MasterData:
     get:
       operationId: getMasterDataOverview
-      summary: Get master data overview
+      summary: SAP BI Tools Get master data overview
       description: >-
         Retrieves an overview of available master data (dimension members
         with navigation attributes) from a specific model. Returns fact
@@ -188,7 +188,7 @@ paths:
   /providers/sac/{modelId}/{dimensionName}Master:
     get:
       operationId: getDimensionMasterData
-      summary: Get master data for a dimension
+      summary: SAP BI Tools Get master data for a dimension
       description: >-
         Retrieves the master data (member list with attributes) for a
         specific dimension within a model. The dimension name is appended

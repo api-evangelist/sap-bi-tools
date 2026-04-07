@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: SAP Analytics Cloud Content Network REST API
+  title: SAP BI Tools SAP Analytics Cloud Content Network REST API
   description: >-
     REST API for managing content in the SAP Analytics Cloud Content Network.
     Enables programmatic access to get, publish, and delete private and public
@@ -42,7 +42,7 @@ paths:
   /api/v1/contentnetwork/items:
     get:
       operationId: listContentItems
-      summary: List content items
+      summary: SAP BI Tools List content items
       description: >-
         Retrieves a list of content items available in the Content Network.
         Returns both private and public content items with their metadata
@@ -77,7 +77,7 @@ paths:
           description: Unauthorized - invalid or missing authentication token
     post:
       operationId: publishContentItem
-      summary: Publish a content item
+      summary: SAP BI Tools Publish a content item
       description: >-
         Publishes a content item to the Content Network making it available
         for other tenants to discover and import. The content item is
@@ -104,7 +104,7 @@ paths:
   /api/v1/contentnetwork/items/{itemId}:
     get:
       operationId: getContentItem
-      summary: Get a content item by ID
+      summary: SAP BI Tools Get a content item by ID
       description: >-
         Retrieves detailed information about a specific content item from
         the Content Network identified by its unique item ID.
@@ -125,7 +125,7 @@ paths:
           description: Content item not found
     delete:
       operationId: deleteContentItem
-      summary: Delete a content item
+      summary: SAP BI Tools Delete a content item
       description: >-
         Deletes a content item from the Content Network. Only private
         content items owned by the current tenant can be deleted.
@@ -145,7 +145,7 @@ paths:
   /api/v1/contentnetwork/items/{itemId}/import:
     post:
       operationId: importContentItem
-      summary: Import a content item
+      summary: SAP BI Tools Import a content item
       description: >-
         Imports a content item from the Content Network into the local SAP
         Analytics Cloud tenant. The imported content and its dependencies

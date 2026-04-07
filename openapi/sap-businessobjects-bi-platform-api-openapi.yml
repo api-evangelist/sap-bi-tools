@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: SAP BusinessObjects BI Platform RESTful Web Services
+  title: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services
   description: >-
     REST API for SAP BusinessObjects BI Platform (biprws) for managing
     documents, users, scheduling reports, and querying the CMS repository.
@@ -58,7 +58,7 @@ paths:
   /logon/long:
     post:
       operationId: logon
-      summary: Log on to BI Platform
+      summary: SAP BI Tools Log on to BI Platform
       description: >-
         Authenticates a user against the BI Platform and returns a logon
         token that must be included in subsequent API requests. Supports
@@ -87,7 +87,7 @@ paths:
   /logoff:
     post:
       operationId: logoff
-      summary: Log off from BI Platform
+      summary: SAP BI Tools Log off from BI Platform
       description: >-
         Invalidates the current logon token and terminates the session.
         The logon token provided in the header is no longer valid after
@@ -102,7 +102,7 @@ paths:
   /v1/infostore:
     get:
       operationId: getInfoStoreRoot
-      summary: Get InfoStore root
+      summary: SAP BI Tools Get InfoStore root
       description: >-
         Retrieves the root entry of the InfoStore repository. The
         InfoStore is the central object repository of the BI Platform
@@ -123,7 +123,7 @@ paths:
   /v1/infostore/{objectId}:
     get:
       operationId: getInfoStoreObject
-      summary: Get an InfoStore object by ID
+      summary: SAP BI Tools Get an InfoStore object by ID
       description: >-
         Retrieves a specific object from the InfoStore repository by its
         unique CMS object identifier. Returns the object metadata
@@ -147,7 +147,7 @@ paths:
   /v1/infostore/{objectId}/children:
     get:
       operationId: getInfoStoreChildren
-      summary: List children of an InfoStore object
+      summary: SAP BI Tools List children of an InfoStore object
       description: >-
         Retrieves the child objects of a specific InfoStore folder or
         container object. Supports pagination with page and pageSize
@@ -173,7 +173,7 @@ paths:
   /v1/cmsquery:
     get:
       operationId: executeCmsQueryGet
-      summary: Execute a CMS query (GET)
+      summary: SAP BI Tools Execute a CMS query (GET)
       description: >-
         Executes a CMS query against the BI Platform repository using the
         query parameter. CMS queries use a SQL-like syntax to search for
@@ -205,7 +205,7 @@ paths:
           description: Invalid or expired logon token
     post:
       operationId: executeCmsQueryPost
-      summary: Execute a CMS query (POST)
+      summary: SAP BI Tools Execute a CMS query (POST)
       description: >-
         Executes a CMS query against the BI Platform repository using a
         POST request body. Preferred for complex queries that may exceed
@@ -243,7 +243,7 @@ paths:
   /v1/infostore/{documentId}/scheduleForms/now:
     post:
       operationId: scheduleDocumentNow
-      summary: Schedule a document for immediate execution
+      summary: SAP BI Tools Schedule a document for immediate execution
       description: >-
         Schedules a document for immediate execution on the BI Platform.
         Creates a new scheduled instance that runs the document with the
@@ -279,7 +279,7 @@ paths:
   /v1/inbox:
     get:
       operationId: listInboxItems
-      summary: List BI Inbox items
+      summary: SAP BI Tools List BI Inbox items
       description: >-
         Retrieves a list of items in the authenticated user's BI Inbox.
         The inbox contains reports and documents that have been sent to

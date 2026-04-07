@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: SAP Analytics Cloud API
+  title: SAP BI Tools SAP Analytics Cloud API
   description: >-
     RESTful API for SAP Analytics Cloud enabling programmatic access to system
     data stored on an SAP Analytics Cloud tenant. The API provides endpoints
@@ -59,7 +59,7 @@ paths:
   /api/v1/stories:
     get:
       operationId: listStories
-      summary: List stories
+      summary: SAP BI Tools List stories
       description: >-
         Retrieves a list of stories available on the SAP Analytics Cloud
         tenant. Supports query parameters to include additional metadata
@@ -85,7 +85,7 @@ paths:
   /api/v1/stories/{storyId}:
     get:
       operationId: getStory
-      summary: Get a story by ID
+      summary: SAP BI Tools Get a story by ID
       description: >-
         Retrieves detailed information about a specific story identified by
         its unique story ID. Returns the story metadata, structure, and
@@ -109,7 +109,7 @@ paths:
   /api/v1/Resources:
     get:
       operationId: listResources
-      summary: List resources
+      summary: SAP BI Tools List resources
       description: >-
         Retrieves a list of resources from the SAP Analytics Cloud file
         repository. Resources include stories, models, folders, and other
@@ -143,7 +143,7 @@ paths:
   /api/v1/scim/Users:
     get:
       operationId: listUsersScim1
-      summary: List users (SCIM 1.1)
+      summary: SAP BI Tools List users (SCIM 1.1)
       description: >-
         Retrieves a list of users provisioned in SAP Analytics Cloud using
         SCIM 1.1 protocol. Supports filtering by user attributes such as
@@ -177,7 +177,7 @@ paths:
   /api/v1/scim2/Users:
     get:
       operationId: listUsersScim2
-      summary: List users (SCIM 2.0)
+      summary: SAP BI Tools List users (SCIM 2.0)
       description: >-
         Retrieves a list of users provisioned in SAP Analytics Cloud using
         SCIM 2.0 protocol. Supports filtering by user attributes such as
@@ -210,7 +210,7 @@ paths:
           description: Unauthorized - invalid or missing authentication token
     post:
       operationId: createUserScim2
-      summary: Create a user (SCIM 2.0)
+      summary: SAP BI Tools Create a user (SCIM 2.0)
       description: >-
         Creates a new user in SAP Analytics Cloud using SCIM 2.0 protocol.
         Requires user profile attributes including userName, name, and
@@ -239,7 +239,7 @@ paths:
   /api/v1/scim2/Users/{userId}:
     get:
       operationId: getUserScim2
-      summary: Get a user by ID (SCIM 2.0)
+      summary: SAP BI Tools Get a user by ID (SCIM 2.0)
       description: >-
         Retrieves detailed information about a specific user identified by
         their unique user ID using SCIM 2.0 protocol.
@@ -260,7 +260,7 @@ paths:
           description: User not found
     put:
       operationId: updateUserScim2
-      summary: Update a user (SCIM 2.0)
+      summary: SAP BI Tools Update a user (SCIM 2.0)
       description: >-
         Updates an existing user in SAP Analytics Cloud using SCIM 2.0
         protocol. Replaces the entire user record with the provided data.
@@ -289,7 +289,7 @@ paths:
           description: User not found
     delete:
       operationId: deleteUserScim2
-      summary: Delete a user (SCIM 2.0)
+      summary: SAP BI Tools Delete a user (SCIM 2.0)
       description: >-
         Deletes a user from SAP Analytics Cloud using SCIM 2.0 protocol.
         Permanently removes the user account and associated data.
@@ -307,7 +307,7 @@ paths:
   /api/v1/scim2/Groups:
     get:
       operationId: listTeams
-      summary: List teams (SCIM 2.0)
+      summary: SAP BI Tools List teams (SCIM 2.0)
       description: >-
         Retrieves a list of teams (groups) configured in SAP Analytics Cloud
         using SCIM 2.0 protocol. Teams are used for organizing users and
@@ -338,7 +338,7 @@ paths:
           description: Unauthorized - invalid or missing authentication token
     post:
       operationId: createTeam
-      summary: Create a team (SCIM 2.0)
+      summary: SAP BI Tools Create a team (SCIM 2.0)
       description: >-
         Creates a new team (group) in SAP Analytics Cloud using SCIM 2.0
         protocol. Teams can be assigned members and used for content sharing
@@ -365,7 +365,7 @@ paths:
   /api/v1/calendars:
     get:
       operationId: listCalendars
-      summary: List calendar events
+      summary: SAP BI Tools List calendar events
       description: >-
         Retrieves a list of calendar events and tasks configured in SAP
         Analytics Cloud. Calendars support planning workflows, scheduling
