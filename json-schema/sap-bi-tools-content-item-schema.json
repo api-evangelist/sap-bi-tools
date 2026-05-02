@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/sap-bi-tools/json-schema/sap-bi-tools-content-item-schema.json",
+  "title": "SAP Analytics Cloud Content Item",
+  "description": "Represents a content item in the SAP Analytics Cloud Content Network. Content items are shareable analytics artifacts such as stories, models, and packages.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the content item"
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the content item"
+    },
+    "description": {
+      "type": "string",
+      "description": "A text description of the content item"
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of content item",
+      "enum": ["STORY", "MODEL", "PACKAGE"]
+    },
+    "visibility": {
+      "type": "string",
+      "description": "The visibility scope",
+      "enum": ["PRIVATE", "PUBLIC"]
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of the content item"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the item was published"
+    },
+    "modifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the item was last modified"
+    },
+    "owner": {
+      "type": "string",
+      "description": "The tenant that published the content item"
+    }
+  },
+  "required": ["id", "name", "type"]
+}

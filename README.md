@@ -1,129 +1,152 @@
-# SAP BI Tools (sap-bi-tools)
-Collection of SAP Business Intelligence tools and APIs for analytics, reporting, and data visualization
+# SAP BI Tools
 
-**URL:** [Visit APIs.json URL](https://api.sap.com/bi-tools)
+Collection of SAP Business Intelligence tools and APIs for analytics, reporting, and data visualization.
 
-## Tags:
+**URL:** https://api.sap.com/bi-tools
 
- - business intelligence, analytics, reporting, data visualization, SAP
+## Tags
+
+Analytics, Business Intelligence, Data Visualization, Reporting, SAP
 
 ## Timestamps
 
-- **Created:** 2024-01-20 
-- **Modified:** 2024-01-20 
+- **Created:** 2024-01-20
+- **Modified:** 2026-05-02
 
 ## APIs
 
 ### SAP Analytics Cloud API
-RESTful API for SAP Analytics Cloud enabling data manipulation, story creation, and model management
 
-**Human URL:** [https://help.sap.com/docs/SAP_ANALYTICS_CLOUD](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD)
+RESTful API for SAP Analytics Cloud enabling data manipulation, story creation, and model management.
 
+- **Base URL:** https://api.sapanalytics.cloud
+- **Version:** 1.0
+- **Human URL:** https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+- **OpenAPI:** [openapi/sap-analytics-cloud-api-openapi.yml](openapi/sap-analytics-cloud-api-openapi.yml)
 
-#### Tags:
+**Properties:** Documentation, OpenAPI, Authentication, Rate Limits, Reference, Getting Started, Change Log
 
- - analytics, cloud, stories, models
+### SAP Analytics Cloud Data Export API
 
-#### Properties
+OData-based API for exporting fact data and master data from SAP Analytics Cloud models.
 
-- [Documentation](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/)
-- [OpenAPI](https://api.sap.com/api/SACOpenAPI/overview)
-- [Authentication](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/b4f4d1e6e7fb4c08b0964e0b6d14d849.html)
-- [Rate Limits](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/rate-limits)
+- **Base URL:** https://api.sapanalytics.cloud
+- **Human URL:** https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html
+- **OpenAPI:** [openapi/sap-analytics-cloud-data-export-api-openapi.yml](openapi/sap-analytics-cloud-data-export-api-openapi.yml)
+
+### SAP Analytics Cloud Content Network REST API
+
+REST API for managing content in the SAP Analytics Cloud Content Network.
+
+- **Base URL:** https://api.sapanalytics.cloud
+- **OpenAPI:** [openapi/sap-analytics-cloud-content-network-api-openapi.yml](openapi/sap-analytics-cloud-content-network-api-openapi.yml)
 
 ### SAP BusinessObjects BI Platform RESTful Web Services
-REST API for SAP BusinessObjects BI Platform for managing documents, users, and scheduling reports
 
-**Human URL:** [https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM)
+REST API for SAP BusinessObjects BI Platform for managing documents, users, and scheduling reports.
 
+- **Base URL:** https://server:port/biprws
+- **Version:** 4.3
+- **Human URL:** https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM
+- **OpenAPI:** [openapi/sap-businessobjects-bi-platform-api-openapi.yml](openapi/sap-businessobjects-bi-platform-api-openapi.yml)
 
-#### Tags:
+### SAP Analytics Cloud Analytics Designer API
 
- - businessobjects, reports, scheduling, documents
+JavaScript-based API for building interactive analytic applications in SAP Analytics Cloud Analytics Designer.
 
-#### Properties
+- **Human URL:** https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html
 
-- [Documentation](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/)
-- [API Reference](https://help.sap.com/doc/e39d9c134f1f4634addd5161f93dbf25/4.3/en-US/RESTful_Web_Services_User_Guide.pdf)
-- [SDK](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/sdk)
-- [Authentication](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/authentication)
+### SAP BusinessObjects Web Intelligence RESTful Web Services API
 
-### SAP Crystal Reports API
-SDK and APIs for embedding and automating SAP Crystal Reports
+REST API for creating, modifying, and exporting Web Intelligence reports.
 
-**Human URL:** [https://help.sap.com/docs/CRYSTAL_REPORTS](https://help.sap.com/docs/CRYSTAL_REPORTS)
+- **Human URL:** https://help.sap.com/docs/SAP_BUSINESSOBJECTS_WEB_INTELLIGENCE/58f583a7643e48cf944cf554eb961f5b/45f8735d6e041014910aba7db0e91070.html
 
+### SAP Crystal Reports RESTful Web Services API
 
-#### Tags:
+RESTful API for SAP Crystal Reports enabling consumption and embedding in web and mobile applications.
 
- - crystal reports, reporting, embedded analytics
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/CRYSTAL_REPORTS/c5fb6213b96b4cc1bf43a55d68d9d87b/)
-- [SDK Download](https://support.sap.com/en/product/analytics/crystal-reports.html)
-- [Developer Guide](https://help.sap.com/docs/CRYSTAL_REPORTS/developer-guide)
-
-### SAP Lumira Discovery Extensions API
-JavaScript API for creating custom visualizations and extensions in SAP Lumira
-
-**Human URL:** [https://help.sap.com/docs/LUMIRA](https://help.sap.com/docs/LUMIRA)
-
-
-#### Tags:
-
- - lumira, visualization, extensions, javascript
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/LUMIRA/82b8ad67e9b74a48bad806dc52c96fcc/)
-- [Extension API](https://help.sap.com/docs/LUMIRA/extensions-api)
-- [Samples](https://github.com/SAP/lumira-extension-viz)
-
-### SAP HANA Cloud Data Lake API
-RESTful API for accessing and managing data in SAP HANA Cloud Data Lake for BI workloads
-
-**Human URL:** [https://help.sap.com/docs/HANA_CLOUD_DATA_LAKE](https://help.sap.com/docs/HANA_CLOUD_DATA_LAKE)
-
-
-#### Tags:
-
- - hana, data lake, cloud, data access
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/HANA_CLOUD_DATA_LAKE/REST_API)
-- [OpenAPI](https://api.sap.com/api/HanaCloudDataLake/overview)
-- [Getting Started](https://help.sap.com/docs/HANA_CLOUD_DATA_LAKE/getting-started)
+- **Human URL:** https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/0945312ac81f4b63be258130d2938055/45cecf3f6e041014910aba7db0e91070.html
 
 ### SAP Datasphere API
-API for SAP Datasphere (formerly SAP Data Warehouse Cloud) for data integration and modeling
 
-**Human URL:** [https://help.sap.com/docs/SAP_DATASPHERE](https://help.sap.com/docs/SAP_DATASPHERE)
+API for SAP Datasphere (formerly SAP Data Warehouse Cloud) for data integration, modeling, and consumption.
 
+- **Base URL:** https://datasphere-api.cfapps.eu10.hana.ondemand.com
+- **Human URL:** https://help.sap.com/docs/SAP_DATASPHERE
 
-#### Tags:
+## Artifacts
 
- - datasphere, data warehouse, data modeling, integration
+### OpenAPI Specifications
 
-#### Properties
+| API | File |
+|-----|------|
+| SAP Analytics Cloud API | [openapi/sap-analytics-cloud-api-openapi.yml](openapi/sap-analytics-cloud-api-openapi.yml) |
+| SAP Analytics Cloud Data Export API | [openapi/sap-analytics-cloud-data-export-api-openapi.yml](openapi/sap-analytics-cloud-data-export-api-openapi.yml) |
+| SAP Analytics Cloud Content Network REST API | [openapi/sap-analytics-cloud-content-network-api-openapi.yml](openapi/sap-analytics-cloud-content-network-api-openapi.yml) |
+| SAP BusinessObjects BI Platform API | [openapi/sap-businessobjects-bi-platform-api-openapi.yml](openapi/sap-businessobjects-bi-platform-api-openapi.yml) |
 
-- [Documentation](https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/)
-- [API Reference](https://help.sap.com/docs/SAP_DATASPHERE/api-reference)
-- [OpenAPI](https://api.sap.com/api/Datasphere/overview)
+### Capabilities
 
-## Common Properties
+Workflow-oriented Naftiko capability compositions:
 
-- [Portal](https://api.sap.com)
-- [Authentication](https://help.sap.com/docs/authentication)
-- [Terms of Service](https://www.sap.com/about/legal/terms-of-use.html)
-- [Privacy Policy](https://www.sap.com/about/legal/privacy.html)
-- [Support](https://support.sap.com)
-- [Community](https://community.sap.com)
-- [Learning](https://learning.sap.com)
+| Workflow | Description |
+|----------|-------------|
+| [Analytics Content Management](capabilities/analytics-content-management.yaml) | Story lifecycle management, Content Network publishing, and file repository governance (SAC + Content Network) |
+| [Data Extraction and Reporting](capabilities/data-extraction-and-reporting.yaml) | Data export pipelines and BusinessObjects report scheduling (Data Export API + BusinessObjects) |
+| [User and Access Management](capabilities/user-and-access-management.yaml) | SCIM 2.0 user and team provisioning for analytics platforms |
+
+**Shared per-API definitions (`capabilities/shared/`):**
+
+- [analytics-cloud.yaml](capabilities/shared/analytics-cloud.yaml) — SAP Analytics Cloud API
+- [analytics-cloud-content-network.yaml](capabilities/shared/analytics-cloud-content-network.yaml) — Content Network API
+- [analytics-cloud-data-export.yaml](capabilities/shared/analytics-cloud-data-export.yaml) — Data Export API
+- [businessobjects-bi-platform.yaml](capabilities/shared/businessobjects-bi-platform.yaml) — BusinessObjects BI Platform API
+
+### Rules
+
+- [rules/sap-bi-tools-rules.yml](rules/sap-bi-tools-rules.yml) — Spectral ruleset enforcing SAP BI Tools API conventions
+
+### JSON Schema
+
+- [json-schema/sap-bi-tools-story-schema.json](json-schema/sap-bi-tools-story-schema.json) — SAP Analytics Cloud Story
+- [json-schema/sap-bi-tools-user-schema.json](json-schema/sap-bi-tools-user-schema.json) — SAP Analytics Cloud User (SCIM 2.0)
+- [json-schema/sap-bi-tools-content-item-schema.json](json-schema/sap-bi-tools-content-item-schema.json) — Content Network Item
+
+### JSON Structure
+
+- [json-structure/sap-bi-tools-story-structure.json](json-structure/sap-bi-tools-story-structure.json)
+- [json-structure/sap-bi-tools-user-structure.json](json-structure/sap-bi-tools-user-structure.json)
+
+### JSON-LD
+
+- [json-ld/sap-bi-tools-context.jsonld](json-ld/sap-bi-tools-context.jsonld)
+
+### Examples
+
+- [examples/sap-bi-tools-list-stories-example.json](examples/sap-bi-tools-list-stories-example.json)
+- [examples/sap-bi-tools-get-fact-data-example.json](examples/sap-bi-tools-get-fact-data-example.json)
+- [examples/sap-bi-tools-list-users-example.json](examples/sap-bi-tools-list-users-example.json)
+
+### Vocabulary
+
+- [vocabulary/sap-bi-tools-vocabulary.yml](vocabulary/sap-bi-tools-vocabulary.yml)
+
+## Common Resources
+
+- **Portal:** https://api.sap.com
+- **Getting Started:** https://developers.sap.com/topics/business-technology-platform..html
+- **Documentation:** https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+- **Authentication:** https://help.sap.com/docs/authentication
+- **Terms of Service:** https://www.sap.com/about/legal/terms-of-use.html
+- **Privacy Policy:** https://www.sap.com/about/legal/privacy.html
+- **Status:** https://www.sap.com/about/trust-center/cloud-service-status.html
+- **Support:** https://support.sap.com
+- **Community:** https://community.sap.com
+- **GitHub Organization:** https://github.com/SAP
+- **Website:** https://www.sap.com
+- **Sign Up:** https://developers.sap.com
 
 ## Maintainers
 
-**FN:** SAP SE
-
-**Email:** support@sap.com
+- **Kin Lane** — kin@apievangelist.com

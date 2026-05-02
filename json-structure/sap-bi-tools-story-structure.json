@@ -1,0 +1,27 @@
+{
+  "name": "Story",
+  "description": "SAP Analytics Cloud Story - primary visualization artifact for data analysis",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique story identifier" },
+    { "name": "name", "type": "string", "required": true, "description": "Display name of the story" },
+    { "name": "description", "type": "string", "required": false, "description": "Text description" },
+    { "name": "createdTime", "type": "datetime", "required": false, "description": "Creation timestamp" },
+    { "name": "modifiedTime", "type": "datetime", "required": false, "description": "Last modification timestamp" },
+    { "name": "createdBy", "type": "string", "required": false, "description": "Creator user ID" },
+    { "name": "modifiedBy", "type": "string", "required": false, "description": "Last modifier user ID" },
+    { "name": "resourceType", "type": "string", "required": false, "description": "Always STORY", "enum": ["STORY"] },
+    {
+      "name": "models",
+      "type": "array",
+      "required": false,
+      "description": "Models referenced by this story",
+      "items": {
+        "fields": [
+          { "name": "id", "type": "string", "required": true, "description": "Model identifier" },
+          { "name": "name", "type": "string", "required": true, "description": "Model display name" },
+          { "name": "description", "type": "string", "required": false, "description": "Model description" }
+        ]
+      }
+    }
+  ]
+}

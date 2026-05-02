@@ -1,0 +1,91 @@
+extends: spectral:oas
+rules:
+  sap-bi-tools-operation-summary-title-case:
+    description: Operation summaries must use Title Case
+    message: Summary "{{value}}" should be in Title Case
+    given: "$.paths[*][*].summary"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  sap-bi-tools-operation-id-camel-case:
+    description: OperationIds must use camelCase
+    message: OperationId "{{value}}" should use camelCase
+    given: "$.paths[*][*].operationId"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  sap-bi-tools-tags-title-case:
+    description: All tags must use Title Case
+    message: Tag "{{value}}" should be in Title Case
+    given: "$.tags[*].name"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  sap-bi-tools-path-kebab-case:
+    description: API path segments must use kebab-case
+    message: Path segment "{{value}}" should use kebab-case
+    given: "$.paths"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z][a-z0-9-]*(/[a-z][a-z0-9-]*|/\\{[a-zA-Z][a-zA-Z0-9]*\\})*)*$"
+
+  sap-bi-tools-oauth2-required:
+    description: SAP Analytics Cloud APIs require OAuth 2.0 security
+    message: Operations should specify OAuth 2.0 security
+    given: "$.components.securitySchemes"
+    severity: warn
+    then:
+      function: truthy
+
+  sap-bi-tools-response-200-schema:
+    description: GET operations must define a 200 response schema
+    message: GET operation should define a 200 response with a schema
+    given: "$.paths[*].get.responses.200.content"
+    severity: warn
+    then:
+      function: truthy
+
+  sap-bi-tools-contact-info:
+    description: API info must include contact information
+    message: API info should include a contact block
+    given: "$.info.contact"
+    severity: warn
+    then:
+      function: truthy
+
+  sap-bi-tools-external-docs:
+    description: APIs should reference external documentation
+    message: API should include an externalDocs block pointing to SAP Help Portal
+    given: "$.externalDocs"
+    severity: info
+    then:
+      function: truthy
+
+  sap-bi-tools-servers-defined:
+    description: APIs must define at least one server URL
+    message: API should define at least one server in the servers array
+    given: "$.servers"
+    severity: error
+    then:
+      function: truthy
+
+  sap-bi-tools-odata-dollar-params:
+    description: OData query parameters should use $-prefixed names
+    message: OData parameters should follow $filter, $top, $skip, $select, $orderby naming convention
+    given: "$.paths[*][*].parameters[*].name"
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "^(filter|top|skip|select|orderby|format)$"

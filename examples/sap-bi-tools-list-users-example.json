@@ -1,0 +1,47 @@
+{
+  "totalResults": 3,
+  "itemsPerPage": 10,
+  "startIndex": 1,
+  "Resources": [
+    {
+      "id": "user_001",
+      "userName": "jane.doe@example.com",
+      "name": {
+        "givenName": "Jane",
+        "familyName": "Doe",
+        "formatted": "Jane Doe"
+      },
+      "displayName": "Jane Doe",
+      "emails": [
+        { "value": "jane.doe@example.com", "primary": true }
+      ],
+      "active": true,
+      "roles": [
+        { "value": "BI_CREATOR" }
+      ],
+      "groups": [
+        { "value": "team_finance", "display": "Finance Analytics Team" }
+      ]
+    },
+    {
+      "id": "user_002",
+      "userName": "john.smith@example.com",
+      "name": {
+        "givenName": "John",
+        "familyName": "Smith",
+        "formatted": "John Smith"
+      },
+      "displayName": "John Smith",
+      "emails": [
+        { "value": "john.smith@example.com", "primary": true }
+      ],
+      "active": true,
+      "roles": [
+        { "value": "BI_VIEWER" }
+      ],
+      "groups": [
+        { "value": "team_sales", "display": "Sales Analytics Team" }
+      ]
+    }
+  ]
+}

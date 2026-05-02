@@ -1,0 +1,201 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SAP BI Tools Data Extraction and Reporting"
+  description: "Workflow capability for extracting data from SAP Analytics Cloud models and managing BusinessObjects reports. Combines data export pipelines with traditional BI report scheduling and delivery. Used by data engineers, BI developers, and operations teams."
+  tags:
+    - Analytics
+    - Business Intelligence
+    - Data Export
+    - Reporting
+    - SAP
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAP_AC_OAUTH_TOKEN: SAP_AC_OAUTH_TOKEN
+      SAP_BOBJ_LOGON_TOKEN: SAP_BOBJ_LOGON_TOKEN
+
+capability:
+  consumes:
+    - import: analytics-cloud-data-export
+      location: ./shared/analytics-cloud-data-export.yaml
+    - import: businessobjects-bi-platform
+      location: ./shared/businessobjects-bi-platform.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: data-extraction-reporting-api
+      description: "Unified REST API for SAP data extraction and BI report management."
+      resources:
+        - path: /v1/namespaces
+          name: namespaces
+          description: "Data export namespaces."
+          operations:
+            - method: GET
+              name: list-namespaces
+              description: "List available namespaces for data export."
+              call: "analytics-cloud-data-export.list-namespaces"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/namespaces/{namespaceId}/providers
+          name: providers
+          description: "Model providers for data export."
+          operations:
+            - method: GET
+              name: list-providers
+              description: "List available models (providers) for data export."
+              call: "analytics-cloud-data-export.list-providers"
+              with:
+                namespaceId: "rest.namespaceId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models/{modelId}/fact-data
+          name: fact-data
+          description: "Model fact data."
+          operations:
+            - method: GET
+              name: get-fact-data
+              description: "Extract fact data from a planning model."
+              call: "analytics-cloud-data-export.get-fact-data"
+              with:
+                modelId: "rest.modelId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models/{modelId}/master-data
+          name: master-data
+          description: "Model master data."
+          operations:
+            - method: GET
+              name: get-master-data
+              description: "Extract master data (dimension members) from a model."
+              call: "analytics-cloud-data-export.get-master-data"
+              with:
+                modelId: "rest.modelId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/reports
+          name: reports
+          description: "BusinessObjects report repository."
+          operations:
+            - method: GET
+              name: browse-reports
+              description: "Browse reports in the InfoStore repository."
+              call: "businessobjects-bi-platform.get-infostore-root"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/reports/{reportId}/schedule
+          name: report-schedule
+          description: "Schedule a report for execution."
+          operations:
+            - method: POST
+              name: schedule-report
+              description: "Schedule a BusinessObjects report for immediate execution."
+              call: "businessobjects-bi-platform.schedule-document"
+              with:
+                documentId: "rest.reportId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/inbox
+          name: inbox
+          description: "BI user inbox."
+          operations:
+            - method: GET
+              name: list-inbox-items
+              description: "List completed report instances in the BI Inbox."
+              call: "businessobjects-bi-platform.list-inbox-items"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9081
+      namespace: data-extraction-reporting-mcp
+      transport: http
+      description: "MCP server for AI-assisted data extraction and BI report management."
+      tools:
+        - name: list-export-models
+          description: "List analytics models available for data export from SAP Analytics Cloud."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "analytics-cloud-data-export.list-providers"
+          with:
+            namespaceId: "tools.namespaceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-model-metadata
+          description: "Get OData metadata describing the structure of a planning model."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "analytics-cloud-data-export.get-model-metadata"
+          with:
+            modelId: "tools.modelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: extract-fact-data
+          description: "Extract fact data (transactional records) from an analytics model."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "analytics-cloud-data-export.get-fact-data"
+          with:
+            modelId: "tools.modelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: extract-master-data
+          description: "Extract master data (dimension members) from an analytics model."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "analytics-cloud-data-export.get-master-data"
+          with:
+            modelId: "tools.modelId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: search-reports
+          description: "Search for BusinessObjects reports and documents in the CMS repository."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "businessobjects-bi-platform.execute-cms-query"
+          with:
+            query: "tools.query"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: schedule-report
+          description: "Schedule a BusinessObjects report for immediate execution."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "businessobjects-bi-platform.schedule-document"
+          with:
+            documentId: "tools.documentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-inbox-items
+          description: "List completed report instances in the user's BI Inbox."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "businessobjects-bi-platform.list-inbox-items"
+          outputParameters:
+            - type: object
+              mapping: "$."

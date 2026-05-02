@@ -1,0 +1,56 @@
+{
+  "name": "User",
+  "description": "SAP Analytics Cloud User - SCIM 2.0 user account for analytics platform access",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique user identifier assigned by the system" },
+    { "name": "userName", "type": "string", "required": true, "description": "Login username (typically email or employee ID)" },
+    {
+      "name": "name",
+      "type": "object",
+      "required": false,
+      "description": "User name components",
+      "fields": [
+        { "name": "givenName", "type": "string", "required": false, "description": "First name" },
+        { "name": "familyName", "type": "string", "required": false, "description": "Last name" },
+        { "name": "formatted", "type": "string", "required": false, "description": "Full formatted name" }
+      ]
+    },
+    { "name": "displayName", "type": "string", "required": false, "description": "Display name shown in the UI" },
+    {
+      "name": "emails",
+      "type": "array",
+      "required": false,
+      "description": "Email addresses",
+      "items": {
+        "fields": [
+          { "name": "value", "type": "string", "required": true, "description": "Email address" },
+          { "name": "primary", "type": "boolean", "required": false, "description": "Primary email flag" }
+        ]
+      }
+    },
+    { "name": "active", "type": "boolean", "required": false, "description": "Account active status" },
+    {
+      "name": "roles",
+      "type": "array",
+      "required": false,
+      "description": "Assigned platform roles",
+      "items": {
+        "fields": [
+          { "name": "value", "type": "string", "required": true, "description": "Role identifier" }
+        ]
+      }
+    },
+    {
+      "name": "groups",
+      "type": "array",
+      "required": false,
+      "description": "Team memberships",
+      "items": {
+        "fields": [
+          { "name": "value", "type": "string", "required": true, "description": "Team identifier" },
+          { "name": "display", "type": "string", "required": false, "description": "Team display name" }
+        ]
+      }
+    }
+  ]
+}

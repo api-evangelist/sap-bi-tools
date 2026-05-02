@@ -1,0 +1,36 @@
+[
+  {
+    "id": "STORY_001",
+    "name": "Sales Performance Dashboard",
+    "description": "Monthly sales performance overview with regional breakdowns",
+    "createdTime": "2025-01-15T09:00:00Z",
+    "modifiedTime": "2026-04-01T14:30:00Z",
+    "createdBy": "user_001",
+    "modifiedBy": "user_002",
+    "resourceType": "STORY",
+    "models": [
+      {
+        "id": "MODEL_SALES_001",
+        "name": "Sales Planning Model",
+        "description": "Integrated sales and revenue planning model"
+      }
+    ]
+  },
+  {
+    "id": "STORY_002",
+    "name": "Financial Close Report",
+    "description": "Quarterly financial close analysis and variance report",
+    "createdTime": "2025-03-01T10:00:00Z",
+    "modifiedTime": "2026-03-31T16:45:00Z",
+    "createdBy": "user_003",
+    "modifiedBy": "user_003",
+    "resourceType": "STORY",
+    "models": [
+      {
+        "id": "MODEL_FINANCE_001",
+        "name": "Finance Consolidation Model",
+        "description": "Group financial consolidation and reporting model"
+      }
+    ]
+  }
+]

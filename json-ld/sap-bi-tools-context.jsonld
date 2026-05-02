@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "sap": "https://www.sap.com/ontology/",
+    "bi": "https://api-evangelist.github.io/sap-bi-tools/vocab#",
+
+    "Story": {
+      "@id": "bi:Story",
+      "@type": "@id",
+      "comment": "An analytic story in SAP Analytics Cloud containing charts and visualizations"
+    },
+    "AnalyticsModel": {
+      "@id": "bi:AnalyticsModel",
+      "@type": "@id",
+      "comment": "A data model in SAP Analytics Cloud used as the basis for stories and reports"
+    },
+    "ContentItem": {
+      "@id": "bi:ContentItem",
+      "@type": "@id",
+      "comment": "A publishable and shareable artifact in the SAP Analytics Cloud Content Network"
+    },
+    "CalendarEvent": {
+      "@id": "bi:CalendarEvent",
+      "@type": "schema:Event",
+      "comment": "A planning calendar event or task used for collaborative planning workflows"
+    },
+
+    "id": "@id",
+    "name": "schema:name",
+    "description": "schema:description",
+    "createdTime": "schema:dateCreated",
+    "modifiedTime": "schema:dateModified",
+    "createdBy": "schema:creator",
+    "modifiedBy": "schema:editor",
+    "resourceType": "bi:resourceType",
+    "visibility": "bi:visibility",
+    "version": "schema:version",
+    "owner": "schema:maintainer",
+    "active": "bi:active",
+    "userName": "bi:userName",
+    "displayName": "schema:alternateName",
+    "roles": "bi:roles",
+    "groups": "bi:groups",
+    "models": "bi:models",
+    "startDate": "schema:startDate",
+    "endDate": "schema:endDate",
+    "status": "bi:status",
+    "assignee": "schema:participant",
+
+    "FactData": "bi:FactData",
+    "MasterData": "bi:MasterData",
+    "Provider": "bi:Provider",
+    "Namespace": "bi:Namespace",
+    "InfoStoreEntry": "bi:InfoStoreEntry"
+  }
+}

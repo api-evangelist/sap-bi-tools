@@ -1,0 +1,178 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SAP BI Tools Analytics Content Management"
+  description: "Unified workflow capability for managing analytics content across SAP Analytics Cloud, including story lifecycle management, content network publishing, and file repository governance. Used by BI administrators and content authors."
+  tags:
+    - Analytics
+    - Business Intelligence
+    - Content Management
+    - SAP
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAP_AC_OAUTH_TOKEN: SAP_AC_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - import: analytics-cloud
+      location: ./shared/analytics-cloud.yaml
+    - import: analytics-cloud-content-network
+      location: ./shared/analytics-cloud-content-network.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: analytics-content-management-api
+      description: "Unified REST API for SAP Analytics Cloud content lifecycle management."
+      resources:
+        - path: /v1/stories
+          name: stories
+          description: "Analytics story management."
+          operations:
+            - method: GET
+              name: list-stories
+              description: "List all analytics stories on the tenant."
+              call: "analytics-cloud.list-stories"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/stories/{storyId}
+          name: story
+          description: "Single analytics story."
+          operations:
+            - method: GET
+              name: get-story
+              description: "Get a story by ID."
+              call: "analytics-cloud.get-story"
+              with:
+                storyId: "rest.storyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/resources
+          name: resources
+          description: "File repository resources."
+          operations:
+            - method: GET
+              name: list-resources
+              description: "List repository resources (stories, models, folders)."
+              call: "analytics-cloud.list-resources"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/content-items
+          name: content-items
+          description: "Content Network items."
+          operations:
+            - method: GET
+              name: list-content-items
+              description: "List Content Network items."
+              call: "analytics-cloud-content-network.list-content-items"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+        - path: /v1/content-items/{itemId}
+          name: content-item
+          description: "Single Content Network item."
+          operations:
+            - method: GET
+              name: get-content-item
+              description: "Get a content item by ID."
+              call: "analytics-cloud-content-network.get-content-item"
+              with:
+                itemId: "rest.itemId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/calendars
+          name: calendars
+          description: "Planning calendars."
+          operations:
+            - method: GET
+              name: list-calendars
+              description: "List calendar events and planning tasks."
+              call: "analytics-cloud.list-calendars"
+              outputParameters:
+                - type: array
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: analytics-content-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted SAP Analytics Cloud content management."
+      tools:
+        - name: list-stories
+          description: "List all analytics stories on the SAP Analytics Cloud tenant."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "analytics-cloud.list-stories"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: get-story
+          description: "Get details of a specific analytics story by ID."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "analytics-cloud.get-story"
+          with:
+            storyId: "tools.storyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-resources
+          description: "List file repository resources (stories, models, folders)."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "analytics-cloud.list-resources"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: list-content-items
+          description: "List content items in the SAP Analytics Cloud Content Network."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "analytics-cloud-content-network.list-content-items"
+          outputParameters:
+            - type: array
+              mapping: "$."
+        - name: publish-content-item
+          description: "Publish a local analytics artifact to the Content Network for sharing."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "analytics-cloud-content-network.publish-content-item"
+          with:
+            name: "tools.name"
+            resourceId: "tools.resourceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: import-content-item
+          description: "Import a content package from the Content Network into the local tenant."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "analytics-cloud-content-network.import-content-item"
+          with:
+            itemId: "tools.itemId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-calendars
+          description: "List planning calendar events and collaborative tasks."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "analytics-cloud.list-calendars"
+          outputParameters:
+            - type: array
+              mapping: "$."

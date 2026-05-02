@@ -1,0 +1,152 @@
+name: SAP BI Tools Vocabulary
+description: Domain vocabulary for SAP Business Intelligence tools including SAP Analytics Cloud, SAP BusinessObjects, and related analytics platforms.
+version: '1.0'
+created: '2026-05-02'
+modified: '2026-05-02'
+
+terms:
+  - term: Story
+    definition: >-
+      The primary visualization artifact in SAP Analytics Cloud. A story contains
+      pages with charts, tables, images, and other components that provide insights
+      into business data. Stories can be created from one or more data models.
+    category: Content
+    synonyms:
+      - Dashboard
+      - Report
+      - Analytics Story
+
+  - term: Analytics Model
+    definition: >-
+      A data model in SAP Analytics Cloud that structures business data for
+      analysis. Models can be planning models (supporting write-back) or
+      analytical models (read-only). They define dimensions, measures, and
+      hierarchies.
+    category: Data
+    synonyms:
+      - Planning Model
+      - SAC Model
+
+  - term: Content Network
+    definition: >-
+      A marketplace within SAP Analytics Cloud where tenants can publish and
+      consume pre-built analytics content including stories, models, and
+      packages. Content can be public (available to all tenants) or private
+      (within an organization).
+    category: Platform
+    synonyms:
+      - Content Marketplace
+
+  - term: SCIM
+    definition: >-
+      System for Cross-domain Identity Management (SCIM) is the protocol used
+      by SAP Analytics Cloud for user and group provisioning. Version 2.0 is
+      supported for creating, reading, updating, and deleting users and teams.
+    category: Identity
+    synonyms:
+      - User Provisioning Protocol
+
+  - term: Tenant
+    definition: >-
+      An isolated SAP Analytics Cloud instance belonging to a single organization.
+      Each tenant has its own URL (e.g., tenant-name.eu1.sapanalytics.cloud),
+      users, content, and data models.
+    category: Platform
+
+  - term: Fact Data
+    definition: >-
+      Transactional data records in a planning model containing dimension member
+      values and measure values. Fact data represents the actual business figures
+      (e.g., sales amounts, cost values) associated with specific dimension
+      combinations.
+    category: Data
+
+  - term: Master Data
+    definition: >-
+      Reference data (dimension member lists with attributes) for dimensions
+      within an analytics model. Master data defines the valid values and
+      hierarchies for dimensions such as Cost Centers, Products, and Customers.
+    category: Data
+    synonyms:
+      - Reference Data
+      - Dimension Members
+
+  - term: InfoStore
+    definition: >-
+      The central object repository of the SAP BusinessObjects BI Platform.
+      The InfoStore contains all managed objects including documents, folders,
+      users, groups, and schedules. Objects are identified by a unique SI_ID.
+    category: BusinessObjects
+
+  - term: CMS Query
+    definition: >-
+      A SQL-like query language used to search and retrieve objects from the
+      SAP BusinessObjects Content Management Server (CMS). Queries target
+      InfoStore tables such as CI_INFOOBJECTS for documents and CI_SYSTEMOBJECTS
+      for users.
+    category: BusinessObjects
+
+  - term: Calendar
+    definition: >-
+      A planning tool in SAP Analytics Cloud used to organize collaborative
+      planning tasks, scheduling notifications, and workflow activities.
+      Calendar events can be assigned to users with start and end dates.
+    category: Planning
+
+  - term: BI Platform
+    definition: >-
+      SAP BusinessObjects Business Intelligence Platform (BOBJ) is the
+      enterprise BI suite providing capabilities for Web Intelligence,
+      Crystal Reports, and other traditional reporting tools. The platform
+      uses a CMS repository and supports REST-based management APIs.
+    category: Platform
+    synonyms:
+      - BOBJ
+      - BusinessObjects
+
+  - term: Data Export API
+    definition: >-
+      An OData-based API in SAP Analytics Cloud that enables programmatic
+      extraction of fact data and master data from planning models. Consists
+      of an Administration service (for discovering models) and a Provider
+      service (for querying data).
+    category: Integration
+
+  - term: Provider
+    definition: >-
+      In the SAP Analytics Cloud Data Export context, a provider represents
+      a planning model that exposes its data via the OData Provider service.
+      Each provider has a unique ProviderID used to construct query URLs.
+    category: Data
+
+  - term: OAuth 2.0
+    definition: >-
+      The authentication protocol used by SAP Analytics Cloud APIs. Supports
+      SAML Bearer Assertion flow (for server-to-server integration) and
+      Authorization Code Grant flow (for user-facing applications). Tokens
+      are obtained from the SAP HANA Cloud authentication service.
+    category: Security
+
+  - term: Logon Token
+    definition: >-
+      A session token returned by the SAP BusinessObjects BI Platform /logon/long
+      endpoint. The token must be included in the X-SAP-LogonToken header for
+      all subsequent API requests. Tokens expire after the session timeout period.
+    category: Security
+
+  - term: Team
+    definition: >-
+      A group of users in SAP Analytics Cloud (represented as a SCIM Group).
+      Teams are used to organize users and manage content access permissions.
+      Team membership determines which stories and models users can access.
+    category: Identity
+    synonyms:
+      - Group
+      - SCIM Group
+
+  - term: OData
+    definition: >-
+      Open Data Protocol — the protocol used by several SAP BI data access
+      APIs including the Data Export API and certain BusinessObjects services.
+      Supports standard query parameters ($filter, $top, $skip, $select, $orderby).
+    category: Protocol

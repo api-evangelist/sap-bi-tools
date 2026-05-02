@@ -1,0 +1,156 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SAP BI Tools User and Access Management"
+  description: "Workflow capability for provisioning and managing users, teams, and access control across SAP Analytics Cloud using SCIM 2.0. Used by IT administrators and system integrators for identity lifecycle management."
+  tags:
+    - Analytics
+    - Business Intelligence
+    - Identity Management
+    - SAP
+    - SCIM
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAP_AC_OAUTH_TOKEN: SAP_AC_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - import: analytics-cloud
+      location: ./shared/analytics-cloud.yaml
+
+  exposes:
+    - type: rest
+      port: 8082
+      namespace: user-access-management-api
+      description: "Unified REST API for SAP Analytics Cloud user and team provisioning."
+      resources:
+        - path: /v1/users
+          name: users
+          description: "User management via SCIM 2.0."
+          operations:
+            - method: GET
+              name: list-users
+              description: "List all provisioned users."
+              call: "analytics-cloud.list-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/users/{userId}
+          name: user
+          description: "Single user."
+          operations:
+            - method: GET
+              name: get-user
+              description: "Get a user by ID."
+              call: "analytics-cloud.get-user"
+              with:
+                userId: "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-user
+              description: "Delete a user account."
+              call: "analytics-cloud.delete-user"
+              with:
+                userId: "rest.userId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/teams
+          name: teams
+          description: "Team management via SCIM 2.0."
+          operations:
+            - method: GET
+              name: list-teams
+              description: "List all teams."
+              call: "analytics-cloud.list-teams"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9082
+      namespace: user-access-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted user provisioning in SAP Analytics Cloud."
+      tools:
+        - name: list-users
+          description: "List all users provisioned in SAP Analytics Cloud."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "analytics-cloud.list-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-user
+          description: "Get details of a specific user account."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "analytics-cloud.get-user"
+          with:
+            userId: "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-user
+          description: "Provision a new user in SAP Analytics Cloud via SCIM 2.0."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "analytics-cloud.create-user"
+          with:
+            userName: "tools.userName"
+            displayName: "tools.displayName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-user
+          description: "Update an existing user's profile and role assignments."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "analytics-cloud.update-user"
+          with:
+            userId: "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-user
+          description: "Deprovision a user from SAP Analytics Cloud."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "analytics-cloud.delete-user"
+          with:
+            userId: "tools.userId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-teams
+          description: "List all teams (groups) configured in SAP Analytics Cloud."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "analytics-cloud.list-teams"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-team
+          description: "Create a new team for organizing users and managing content access."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "analytics-cloud.create-team"
+          with:
+            displayName: "tools.displayName"
+          outputParameters:
+            - type: object
+              mapping: "$."

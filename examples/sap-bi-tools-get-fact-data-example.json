@@ -1,0 +1,29 @@
+{
+  "@odata.context": "https://my-tenant.eu1.sapanalytics.cloud/api/v1/dataexport/providers/sac/MODEL_SALES_001/$metadata#FactData",
+  "value": [
+    {
+      "Date": "2026-03-01",
+      "Region": "EMEA",
+      "Product": "SAP S/4HANA",
+      "SalesAmount": 1250000.00,
+      "UnitsSold": 42,
+      "Currency": "EUR"
+    },
+    {
+      "Date": "2026-03-01",
+      "Region": "Americas",
+      "Product": "SAP Analytics Cloud",
+      "SalesAmount": 875000.00,
+      "UnitsSold": 125,
+      "Currency": "USD"
+    },
+    {
+      "Date": "2026-03-01",
+      "Region": "APJ",
+      "Product": "SAP BTP",
+      "SalesAmount": 430000.00,
+      "UnitsSold": 18,
+      "Currency": "USD"
+    }
+  ]
+}

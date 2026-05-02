@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/sap-bi-tools/json-schema/sap-bi-tools-story-schema.json",
+  "title": "SAP Analytics Cloud Story",
+  "description": "Represents an analytic story in SAP Analytics Cloud. Stories are the primary visualization artifact containing charts, tables, and components for data analysis.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the story"
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the story"
+    },
+    "description": {
+      "type": "string",
+      "description": "A text description of the story"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the story was created"
+    },
+    "modifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the story was last modified"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "The user ID of the story creator"
+    },
+    "modifiedBy": {
+      "type": "string",
+      "description": "The user ID of the last modifier"
+    },
+    "resourceType": {
+      "type": "string",
+      "const": "STORY",
+      "description": "The type of resource (always STORY)"
+    },
+    "models": {
+      "type": "array",
+      "description": "List of models used in the story",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the model"
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name of the model"
+          },
+          "description": {
+            "type": "string",
+            "description": "A text description of the model"
+          }
+        }
+      }
+    }
+  },
+  "required": ["id", "name"]
+}

@@ -4,7 +4,7 @@ description: >-
   and data visualization.
 image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
 created: '2024-01-20'
-modified: '2026-03-04'
+modified: '2026-05-02'
 specificationVersion: '0.18'
 url: https://api.sap.com/bi-tools
 tags:
@@ -42,6 +42,8 @@ apis:
         url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html
       - type: Change Log
         url: https://www.sap.com/sea/products/data-cloud/cloud-analytics/features/release-highlights.html
+      - type: OpenAPI
+        url: openapi/sap-analytics-cloud-api-openapi.yml
     contact:
       - type: Support
         url: https://support.sap.com/en/index.html
@@ -358,3 +360,34 @@ common:
   - type: SDKs
     url: https://developers.sap.com/topics/cloud-sdk.html
 include: []
+common:
+  - type: OpenAPI
+    url: openapi/sap-analytics-cloud-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/sap-analytics-cloud-content-network-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/sap-analytics-cloud-data-export-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/sap-businessobjects-bi-platform-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/sap-bi-tools-story-schema.json
+  - type: JSONSchema
+    url: json-schema/sap-bi-tools-user-schema.json
+  - type: JSONSchema
+    url: json-schema/sap-bi-tools-content-item-schema.json
+  - type: JSONStructure
+    url: json-structure/sap-bi-tools-story-structure.json
+  - type: JSONStructure
+    url: json-structure/sap-bi-tools-user-structure.json
+  - type: JSON-LD
+    url: json-ld/sap-bi-tools-context.jsonld
+  - type: Vocabulary
+    url: vocabulary/sap-bi-tools-vocabulary.yml
+  - type: SpectralRules
+    url: rules/sap-bi-tools-rules.yml
+  - type: NaftikoCapability
+    url: capabilities/analytics-content-management.yaml
+  - type: NaftikoCapability
+    url: capabilities/data-extraction-and-reporting.yaml
+  - type: NaftikoCapability
+    url: capabilities/user-and-access-management.yaml

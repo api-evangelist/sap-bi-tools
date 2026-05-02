@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/sap-bi-tools/json-schema/sap-bi-tools-user-schema.json",
+  "title": "SAP Analytics Cloud User",
+  "description": "A user record conforming to SCIM 2.0 protocol for SAP Analytics Cloud. Contains user profile attributes, roles, and team memberships.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier assigned to the user"
+    },
+    "userName": {
+      "type": "string",
+      "description": "The login username for the user"
+    },
+    "name": {
+      "type": "object",
+      "description": "The user's name components",
+      "properties": {
+        "givenName": {
+          "type": "string",
+          "description": "The first name of the user"
+        },
+        "familyName": {
+          "type": "string",
+          "description": "The last name of the user"
+        },
+        "formatted": {
+          "type": "string",
+          "description": "The full formatted name of the user"
+        }
+      }
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name of the user"
+    },
+    "emails": {
+      "type": "array",
+      "description": "Email addresses for the user",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "email",
+            "description": "The email address"
+          },
+          "primary": {
+            "type": "boolean",
+            "description": "Whether this is the primary email"
+          }
+        }
+      }
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Whether the user account is active"
+    },
+    "roles": {
+      "type": "array",
+      "description": "Roles assigned to the user",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The role identifier"
+          }
+        }
+      }
+    },
+    "groups": {
+      "type": "array",
+      "description": "Teams the user belongs to",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The team identifier"
+          },
+          "display": {
+            "type": "string",
+            "description": "The team display name"
+          }
+        }
+      }
+    }
+  },
+  "required": ["userName"]
+}
