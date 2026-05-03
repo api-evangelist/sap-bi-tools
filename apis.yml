@@ -322,10 +322,6 @@ apis:
     contact:
       - type: Support
         url: https://support.sap.com/en/index.html
-maintainers:
-  - name: Kin Lane
-    email: kin@apievangelist.com
-    url: https://www.sap.com
 common:
   - type: Portal
     url: https://api.sap.com
@@ -359,8 +355,6 @@ common:
     url: https://developers.sap.com
   - type: SDKs
     url: https://developers.sap.com/topics/cloud-sdk.html
-include: []
-common:
   - type: OpenAPI
     url: openapi/sap-analytics-cloud-api-openapi.yml
   - type: OpenAPI
@@ -391,3 +385,7 @@ common:
     url: capabilities/data-extraction-and-reporting.yaml
   - type: NaftikoCapability
     url: capabilities/user-and-access-management.yaml
+maintainers:
+  - name: Kin Lane
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
