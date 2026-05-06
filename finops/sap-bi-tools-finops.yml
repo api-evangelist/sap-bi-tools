@@ -1,240 +1,70 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: SAP BI Tools
+providerId: sap-bi-tools
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - Analytics
+  - Business Intelligence
+  - Data Visualization
+  - Reporting
+  - SAP
+description: FOCUS-aligned FinOps placeholder for SAP BI Tools. Per-user / per-session licensing under the BusinessObjects BI Suite.
+sources:
+  - https://api.sap.com/bi-tools
+  - https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM
+notes: Provider does not publish a public, machine-readable rate card; meters and FOCUS columns below are placeholders to be reconciled once contract or partner-portal terms are available.
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: SAP BI Tools
-providerId: sap-bi-tools
-publisherName: SAP BI Tools
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - Analytics
-  - Business Intelligence
-  - Data Visualization
-  - Reporting
-  - SAP
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the SAP BI Tools API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: SAP SE
+serviceCategory: Business Intelligence / Reporting
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
-  billingCurrency: USD
+  pricingCategory: Enterprise Contract
+  billingFrequency: Per-Invoice
+  billingCurrency: USD/EUR/varies
   chargeCategories:
-    - Usage
     - Purchase
+    - Usage
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: SAP BI Tools
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Business Intelligence / Reporting
   ProviderName: SAP BI Tools
-  PublisherName: SAP BI Tools
-  InvoiceIssuerName: SAP BI Tools
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: SAP SE
+  InvoiceIssuerName: SAP SE
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: contracted_consumption
+    description: Consumption against the customer's negotiated SAP / Concur contract; reconcile to actual
+      provider-published meters once available.
+    unit: varies
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - service
       - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: SAP Analytics Cloud API
-    baseURL: https://api.sapanalytics.cloud
-    tags:
-      - Analytics
-      - Cloud
-      - Models
-      - Stories
-    serviceName: SAP Analytics Cloud API
-    serviceCategory: API
-  - name: SAP Analytics Cloud Data Export API
-    baseURL: https://api.sapanalytics.cloud
-    tags:
-      - Analytics
-      - Cloud
-      - Data Export
-      - OData
-    serviceName: SAP Analytics Cloud Data Export API
-    serviceCategory: API
-  - name: SAP Analytics Cloud Content Network REST API
-    baseURL: https://api.sapanalytics.cloud
-    tags:
-      - Analytics
-      - Cloud
-      - Content Management
-    serviceName: SAP Analytics Cloud Content Network REST API
-    serviceCategory: API
-  - name: SAP Analytics Cloud Analytics Designer API
-    baseURL: ''
-    tags:
-      - Analytics
-      - Application Design
-      - Embedded Analytics
-      - JavaScript
-    serviceName: SAP Analytics Cloud Analytics Designer API
-    serviceCategory: API
-  - name: SAP BusinessObjects BI Platform RESTful Web Services
-    baseURL: https://server:port/biprws
-    tags:
-      - BusinessObjects
-      - Documents
-      - Reports
-      - Scheduling
-    serviceName: SAP BusinessObjects BI Platform RESTful Web Services
-    serviceCategory: API
-  - name: SAP BusinessObjects Web Intelligence RESTful Web Services API
-    baseURL: https://server:port/biprws
-    tags:
-      - BusinessObjects
-      - Data Providers
-      - Reports
-      - Web Intelligence
-    serviceName: SAP BusinessObjects Web Intelligence RESTful Web Services API
-    serviceCategory: API
-  - name: SAP BusinessObjects BI Semantic Layer REST API
-    baseURL: https://server:port/biprws
-    tags:
-      - BusinessObjects
-      - Data Access
-      - Semantic Layer
-      - Universes
-    serviceName: SAP BusinessObjects BI Semantic Layer REST API
-    serviceCategory: API
-  - name: SAP Crystal Reports RESTful Web Services API
-    baseURL: ''
-    tags:
-      - Crystal Reports
-      - Embedded Analytics
-      - Reporting
-    serviceName: SAP Crystal Reports RESTful Web Services API
-    serviceCategory: API
-  - name: SAP Crystal Reports .NET SDK
-    baseURL: ''
-    tags:
-      - .NET
-      - Crystal Reports
-      - SDK
-      - Visual Studio
-    serviceName: SAP Crystal Reports .NET SDK
-    serviceCategory: API
-  - name: SAP Lumira Discovery Extensions API
-    baseURL: ''
-    tags:
-      - Extensions
-      - JavaScript
-      - Lumira
-      - Visualization
-    serviceName: SAP Lumira Discovery Extensions API
-    serviceCategory: API
-  - name: SAP HANA Cloud Data Lake Files REST API
-    baseURL: https://api.hana.ondemand.com
-    tags:
-      - Cloud
-      - Data Access
-      - Data Lake
-      - HANA
-    serviceName: SAP HANA Cloud Data Lake Files REST API
-    serviceCategory: API
-  - name: SAP Datasphere API
-    baseURL: https://datasphere-api.cfapps.eu10.hana.ondemand.com
-    tags:
-      - Data Modeling
-      - Data Warehouse
-      - Datasphere
-      - Integration
-    serviceName: SAP Datasphere API
-    serviceCategory: API
-  - name: SAP Datasphere Consumption and Catalog API
-    baseURL: https://datasphere-api.cfapps.eu10.hana.ondemand.com
-    tags:
-      - Catalog
-      - Data Consumption
-      - Datasphere
-      - OData
-    serviceName: SAP Datasphere Consumption and Catalog API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+principles:
+  - name: Visibility
+    description: Use SAP for Me, the BTP Cockpit, or the SAP Concur admin console (as applicable) to
+      view consumption against entitlements; line items appear on the SAP / Concur invoice.
+  - name: Allocation
+    description: Allocate by SAP global account / subaccount or by Concur entity; map to internal cost
+      centers via the relevant cockpit before chargeback.
+  - name: Optimization
+    description: Track CPEA/BTPEA balance burn or per-employee subscription utilization; right-size service
+      plans and prune unused entitlements at renewal.
+  - name: Accountability
+    description: Designate a single billing owner and reconcile invoices monthly with usage reports from
+      the relevant SAP / Concur cockpit.
 maintainers:
-  - name: Kin Lane
+  - FN: Kin Lane
     email: kin@apievangelist.com
-    url: https://apievangelist.com

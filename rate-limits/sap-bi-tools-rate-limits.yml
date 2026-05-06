@@ -4,147 +4,34 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: SAP BI Tools
 providerId: sap-bi-tools
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - Rate Limiting
   - Analytics
   - Business Intelligence
   - Data Visualization
   - Reporting
   - SAP
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the SAP BI Tools API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: SAP BI Tools surface APIs through BusinessObjects RESTful Web Services; rate-limit and concurrency limits are governed by the customer's deployment (CMS configuration) rather than a published public limit.
+sources:
+  - https://api.sap.com/bi-tools
+  - https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM
+notes: Provider documentation pages render via client-side JavaScript or sit behind a partner portal; static rate-limit numbers are not exposed to automated fetches. Reconcile from the per-product SAP Help Portal section or partner developer portal.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - SAP Analytics Cloud API
-      - SAP Analytics Cloud Data Export API
-      - SAP Analytics Cloud Content Network REST API
-      - SAP Analytics Cloud Analytics Designer API
-      - SAP BusinessObjects BI Platform RESTful Web Services
-      - SAP BusinessObjects Web Intelligence RESTful Web Services API
-      - SAP BusinessObjects BI Semantic Layer REST API
-      - SAP Crystal Reports RESTful Web Services API
-      - SAP Crystal Reports .NET SDK
-      - SAP Lumira Discovery Extensions API
-      - SAP HANA Cloud Data Lake Files REST API
-      - SAP Datasphere API
-      - SAP Datasphere Consumption and Catalog API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - SAP Analytics Cloud API
-      - SAP Analytics Cloud Data Export API
-      - SAP Analytics Cloud Content Network REST API
-      - SAP Analytics Cloud Analytics Designer API
-      - SAP BusinessObjects BI Platform RESTful Web Services
-      - SAP BusinessObjects Web Intelligence RESTful Web Services API
-      - SAP BusinessObjects BI Semantic Layer REST API
-      - SAP Crystal Reports RESTful Web Services API
-      - SAP Crystal Reports .NET SDK
-      - SAP Lumira Discovery Extensions API
-      - SAP HANA Cloud Data Lake Files REST API
-      - SAP Datasphere API
-      - SAP Datasphere Consumption and Catalog API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - SAP Analytics Cloud API
-      - SAP Analytics Cloud Data Export API
-      - SAP Analytics Cloud Content Network REST API
-      - SAP Analytics Cloud Analytics Designer API
-      - SAP BusinessObjects BI Platform RESTful Web Services
-      - SAP BusinessObjects Web Intelligence RESTful Web Services API
-      - SAP BusinessObjects BI Semantic Layer REST API
-      - SAP Crystal Reports RESTful Web Services API
-      - SAP Crystal Reports .NET SDK
-      - SAP Lumira Discovery Extensions API
-      - SAP HANA Cloud Data Lake Files REST API
-      - SAP Datasphere API
-      - SAP Datasphere Consumption and Catalog API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - SAP Analytics Cloud API
-      - SAP Analytics Cloud Data Export API
-      - SAP Analytics Cloud Content Network REST API
-      - SAP Analytics Cloud Analytics Designer API
-      - SAP BusinessObjects BI Platform RESTful Web Services
-      - SAP BusinessObjects Web Intelligence RESTful Web Services API
-      - SAP BusinessObjects BI Semantic Layer REST API
-      - SAP Crystal Reports RESTful Web Services API
-      - SAP Crystal Reports .NET SDK
-      - SAP Lumira Discovery Extensions API
-      - SAP HANA Cloud Data Lake Files REST API
-      - SAP Datasphere API
-      - SAP Datasphere Consumption and Catalog API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - SAP Analytics Cloud API
-      - SAP Analytics Cloud Data Export API
-      - SAP Analytics Cloud Content Network REST API
-      - SAP Analytics Cloud Analytics Designer API
-      - SAP BusinessObjects BI Platform RESTful Web Services
-      - SAP BusinessObjects Web Intelligence RESTful Web Services API
-      - SAP BusinessObjects BI Semantic Layer REST API
-      - SAP Crystal Reports RESTful Web Services API
-      - SAP Crystal Reports .NET SDK
-      - SAP Lumira Discovery Extensions API
-      - SAP HANA Cloud Data Lake Files REST API
-      - SAP Datasphere API
-      - SAP Datasphere Consumption and Catalog API
+  - name: Per-service quotas
+    scope: account/region/service
+    metric: varies
+    limit: see provider documentation; gated or partner-only
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Documentation location
+    description: Rate limits are documented per service in the SAP Help Portal or the SAP Concur developer
+      portal; consult the relevant section for current numbers.
+  - name: Contract-governed
+    description: Effective limits depend on the customer's BTP entitlement, partner application, or negotiated
+      contract.
 maintainers:
-  - name: Kin Lane
+  - FN: Kin Lane
     email: kin@apievangelist.com
-    url: https://apievangelist.com
