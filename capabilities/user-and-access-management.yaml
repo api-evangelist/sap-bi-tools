@@ -1,156 +1,347 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "SAP BI Tools User and Access Management"
-  description: "Workflow capability for provisioning and managing users, teams, and access control across SAP Analytics Cloud using SCIM 2.0. Used by IT administrators and system integrators for identity lifecycle management."
+  label: SAP BI Tools User and Access Management
+  description: Workflow capability for provisioning and managing users, teams, and access control across SAP Analytics Cloud
+    using SCIM 2.0. Used by IT administrators and system integrators for identity lifecycle management.
   tags:
-    - Analytics
-    - Business Intelligence
-    - Identity Management
-    - SAP
-    - SCIM
-  created: "2026-05-02"
-  modified: "2026-05-02"
-
+  - Analytics
+  - Business Intelligence
+  - Identity Management
+  - SAP
+  - SCIM
+  created: '2026-05-02'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      SAP_AC_OAUTH_TOKEN: SAP_AC_OAUTH_TOKEN
-
+- namespace: env
+  keys:
+    SAP_AC_OAUTH_TOKEN: SAP_AC_OAUTH_TOKEN
 capability:
   consumes:
-    - import: analytics-cloud
-      location: ./shared/analytics-cloud.yaml
-
+  - type: http
+    namespace: analytics-cloud
+    baseUri: https://{tenant}.{datacenter}.sapanalytics.cloud
+    description: SAP Analytics Cloud REST API for managing stories, resources, users, and teams.
+    authentication:
+      type: bearer
+      token: '{{SAP_AC_OAUTH_TOKEN}}'
+    resources:
+    - name: stories
+      path: /api/v1/stories
+      description: Manage analytic stories including dashboards and reports.
+      operations:
+      - name: list-stories
+        method: GET
+        description: List all stories available on the SAP Analytics Cloud tenant.
+        inputParameters:
+        - name: include
+          in: query
+          type: string
+          required: false
+          description: Comma-separated related resources to include (e.g., models)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+      - name: get-story
+        method: GET
+        description: Get a story by its unique ID.
+        inputParameters:
+        - name: storyId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of the story
+        - name: include
+          in: query
+          type: string
+          required: false
+          description: Comma-separated related resources to include
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resources
+      path: /api/v1/Resources
+      description: Browse and manage resources in the SAP Analytics Cloud file repository.
+      operations:
+      - name: list-resources
+        method: GET
+        description: List resources including stories, models, and folders.
+        inputParameters:
+        - name: resourceType
+          in: query
+          type: string
+          required: false
+          description: Filter by resource type (STORY, MODEL, FOLDER)
+        - name: $top
+          in: query
+          type: integer
+          required: false
+          description: Maximum number of records to return
+        - name: $skip
+          in: query
+          type: integer
+          required: false
+          description: Number of records to skip for pagination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+    - name: users
+      path: /api/v1/scim2/Users
+      description: SCIM 2.0 endpoints for managing user accounts.
+      operations:
+      - name: list-users
+        method: GET
+        description: List users using SCIM 2.0 protocol.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          required: false
+          description: SCIM 2.0 filter expression
+        - name: count
+          in: query
+          type: integer
+          required: false
+          description: Maximum results per page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-user
+        method: POST
+        description: Create a new user using SCIM 2.0 protocol.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            userName: '{{tools.userName}}'
+            displayName: '{{tools.displayName}}'
+      - name: get-user
+        method: GET
+        description: Get a user by ID using SCIM 2.0.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of the user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-user
+        method: PUT
+        description: Update a user record using SCIM 2.0.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of the user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            userName: '{{tools.userName}}'
+      - name: delete-user
+        method: DELETE
+        description: Delete a user from SAP Analytics Cloud.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of the user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: teams
+      path: /api/v1/scim2/Groups
+      description: SCIM 2.0 endpoints for managing teams and group memberships.
+      operations:
+      - name: list-teams
+        method: GET
+        description: List teams using SCIM 2.0 protocol.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          required: false
+          description: SCIM 2.0 filter expression
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-team
+        method: POST
+        description: Create a new team using SCIM 2.0 protocol.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            displayName: '{{tools.displayName}}'
+    - name: calendars
+      path: /api/v1/calendars
+      description: Manage calendar events and tasks for planning workflows.
+      operations:
+      - name: list-calendars
+        method: GET
+        description: List calendar events and planning tasks.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
   exposes:
-    - type: rest
-      port: 8082
-      namespace: user-access-management-api
-      description: "Unified REST API for SAP Analytics Cloud user and team provisioning."
-      resources:
-        - path: /v1/users
-          name: users
-          description: "User management via SCIM 2.0."
-          operations:
-            - method: GET
-              name: list-users
-              description: "List all provisioned users."
-              call: "analytics-cloud.list-users"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/users/{userId}
-          name: user
-          description: "Single user."
-          operations:
-            - method: GET
-              name: get-user
-              description: "Get a user by ID."
-              call: "analytics-cloud.get-user"
-              with:
-                userId: "rest.userId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: DELETE
-              name: delete-user
-              description: "Delete a user account."
-              call: "analytics-cloud.delete-user"
-              with:
-                userId: "rest.userId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/teams
-          name: teams
-          description: "Team management via SCIM 2.0."
-          operations:
-            - method: GET
-              name: list-teams
-              description: "List all teams."
-              call: "analytics-cloud.list-teams"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9082
-      namespace: user-access-management-mcp
-      transport: http
-      description: "MCP server for AI-assisted user provisioning in SAP Analytics Cloud."
-      tools:
-        - name: list-users
-          description: "List all users provisioned in SAP Analytics Cloud."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "analytics-cloud.list-users"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-user
-          description: "Get details of a specific user account."
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "analytics-cloud.get-user"
-          with:
-            userId: "tools.userId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-user
-          description: "Provision a new user in SAP Analytics Cloud via SCIM 2.0."
-          hints:
-            readOnly: false
-            openWorld: false
-          call: "analytics-cloud.create-user"
-          with:
-            userName: "tools.userName"
-            displayName: "tools.displayName"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: update-user
-          description: "Update an existing user's profile and role assignments."
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "analytics-cloud.update-user"
-          with:
-            userId: "tools.userId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: delete-user
-          description: "Deprovision a user from SAP Analytics Cloud."
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "analytics-cloud.delete-user"
-          with:
-            userId: "tools.userId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-teams
-          description: "List all teams (groups) configured in SAP Analytics Cloud."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "analytics-cloud.list-teams"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-team
-          description: "Create a new team for organizing users and managing content access."
-          hints:
-            readOnly: false
-            openWorld: false
-          call: "analytics-cloud.create-team"
-          with:
-            displayName: "tools.displayName"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8082
+    namespace: user-access-management-api
+    description: Unified REST API for SAP Analytics Cloud user and team provisioning.
+    resources:
+    - path: /v1/users
+      name: users
+      description: User management via SCIM 2.0.
+      operations:
+      - method: GET
+        name: list-users
+        description: List all provisioned users.
+        call: analytics-cloud.list-users
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{userId}
+      name: user
+      description: Single user.
+      operations:
+      - method: GET
+        name: get-user
+        description: Get a user by ID.
+        call: analytics-cloud.get-user
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete-user
+        description: Delete a user account.
+        call: analytics-cloud.delete-user
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/teams
+      name: teams
+      description: Team management via SCIM 2.0.
+      operations:
+      - method: GET
+        name: list-teams
+        description: List all teams.
+        call: analytics-cloud.list-teams
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9082
+    namespace: user-access-management-mcp
+    transport: http
+    description: MCP server for AI-assisted user provisioning in SAP Analytics Cloud.
+    tools:
+    - name: list-users
+      description: List all users provisioned in SAP Analytics Cloud.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: analytics-cloud.list-users
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user
+      description: Get details of a specific user account.
+      hints:
+        readOnly: true
+        openWorld: false
+      call: analytics-cloud.get-user
+      with:
+        userId: tools.userId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-user
+      description: Provision a new user in SAP Analytics Cloud via SCIM 2.0.
+      hints:
+        readOnly: false
+        openWorld: false
+      call: analytics-cloud.create-user
+      with:
+        userName: tools.userName
+        displayName: tools.displayName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user
+      description: Update an existing user's profile and role assignments.
+      hints:
+        readOnly: false
+        idempotent: true
+      call: analytics-cloud.update-user
+      with:
+        userId: tools.userId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-user
+      description: Deprovision a user from SAP Analytics Cloud.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: analytics-cloud.delete-user
+      with:
+        userId: tools.userId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-teams
+      description: List all teams (groups) configured in SAP Analytics Cloud.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: analytics-cloud.list-teams
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-team
+      description: Create a new team for organizing users and managing content access.
+      hints:
+        readOnly: false
+        openWorld: false
+      call: analytics-cloud.create-team
+      with:
+        displayName: tools.displayName
+      outputParameters:
+      - type: object
+        mapping: $.
