@@ -34,13 +34,13 @@ apis:
         url: https://api.sap.com/api/SACOpenAPI/overview
       - type: Authentication
         url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/b4f4d1e6e7fb4c08b0964e0b6d14d849.html
-      - type: Rate Limits
+      - type: RateLimits
         url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/rate-limits
       - type: Reference
         url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/fc2c581619264a40a37b98c19753c542.html
-      - type: Getting Started
+      - type: GettingStarted
         url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html
-      - type: Change Log
+      - type: ChangeLog
         url: https://www.sap.com/sea/products/data-cloud/cloud-analytics/features/release-highlights.html
       - type: OpenAPI
         url: openapi/sap-analytics-cloud-api-openapi.yml
@@ -122,7 +122,7 @@ apis:
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/
-      - type: API Reference
+      - type: APIReference
         url: https://help.sap.com/doc/e39d9c134f1f4634addd5161f93dbf25/4.3/en-US/RESTful_Web_Services_User_Guide.pdf
       - type: SDK
         url: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/sdk
@@ -266,7 +266,7 @@ apis:
         url: https://help.sap.com/docs/hana-cloud-data-lake
       - type: OpenAPI
         url: https://api.sap.com/api/HanaCloudDataLake/overview
-      - type: Getting Started
+      - type: GettingStarted
         url: https://developers.sap.com/tutorials/data-lake-file-containers-restapi..html
       - type: Reference
         url: https://help.sap.com/doc/9d084a41830f46d6904fd4c23cd4bbfa/QRC_3_2021/en-US/html/index.html
@@ -292,7 +292,7 @@ apis:
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/
-      - type: API Reference
+      - type: APIReference
         url: https://help.sap.com/docs/SAP_DATASPHERE/api-reference
       - type: OpenAPI
         url: https://api.sap.com/api/Datasphere/overview
@@ -325,17 +325,17 @@ apis:
 common:
   - type: Portal
     url: https://api.sap.com
-  - type: Getting Started
+  - type: GettingStarted
     url: https://developers.sap.com/topics/business-technology-platform..html
   - type: Documentation
     url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
   - type: Authentication
     url: https://help.sap.com/docs/authentication
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.sap.com/about/legal/terms-of-use.html
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.sap.com/about/legal/privacy.html
-  - type: Status
+  - type: StatusPage
     url: https://www.sap.com/about/trust-center/cloud-service-status.html
   - type: Support
     url: https://support.sap.com
@@ -345,13 +345,13 @@ common:
     url: https://community.sap.com/t5/application-development-and-automation-blog-posts/bg-p/application-developmentblog-board
   - type: Learning
     url: https://learning.sap.com
-  - type: Change Log
+  - type: ChangeLog
     url: https://pages.community.sap.com/topics/cloud-analytics/product-updates
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/SAP
   - type: Website
     url: https://www.sap.com
-  - type: Sign Up
+  - type: SignUp
     url: https://developers.sap.com
   - type: SDKs
     url: https://developers.sap.com/topics/cloud-sdk.html
@@ -373,7 +373,7 @@ common:
     url: json-structure/sap-bi-tools-story-structure.json
   - type: JSONStructure
     url: json-structure/sap-bi-tools-user-structure.json
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/sap-bi-tools-context.jsonld
   - type: Vocabulary
     url: vocabulary/sap-bi-tools-vocabulary.yml
