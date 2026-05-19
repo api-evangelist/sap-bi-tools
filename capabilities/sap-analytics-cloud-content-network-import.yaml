@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BI Tools SAP Analytics Cloud Content Network REST API — Import
+  description: 'SAP BI Tools SAP Analytics Cloud Content Network REST API — Import. 1 operations. Lead operation: SAP BI Tools
+    Import a content item. Self-contained Naftiko capability covering one Sap Bi Tools business surface.'
+  tags:
+  - Sap Bi Tools
+  - Import
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_TOOLS_API_KEY: SAP_BI_TOOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-analytics-cloud-content-network-import
+    baseUri: https://{tenant}.{datacenter}.sapanalytics.cloud
+    description: SAP BI Tools SAP Analytics Cloud Content Network REST API — Import business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: api-v1-contentnetwork-items-itemId-import
+      path: /api/v1/contentnetwork/items/{itemId}/import
+      operations:
+      - name: importcontentitem
+        method: POST
+        description: SAP BI Tools Import a content item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BI_TOOLS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sap-analytics-cloud-content-network-import-rest
+    port: 8080
+    description: REST adapter for SAP BI Tools SAP Analytics Cloud Content Network REST API — Import. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/contentnetwork/items/{itemid}/import
+      name: api-v1-contentnetwork-items-itemid-import
+      description: REST surface for api-v1-contentnetwork-items-itemId-import.
+      operations:
+      - method: POST
+        name: importcontentitem
+        description: SAP BI Tools Import a content item
+        call: sap-analytics-cloud-content-network-import.importcontentitem
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-analytics-cloud-content-network-import-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BI Tools SAP Analytics Cloud Content Network REST API — Import. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: sap-bi-tools-import-content
+      description: SAP BI Tools Import a content item
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sap-analytics-cloud-content-network-import.importcontentitem
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,259 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BI Tools SAP Analytics Cloud API — Users
+  description: 'SAP BI Tools SAP Analytics Cloud API — Users. 6 operations. Lead operation: SAP BI Tools List users (SCIM
+    1.1). Self-contained Naftiko capability covering one Sap Bi Tools business surface.'
+  tags:
+  - Sap Bi Tools
+  - Users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_TOOLS_API_KEY: SAP_BI_TOOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-analytics-cloud-users
+    baseUri: https://{tenant}.{datacenter}.sapanalytics.cloud
+    description: SAP BI Tools SAP Analytics Cloud API — Users business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-scim-Users
+      path: /api/v1/scim/Users
+      operations:
+      - name: listusersscim1
+        method: GET
+        description: SAP BI Tools List users (SCIM 1.1)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: SCIM filter expression (e.g., userName eq "john.doe")
+        - name: startIndex
+          in: query
+          type: integer
+          description: The starting index for pagination (1-based)
+    - name: api-v1-scim2-Users
+      path: /api/v1/scim2/Users
+      operations:
+      - name: listusersscim2
+        method: GET
+        description: SAP BI Tools List users (SCIM 2.0)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: SCIM 2.0 filter expression (e.g., userName eq "john.doe")
+        - name: startIndex
+          in: query
+          type: integer
+          description: The starting index for pagination (1-based)
+      - name: createuserscim2
+        method: POST
+        description: SAP BI Tools Create a user (SCIM 2.0)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-v1-scim2-Users-userId
+      path: /api/v1/scim2/Users/{userId}
+      operations:
+      - name: getuserscim2
+        method: GET
+        description: SAP BI Tools Get a user by ID (SCIM 2.0)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateuserscim2
+        method: PUT
+        description: SAP BI Tools Update a user (SCIM 2.0)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteuserscim2
+        method: DELETE
+        description: SAP BI Tools Delete a user (SCIM 2.0)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BI_TOOLS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sap-analytics-cloud-users-rest
+    port: 8080
+    description: REST adapter for SAP BI Tools SAP Analytics Cloud API — Users. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/scim/users
+      name: api-v1-scim-users
+      description: REST surface for api-v1-scim-Users.
+      operations:
+      - method: GET
+        name: listusersscim1
+        description: SAP BI Tools List users (SCIM 1.1)
+        call: sap-analytics-cloud-users.listusersscim1
+        with:
+          filter: rest.filter
+          startIndex: rest.startIndex
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/scim2/users
+      name: api-v1-scim2-users
+      description: REST surface for api-v1-scim2-Users.
+      operations:
+      - method: GET
+        name: listusersscim2
+        description: SAP BI Tools List users (SCIM 2.0)
+        call: sap-analytics-cloud-users.listusersscim2
+        with:
+          filter: rest.filter
+          startIndex: rest.startIndex
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createuserscim2
+        description: SAP BI Tools Create a user (SCIM 2.0)
+        call: sap-analytics-cloud-users.createuserscim2
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/scim2/users/{userid}
+      name: api-v1-scim2-users-userid
+      description: REST surface for api-v1-scim2-Users-userId.
+      operations:
+      - method: GET
+        name: getuserscim2
+        description: SAP BI Tools Get a user by ID (SCIM 2.0)
+        call: sap-analytics-cloud-users.getuserscim2
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateuserscim2
+        description: SAP BI Tools Update a user (SCIM 2.0)
+        call: sap-analytics-cloud-users.updateuserscim2
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteuserscim2
+        description: SAP BI Tools Delete a user (SCIM 2.0)
+        call: sap-analytics-cloud-users.deleteuserscim2
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-analytics-cloud-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BI Tools SAP Analytics Cloud API — Users. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: sap-bi-tools-list-users
+      description: SAP BI Tools List users (SCIM 1.1)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-users.listusersscim1
+      with:
+        filter: tools.filter
+        startIndex: tools.startIndex
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-list-users-2
+      description: SAP BI Tools List users (SCIM 2.0)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-users.listusersscim2
+      with:
+        filter: tools.filter
+        startIndex: tools.startIndex
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-create-user
+      description: SAP BI Tools Create a user (SCIM 2.0)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sap-analytics-cloud-users.createuserscim2
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-get-user
+      description: SAP BI Tools Get a user by ID (SCIM 2.0)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-users.getuserscim2
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-update-user
+      description: SAP BI Tools Update a user (SCIM 2.0)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-users.updateuserscim2
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-delete-user
+      description: SAP BI Tools Delete a user (SCIM 2.0)
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: sap-analytics-cloud-users.deleteuserscim2
+      outputParameters:
+      - type: object
+        mapping: $.

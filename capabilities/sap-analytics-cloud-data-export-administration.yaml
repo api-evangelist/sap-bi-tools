@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BI Tools SAP Analytics Cloud Data Export API — Administration
+  description: 'SAP BI Tools SAP Analytics Cloud Data Export API — Administration. 2 operations. Lead operation: SAP BI Tools
+    List available namespaces. Self-contained Naftiko capability covering one Sap Bi Tools business surface.'
+  tags:
+  - Sap Bi Tools
+  - Administration
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_TOOLS_API_KEY: SAP_BI_TOOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-analytics-cloud-data-export-administration
+    baseUri: https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/dataexport
+    description: SAP BI Tools SAP Analytics Cloud Data Export API — Administration business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: administration-Namespaces
+      path: /administration/Namespaces
+      operations:
+      - name: listnamespaces
+        method: GET
+        description: SAP BI Tools List available namespaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: administration-Namespaces(NamespaceID='{namespaceId}')-Providers
+      path: /administration/Namespaces(NamespaceID='{namespaceId}')/Providers
+      operations:
+      - name: listproviders
+        method: GET
+        description: SAP BI Tools List available providers (models)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BI_TOOLS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sap-analytics-cloud-data-export-administration-rest
+    port: 8080
+    description: REST adapter for SAP BI Tools SAP Analytics Cloud Data Export API — Administration. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/administration/namespaces
+      name: administration-namespaces
+      description: REST surface for administration-Namespaces.
+      operations:
+      - method: GET
+        name: listnamespaces
+        description: SAP BI Tools List available namespaces
+        call: sap-analytics-cloud-data-export-administration.listnamespaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/administration/namespaces-namespaceid-namespaceid/providers
+      name: administration-namespaces-namespaceid-namespaceid-providers
+      description: REST surface for administration-Namespaces(NamespaceID='{namespaceId}')-Providers.
+      operations:
+      - method: GET
+        name: listproviders
+        description: SAP BI Tools List available providers (models)
+        call: sap-analytics-cloud-data-export-administration.listproviders
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-analytics-cloud-data-export-administration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BI Tools SAP Analytics Cloud Data Export API — Administration. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: sap-bi-tools-list-available
+      description: SAP BI Tools List available namespaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-data-export-administration.listnamespaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-list-available-2
+      description: SAP BI Tools List available providers (models)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-data-export-administration.listproviders
+      outputParameters:
+      - type: object
+        mapping: $.

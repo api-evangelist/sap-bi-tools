@@ -1,0 +1,113 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BI Tools SAP Analytics Cloud Data Export API — Master Data
+  description: 'SAP BI Tools SAP Analytics Cloud Data Export API — Master Data. 2 operations. Lead operation: SAP BI Tools
+    Get master data overview. Self-contained Naftiko capability covering one Sap Bi Tools business surface.'
+  tags:
+  - Sap Bi Tools
+  - Master Data
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_TOOLS_API_KEY: SAP_BI_TOOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-analytics-cloud-data-export-master-data
+    baseUri: https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/dataexport
+    description: SAP BI Tools SAP Analytics Cloud Data Export API — Master Data business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: providers-sac-modelId-MasterData
+      path: /providers/sac/{modelId}/MasterData
+      operations:
+      - name: getmasterdataoverview
+        method: GET
+        description: SAP BI Tools Get master data overview
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: providers-sac-modelId-dimensionName}Master
+      path: /providers/sac/{modelId}/{dimensionName}Master
+      operations:
+      - name: getdimensionmasterdata
+        method: GET
+        description: SAP BI Tools Get master data for a dimension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dimensionName
+          in: path
+          type: string
+          description: The technical name of the dimension whose master data to retrieve
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BI_TOOLS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sap-analytics-cloud-data-export-master-data-rest
+    port: 8080
+    description: REST adapter for SAP BI Tools SAP Analytics Cloud Data Export API — Master Data. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/providers/sac/{modelid}/masterdata
+      name: providers-sac-modelid-masterdata
+      description: REST surface for providers-sac-modelId-MasterData.
+      operations:
+      - method: GET
+        name: getmasterdataoverview
+        description: SAP BI Tools Get master data overview
+        call: sap-analytics-cloud-data-export-master-data.getmasterdataoverview
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/providers/sac/{modelid}/dimensionname-master
+      name: providers-sac-modelid-dimensionname-master
+      description: REST surface for providers-sac-modelId-dimensionName}Master.
+      operations:
+      - method: GET
+        name: getdimensionmasterdata
+        description: SAP BI Tools Get master data for a dimension
+        call: sap-analytics-cloud-data-export-master-data.getdimensionmasterdata
+        with:
+          dimensionName: rest.dimensionName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-analytics-cloud-data-export-master-data-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BI Tools SAP Analytics Cloud Data Export API — Master Data. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: sap-bi-tools-get-master
+      description: SAP BI Tools Get master data overview
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-data-export-master-data.getmasterdataoverview
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-get-master-2
+      description: SAP BI Tools Get master data for a dimension
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-data-export-master-data.getdimensionmasterdata
+      with:
+        dimensionName: tools.dimensionName
+      outputParameters:
+      - type: object
+        mapping: $.

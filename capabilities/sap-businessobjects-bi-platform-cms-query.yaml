@@ -1,0 +1,118 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services — CMS Query
+  description: 'SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services — CMS Query. 2 operations. Lead operation:
+    SAP BI Tools Execute a CMS query (GET). Self-contained Naftiko capability covering one Sap Bi Tools business surface.'
+  tags:
+  - Sap Bi Tools
+  - CMS Query
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_TOOLS_API_KEY: SAP_BI_TOOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-businessobjects-bi-platform-cms-query
+    baseUri: http://{server}:{port}/biprws
+    description: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services — CMS Query business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: v1-cmsquery
+      path: /v1/cmsquery
+      operations:
+      - name: executecmsqueryget
+        method: GET
+        description: SAP BI Tools Execute a CMS query (GET)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: The CMS query string (e.g., SELECT * FROM CI_INFOOBJECTS WHERE SI_KIND='Webi')
+          required: true
+      - name: executecmsquerypost
+        method: POST
+        description: SAP BI Tools Execute a CMS query (POST)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: X-SAP-LogonToken
+      value: '{{env.SAP_BI_TOOLS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: sap-businessobjects-bi-platform-cms-query-rest
+    port: 8080
+    description: REST adapter for SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services — CMS Query. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/cmsquery
+      name: v1-cmsquery
+      description: REST surface for v1-cmsquery.
+      operations:
+      - method: GET
+        name: executecmsqueryget
+        description: SAP BI Tools Execute a CMS query (GET)
+        call: sap-businessobjects-bi-platform-cms-query.executecmsqueryget
+        with:
+          query: rest.query
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: executecmsquerypost
+        description: SAP BI Tools Execute a CMS query (POST)
+        call: sap-businessobjects-bi-platform-cms-query.executecmsquerypost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-businessobjects-bi-platform-cms-query-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services — CMS Query. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: sap-bi-tools-execute-cms
+      description: SAP BI Tools Execute a CMS query (GET)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-businessobjects-bi-platform-cms-query.executecmsqueryget
+      with:
+        query: tools.query
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-execute-cms-2
+      description: SAP BI Tools Execute a CMS query (POST)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: sap-businessobjects-bi-platform-cms-query.executecmsquerypost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services — InfoStore
+  description: 'SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services — InfoStore. 3 operations. Lead operation:
+    SAP BI Tools Get InfoStore root. Self-contained Naftiko capability covering one Sap Bi Tools business surface.'
+  tags:
+  - Sap Bi Tools
+  - InfoStore
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_TOOLS_API_KEY: SAP_BI_TOOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-businessobjects-bi-platform-infostore
+    baseUri: http://{server}:{port}/biprws
+    description: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services — InfoStore business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: v1-infostore
+      path: /v1/infostore
+      operations:
+      - name: getinfostoreroot
+        method: GET
+        description: SAP BI Tools Get InfoStore root
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-infostore-objectId
+      path: /v1/infostore/{objectId}
+      operations:
+      - name: getinfostoreobject
+        method: GET
+        description: SAP BI Tools Get an InfoStore object by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-infostore-objectId-children
+      path: /v1/infostore/{objectId}/children
+      operations:
+      - name: getinfostorechildren
+        method: GET
+        description: SAP BI Tools List children of an InfoStore object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-SAP-LogonToken
+      value: '{{env.SAP_BI_TOOLS_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: sap-businessobjects-bi-platform-infostore-rest
+    port: 8080
+    description: REST adapter for SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services — InfoStore. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/infostore
+      name: v1-infostore
+      description: REST surface for v1-infostore.
+      operations:
+      - method: GET
+        name: getinfostoreroot
+        description: SAP BI Tools Get InfoStore root
+        call: sap-businessobjects-bi-platform-infostore.getinfostoreroot
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/infostore/{objectid}
+      name: v1-infostore-objectid
+      description: REST surface for v1-infostore-objectId.
+      operations:
+      - method: GET
+        name: getinfostoreobject
+        description: SAP BI Tools Get an InfoStore object by ID
+        call: sap-businessobjects-bi-platform-infostore.getinfostoreobject
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/infostore/{objectid}/children
+      name: v1-infostore-objectid-children
+      description: REST surface for v1-infostore-objectId-children.
+      operations:
+      - method: GET
+        name: getinfostorechildren
+        description: SAP BI Tools List children of an InfoStore object
+        call: sap-businessobjects-bi-platform-infostore.getinfostorechildren
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-businessobjects-bi-platform-infostore-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services — InfoStore. One tool per
+      consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: sap-bi-tools-get-infostore
+      description: SAP BI Tools Get InfoStore root
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-businessobjects-bi-platform-infostore.getinfostoreroot
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-get-infostore-2
+      description: SAP BI Tools Get an InfoStore object by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-businessobjects-bi-platform-infostore.getinfostoreobject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-list-children
+      description: SAP BI Tools List children of an InfoStore object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-businessobjects-bi-platform-infostore.getinfostorechildren
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,120 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BI Tools SAP Analytics Cloud API — Teams
+  description: 'SAP BI Tools SAP Analytics Cloud API — Teams. 2 operations. Lead operation: SAP BI Tools List teams (SCIM
+    2.0). Self-contained Naftiko capability covering one Sap Bi Tools business surface.'
+  tags:
+  - Sap Bi Tools
+  - Teams
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_TOOLS_API_KEY: SAP_BI_TOOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-analytics-cloud-teams
+    baseUri: https://{tenant}.{datacenter}.sapanalytics.cloud
+    description: SAP BI Tools SAP Analytics Cloud API — Teams business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-scim2-Groups
+      path: /api/v1/scim2/Groups
+      operations:
+      - name: listteams
+        method: GET
+        description: SAP BI Tools List teams (SCIM 2.0)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: SCIM 2.0 filter expression for teams
+        - name: startIndex
+          in: query
+          type: integer
+          description: The starting index for pagination (1-based)
+      - name: createteam
+        method: POST
+        description: SAP BI Tools Create a team (SCIM 2.0)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BI_TOOLS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sap-analytics-cloud-teams-rest
+    port: 8080
+    description: REST adapter for SAP BI Tools SAP Analytics Cloud API — Teams. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/scim2/groups
+      name: api-v1-scim2-groups
+      description: REST surface for api-v1-scim2-Groups.
+      operations:
+      - method: GET
+        name: listteams
+        description: SAP BI Tools List teams (SCIM 2.0)
+        call: sap-analytics-cloud-teams.listteams
+        with:
+          filter: rest.filter
+          startIndex: rest.startIndex
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createteam
+        description: SAP BI Tools Create a team (SCIM 2.0)
+        call: sap-analytics-cloud-teams.createteam
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-analytics-cloud-teams-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BI Tools SAP Analytics Cloud API — Teams. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: sap-bi-tools-list-teams
+      description: SAP BI Tools List teams (SCIM 2.0)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-teams.listteams
+      with:
+        filter: tools.filter
+        startIndex: tools.startIndex
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-create-team
+      description: SAP BI Tools Create a team (SCIM 2.0)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: sap-analytics-cloud-teams.createteam
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

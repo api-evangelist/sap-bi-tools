@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BI Tools SAP Analytics Cloud API — Stories
+  description: 'SAP BI Tools SAP Analytics Cloud API — Stories. 2 operations. Lead operation: SAP BI Tools List stories. Self-contained
+    Naftiko capability covering one Sap Bi Tools business surface.'
+  tags:
+  - Sap Bi Tools
+  - Stories
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_TOOLS_API_KEY: SAP_BI_TOOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-analytics-cloud-stories
+    baseUri: https://{tenant}.{datacenter}.sapanalytics.cloud
+    description: SAP BI Tools SAP Analytics Cloud API — Stories business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-stories
+      path: /api/v1/stories
+      operations:
+      - name: liststories
+        method: GET
+        description: SAP BI Tools List stories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-stories-storyId
+      path: /api/v1/stories/{storyId}
+      operations:
+      - name: getstory
+        method: GET
+        description: SAP BI Tools Get a story by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BI_TOOLS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sap-analytics-cloud-stories-rest
+    port: 8080
+    description: REST adapter for SAP BI Tools SAP Analytics Cloud API — Stories. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/stories
+      name: api-v1-stories
+      description: REST surface for api-v1-stories.
+      operations:
+      - method: GET
+        name: liststories
+        description: SAP BI Tools List stories
+        call: sap-analytics-cloud-stories.liststories
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/stories/{storyid}
+      name: api-v1-stories-storyid
+      description: REST surface for api-v1-stories-storyId.
+      operations:
+      - method: GET
+        name: getstory
+        description: SAP BI Tools Get a story by ID
+        call: sap-analytics-cloud-stories.getstory
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-analytics-cloud-stories-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BI Tools SAP Analytics Cloud API — Stories. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: sap-bi-tools-list-stories
+      description: SAP BI Tools List stories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-stories.liststories
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-bi-tools-get-story
+      description: SAP BI Tools Get a story by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-stories.getstory
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP BI Tools SAP Analytics Cloud Data Export API — Metadata
+  description: 'SAP BI Tools SAP Analytics Cloud Data Export API — Metadata. 1 operations. Lead operation: SAP BI Tools Get
+    model metadata. Self-contained Naftiko capability covering one Sap Bi Tools business surface.'
+  tags:
+  - Sap Bi Tools
+  - Metadata
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_TOOLS_API_KEY: SAP_BI_TOOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: sap-analytics-cloud-data-export-metadata
+    baseUri: https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/dataexport
+    description: SAP BI Tools SAP Analytics Cloud Data Export API — Metadata business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: providers-sac-modelId-$metadata
+      path: /providers/sac/{modelId}/$metadata
+      operations:
+      - name: getmodelmetadata
+        method: GET
+        description: SAP BI Tools Get model metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BI_TOOLS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: sap-analytics-cloud-data-export-metadata-rest
+    port: 8080
+    description: REST adapter for SAP BI Tools SAP Analytics Cloud Data Export API — Metadata. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/providers/sac/{modelid}/metadata
+      name: providers-sac-modelid-metadata
+      description: REST surface for providers-sac-modelId-$metadata.
+      operations:
+      - method: GET
+        name: getmodelmetadata
+        description: SAP BI Tools Get model metadata
+        call: sap-analytics-cloud-data-export-metadata.getmodelmetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: sap-analytics-cloud-data-export-metadata-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP BI Tools SAP Analytics Cloud Data Export API — Metadata. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: sap-bi-tools-get-model
+      description: SAP BI Tools Get model metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: sap-analytics-cloud-data-export-metadata.getmodelmetadata
+      outputParameters:
+      - type: object
+        mapping: $.
