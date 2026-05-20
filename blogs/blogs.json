@@ -3,12 +3,11 @@
   "feeds": [
     {
       "source": "https://community.sap.com/t5/application-development-and-automation-blog-posts/bg-p/application-developmentblog-board",
-      "feed_url": "",
-      "title": "",
-      "saved": 0,
-      "error": "no_feed"
+      "feed_url": "https://community.sap.com/khhcw49343/rss/board?board.id=application-developmentblog-board",
+      "title": "Application Development and Automation Blog Posts articles",
+      "saved": 13
     }
   ],
-  "post_count": 10,
-  "fetched": "2026-05-09T20:17:51Z"
+  "post_count": 23,
+  "fetched": "2026-05-17T20:48:52Z"
 }
