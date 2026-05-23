@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ProviderCollection",
+  "title": "ProviderCollection",
+  "type": "object",
+  "description": "A collection of providers (models) available for export",
+  "properties": {
+    "@odata.context": {
+      "type": "string",
+      "description": "The OData context URL"
+    },
+    "value": {
+      "type": "array",
+      "description": "The list of providers",
+      "items": {
+        "$ref": "#/components/schemas/Provider"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Provider",
+  "title": "Provider",
+  "type": "object",
+  "description": "Represents an SAP Analytics Cloud model available for data export. Providers contain fact data and master data that can be queried via the Provider service endpoints.",
+  "properties": {
+    "ProviderID": {
+      "type": "string",
+      "description": "The unique provider identifier for the model"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The human-readable description of the model"
+    },
+    "ProviderName": {
+      "type": "string",
+      "description": "The display name of the model"
+    }
+  }
+}

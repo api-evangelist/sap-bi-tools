@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScimListResponse",
+  "title": "ScimListResponse",
+  "type": "object",
+  "description": "A paginated list response conforming to SCIM 2.0 protocol.",
+  "properties": {
+    "totalResults": {
+      "type": "integer",
+      "description": "The total number of results matching the query"
+    },
+    "itemsPerPage": {
+      "type": "integer",
+      "description": "The number of results returned per page"
+    },
+    "startIndex": {
+      "type": "integer",
+      "description": "The starting index of the returned results"
+    },
+    "Resources": {
+      "type": "array",
+      "description": "The list of resources in the current page",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

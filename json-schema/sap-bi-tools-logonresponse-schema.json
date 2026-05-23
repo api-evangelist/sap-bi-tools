@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LogonResponse",
+  "title": "LogonResponse",
+  "type": "object",
+  "description": "Response containing the logon token and session information",
+  "properties": {
+    "logonToken": {
+      "type": "string",
+      "description": "The logon token to use in subsequent API requests via the X-SAP-LogonToken header"
+    }
+  }
+}

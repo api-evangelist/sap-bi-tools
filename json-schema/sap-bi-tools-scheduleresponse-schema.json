@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScheduleResponse",
+  "title": "ScheduleResponse",
+  "type": "object",
+  "description": "Response from scheduling a document",
+  "properties": {
+    "SI_ID": {
+      "type": "integer",
+      "description": "The CMS ID of the scheduled instance"
+    },
+    "status": {
+      "type": "string",
+      "description": "The scheduling status"
+    }
+  }
+}

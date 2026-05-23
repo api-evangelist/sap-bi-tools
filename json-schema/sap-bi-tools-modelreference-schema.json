@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ModelReference",
+  "title": "ModelReference",
+  "type": "object",
+  "description": "A reference to a model used within a story",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the model"
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the model"
+    },
+    "description": {
+      "type": "string",
+      "description": "A text description of the model"
+    }
+  }
+}

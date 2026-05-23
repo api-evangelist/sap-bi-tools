@@ -1,0 +1,162 @@
+{
+  "provider": "SAP BI Tools",
+  "providerId": "sap-bi-tools",
+  "kind": "json-structure",
+  "description": "Structural overview of the SAP BI Tools API surface; extracted from openapi/.",
+  "schemaCount": 7,
+  "operationCount": 12,
+  "schemas": [
+    {
+      "name": "Story",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "ModelReference",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Resource",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "ScimUser",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "ScimGroup",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ScimListResponse",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "CalendarEvent",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/api/v1/stories",
+      "operationId": "listStories",
+      "summary": "SAP BI Tools List stories",
+      "tags": [
+        "Stories"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/stories/{storyId}",
+      "operationId": "getStory",
+      "summary": "SAP BI Tools Get a story by ID",
+      "tags": [
+        "Stories"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/Resources",
+      "operationId": "listResources",
+      "summary": "SAP BI Tools List resources",
+      "tags": [
+        "Resources"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/scim/Users",
+      "operationId": "listUsersScim1",
+      "summary": "SAP BI Tools List users (SCIM 1.1)",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/scim2/Users",
+      "operationId": "listUsersScim2",
+      "summary": "SAP BI Tools List users (SCIM 2.0)",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/scim2/Users",
+      "operationId": "createUserScim2",
+      "summary": "SAP BI Tools Create a user (SCIM 2.0)",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/scim2/Users/{userId}",
+      "operationId": "getUserScim2",
+      "summary": "SAP BI Tools Get a user by ID (SCIM 2.0)",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/scim2/Users/{userId}",
+      "operationId": "updateUserScim2",
+      "summary": "SAP BI Tools Update a user (SCIM 2.0)",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/scim2/Users/{userId}",
+      "operationId": "deleteUserScim2",
+      "summary": "SAP BI Tools Delete a user (SCIM 2.0)",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/scim2/Groups",
+      "operationId": "listTeams",
+      "summary": "SAP BI Tools List teams (SCIM 2.0)",
+      "tags": [
+        "Teams"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/scim2/Groups",
+      "operationId": "createTeam",
+      "summary": "SAP BI Tools Create a team (SCIM 2.0)",
+      "tags": [
+        "Teams"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/calendars",
+      "operationId": "listCalendars",
+      "summary": "SAP BI Tools List calendar events",
+      "tags": [
+        "Calendars"
+      ]
+    }
+  ]
+}

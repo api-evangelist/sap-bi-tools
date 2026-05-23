@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScheduleRequest",
+  "title": "ScheduleRequest",
+  "type": "object",
+  "description": "Request parameters for scheduling a document",
+  "properties": {
+    "parameters": {
+      "type": "array",
+      "description": "Report parameters to set before execution",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The parameter name"
+          },
+          "value": {
+            "type": "string",
+            "description": "The parameter value"
+          }
+        }
+      }
+    },
+    "format": {
+      "type": "string",
+      "description": "The output format for the scheduled instance (e.g., pdf, xlsx)"
+    }
+  }
+}

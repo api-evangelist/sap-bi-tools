@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ODataCollection",
+  "title": "ODataCollection",
+  "type": "object",
+  "description": "A standard OData collection response wrapper",
+  "properties": {
+    "@odata.context": {
+      "type": "string",
+      "description": "The OData context URL"
+    },
+    "value": {
+      "type": "array",
+      "description": "The collection of results",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CalendarEvent",
+  "title": "CalendarEvent",
+  "type": "object",
+  "description": "Represents a calendar event or task in SAP Analytics Cloud used for planning workflows and scheduling.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the calendar event"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the calendar event"
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the event"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The start date and time of the event"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The end date and time of the event"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the event",
+      "enum": [
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "COMPLETED"
+      ]
+    },
+    "assignee": {
+      "type": "string",
+      "description": "The user assigned to the event"
+    }
+  }
+}

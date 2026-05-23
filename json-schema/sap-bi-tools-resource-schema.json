@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Resource",
+  "title": "Resource",
+  "type": "object",
+  "description": "Represents a resource in the SAP Analytics Cloud file repository. Resources can be stories, models, folders, or other content types.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the resource"
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the resource"
+    },
+    "description": {
+      "type": "string",
+      "description": "A text description of the resource"
+    },
+    "resourceType": {
+      "type": "string",
+      "description": "The type of resource (e.g., STORY, MODEL, FOLDER)"
+    },
+    "resourceSubType": {
+      "type": "string",
+      "description": "The sub-type of the resource"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the resource was created"
+    },
+    "modifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the resource was last modified"
+    },
+    "parentId": {
+      "type": "string",
+      "description": "The ID of the parent folder"
+    }
+  }
+}

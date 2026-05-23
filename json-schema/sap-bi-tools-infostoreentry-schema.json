@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InfoStoreEntry",
+  "title": "InfoStoreEntry",
+  "type": "object",
+  "description": "Represents an object in the BI Platform CMS InfoStore repository. All managed objects including documents, folders, users, and groups are represented as InfoStore entries.",
+  "properties": {
+    "SI_ID": {
+      "type": "integer",
+      "description": "The unique CMS object identifier"
+    },
+    "SI_NAME": {
+      "type": "string",
+      "description": "The display name of the object"
+    },
+    "SI_KIND": {
+      "type": "string",
+      "description": "The object type (e.g., Webi, CrystalReport, Folder, FullClient, Publication)"
+    },
+    "SI_DESCRIPTION": {
+      "type": "string",
+      "description": "A text description of the object"
+    },
+    "SI_CREATION_TIME": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the object was created"
+    },
+    "SI_UPDATE_TS": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the object was last updated"
+    },
+    "SI_OWNER": {
+      "type": "string",
+      "description": "The owner of the object"
+    },
+    "SI_PARENTID": {
+      "type": "integer",
+      "description": "The CMS ID of the parent folder"
+    },
+    "SI_PATH": {
+      "type": "string",
+      "description": "The full path to the object in the repository"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ImportResult",
+  "title": "ImportResult",
+  "type": "object",
+  "description": "The result of a content import operation",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "The status of the import operation",
+      "enum": [
+        "SUCCESS",
+        "PARTIAL",
+        "FAILED"
+      ]
+    },
+    "importedResources": {
+      "type": "array",
+      "description": "List of resources that were imported",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the imported resource"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the imported resource"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the imported resource"
+          }
+        }
+      }
+    }
+  }
+}

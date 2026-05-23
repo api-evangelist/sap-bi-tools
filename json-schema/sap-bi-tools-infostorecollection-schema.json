@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InfoStoreCollection",
+  "title": "InfoStoreCollection",
+  "type": "object",
+  "description": "A paginated collection of InfoStore entries",
+  "properties": {
+    "entries": {
+      "type": "array",
+      "description": "The list of InfoStore entries in this page",
+      "items": {
+        "$ref": "#/components/schemas/InfoStoreEntry"
+      }
+    },
+    "__count": {
+      "type": "integer",
+      "description": "Total number of matching entries"
+    }
+  }
+}

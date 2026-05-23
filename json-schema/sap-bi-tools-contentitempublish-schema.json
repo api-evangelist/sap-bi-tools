@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ContentItemPublish",
+  "title": "ContentItemPublish",
+  "type": "object",
+  "description": "Request body for publishing a content item",
+  "required": [
+    "name",
+    "resourceId"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The display name for the published content item"
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the content item"
+    },
+    "resourceId": {
+      "type": "string",
+      "description": "The ID of the local resource to publish"
+    },
+    "visibility": {
+      "type": "string",
+      "description": "The visibility scope for the published item",
+      "enum": [
+        "PRIVATE",
+        "PUBLIC"
+      ],
+      "default": "PRIVATE"
+    }
+  }
+}
