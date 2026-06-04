@@ -1,0 +1,132 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools CMS Query Drilldown
+  summary: Log on, run a complex CMS query via POST, then drill into the first matching object and list its children.
+  description: >-
+    A discovery and drilldown pattern for the BI Platform repository. The
+    workflow authenticates, submits a complex CMS query through the POST
+    endpoint (preferred when the query may exceed URL length limits), reads the
+    full metadata of the first matching object, and lists that object's
+    children to explore its contents. The logon token captured at logon is
+    supplied on every subsequent call via the X-SAP-LogonToken header. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: biPlatformApi
+  url: ../openapi/sap-businessobjects-bi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cms-query-drilldown
+  summary: Submit a complex CMS query via POST and drill into the first result.
+  description: >-
+    Runs a CMS query through the POST endpoint, retrieves the first matching
+    object's metadata, and then lists its children.
+  inputs:
+    type: object
+    required:
+    - userName
+    - password
+    - query
+    properties:
+      userName:
+        type: string
+        description: The BI Platform username to authenticate with.
+      password:
+        type: string
+        description: The password for the supplied user.
+      auth:
+        type: string
+        description: The authentication type (secEnterprise, secLDAP, secWinAD).
+        default: secEnterprise
+      query:
+        type: string
+        description: >-
+          The CMS query string (e.g. SELECT SI_ID, SI_NAME, SI_KIND FROM
+          CI_INFOOBJECTS WHERE SI_KIND='Folder').
+  steps:
+  - stepId: logon
+    description: Authenticate and capture the logon token.
+    operationId: logon
+    requestBody:
+      contentType: application/json
+      payload:
+        userName: $inputs.userName
+        password: $inputs.password
+        auth: $inputs.auth
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      logonToken: $response.body#/logonToken
+  - stepId: runQuery
+    description: >-
+      Submit the CMS query through the POST endpoint and capture the id of the
+      first matching object.
+    operationId: executeCmsQueryPost
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    requestBody:
+      contentType: application/json
+      payload:
+        query: $inputs.query
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchCount: $response.body#/__count
+      firstObjectId: $response.body#/entries/0/SI_ID
+    onSuccess:
+    - name: hasResults
+      type: goto
+      stepId: getObject
+      criteria:
+      - context: $response.body
+        condition: $.entries.length > 0
+        type: jsonpath
+    - name: noResults
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.entries.length == 0
+        type: jsonpath
+  - stepId: getObject
+    description: Retrieve the full metadata of the first matching object.
+    operationId: getInfoStoreObject
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    - name: objectId
+      in: path
+      value: $steps.runQuery.outputs.firstObjectId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      objectName: $response.body#/SI_NAME
+      objectKind: $response.body#/SI_KIND
+  - stepId: listObjectChildren
+    description: List the children of the first matching object to explore its contents.
+    operationId: getInfoStoreChildren
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    - name: objectId
+      in: path
+      value: $steps.runQuery.outputs.firstObjectId
+    - name: page
+      in: query
+      value: 1
+    - name: pageSize
+      in: query
+      value: 50
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      childCount: $response.body#/__count
+  outputs:
+    matchCount: $steps.runQuery.outputs.matchCount
+    firstObjectId: $steps.runQuery.outputs.firstObjectId
+    objectName: $steps.getObject.outputs.objectName
+    childCount: $steps.listObjectChildren.outputs.childCount

@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Create a SAC Team With a Member
+  summary: Create a SAP Analytics Cloud user via SCIM 2.0, then create a team that includes the new user as a member.
+  description: >-
+    A team-bootstrapping pattern for SAP Analytics Cloud access control. The
+    workflow creates a new SCIM 2.0 user from the supplied profile attributes,
+    captures the assigned user id, and then creates a SCIM 2.0 team (group)
+    that lists the new user as its first member. SAP Analytics Cloud uses
+    OAuth 2.0 bearer authentication, so no logon token is threaded between
+    steps. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsCloudApi
+  url: ../openapi/sap-analytics-cloud-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-team-with-member
+  summary: Create a user and a team that includes that user as a member.
+  description: >-
+    Creates a SCIM 2.0 user, then creates a SCIM 2.0 team with the newly
+    created user assigned as a member.
+  inputs:
+    type: object
+    required:
+    - userName
+    - givenName
+    - familyName
+    - email
+    - teamName
+    properties:
+      userName:
+        type: string
+        description: The login username for the new user.
+      givenName:
+        type: string
+        description: The first name of the new user.
+      familyName:
+        type: string
+        description: The last name of the new user.
+      email:
+        type: string
+        description: The primary email address of the new user.
+      teamName:
+        type: string
+        description: The display name for the new team.
+  steps:
+  - stepId: createUser
+    description: Create a new SCIM 2.0 user and capture the assigned user id.
+    operationId: createUserScim2
+    requestBody:
+      contentType: application/json
+      payload:
+        userName: $inputs.userName
+        name:
+          givenName: $inputs.givenName
+          familyName: $inputs.familyName
+        emails:
+        - value: $inputs.email
+          primary: true
+        active: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      userId: $response.body#/id
+      userDisplayName: $response.body#/displayName
+  - stepId: createTeam
+    description: >-
+      Create a new SCIM 2.0 team that includes the newly created user as its
+      first member.
+    operationId: createTeam
+    requestBody:
+      contentType: application/json
+      payload:
+        displayName: $inputs.teamName
+        members:
+        - value: $steps.createUser.outputs.userId
+          display: $steps.createUser.outputs.userDisplayName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      teamId: $response.body#/id
+      teamDisplayName: $response.body#/displayName
+  outputs:
+    userId: $steps.createUser.outputs.userId
+    teamId: $steps.createTeam.outputs.teamId
+    teamDisplayName: $steps.createTeam.outputs.teamDisplayName

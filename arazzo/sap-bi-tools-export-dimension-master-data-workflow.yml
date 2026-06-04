@@ -1,0 +1,125 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Export Dimension Master Data
+  summary: Discover export namespaces and providers, read a model's master data overview, then pull a named dimension's master data.
+  description: >-
+    A master-data extraction pattern for the SAP Analytics Cloud Data Export
+    API. The workflow lists the available export namespaces, lists the
+    providers (models) in the first namespace, reads the master data overview
+    of the first model, and then pulls the master data member list for a named
+    dimension within that model. The Data Export API uses OAuth 2.0 bearer
+    authentication, so no logon token is threaded between steps. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: dataExportApi
+  url: ../openapi/sap-analytics-cloud-data-export-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: export-dimension-master-data
+  summary: Resolve a namespace and model, then pull a dimension's master data.
+  description: >-
+    Lists namespaces and providers, reads the first model's master data
+    overview, and retrieves the master data for the supplied dimension.
+  inputs:
+    type: object
+    required:
+    - dimensionName
+    properties:
+      dimensionName:
+        type: string
+        description: The technical name of the dimension whose master data to pull.
+      top:
+        type: integer
+        description: Maximum number of master data members to return.
+        default: 100
+  steps:
+  - stepId: listNamespaces
+    description: List the available export namespaces and capture the first one.
+    operationId: listNamespaces
+    parameters:
+    - name: $format
+      in: query
+      value: JSON
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstNamespaceId: $response.body#/value/0/NamespaceID
+  - stepId: listProviders
+    description: >-
+      List the providers (models) in the first namespace and capture the id of
+      the first model.
+    operationId: listProviders
+    parameters:
+    - name: namespaceId
+      in: path
+      value: $steps.listNamespaces.outputs.firstNamespaceId
+    - name: $format
+      in: query
+      value: JSON
+    - name: $top
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstModelId: $response.body#/value/0/ProviderID
+    onSuccess:
+    - name: providersFound
+      type: goto
+      stepId: getMasterOverview
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: noProviders
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: getMasterOverview
+    description: Read the master data overview of the first model.
+    operationId: getMasterDataOverview
+    parameters:
+    - name: modelId
+      in: path
+      value: $steps.listProviders.outputs.firstModelId
+    - name: $format
+      in: query
+      value: JSON
+    - name: $top
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      overviewContext: $response.body#/@odata.context
+  - stepId: getDimensionMaster
+    description: >-
+      Pull the master data member list for the supplied dimension within the
+      first model.
+    operationId: getDimensionMasterData
+    parameters:
+    - name: modelId
+      in: path
+      value: $steps.listProviders.outputs.firstModelId
+    - name: dimensionName
+      in: path
+      value: $inputs.dimensionName
+    - name: $format
+      in: query
+      value: JSON
+    - name: $top
+      in: query
+      value: $inputs.top
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      dimensionContext: $response.body#/@odata.context
+      firstMember: $response.body#/value/0
+  outputs:
+    firstNamespaceId: $steps.listNamespaces.outputs.firstNamespaceId
+    firstModelId: $steps.listProviders.outputs.firstModelId
+    dimensionContext: $steps.getDimensionMaster.outputs.dimensionContext

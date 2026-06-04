@@ -1,0 +1,122 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Import a Content Network Item
+  summary: Discover a public content item in the Content Network and import it into a target folder, branching on the import outcome.
+  description: >-
+    A content-acquisition pattern for SAP Analytics Cloud. The workflow lists
+    public content items of a requested type, reads the detail of the first
+    match, and imports it into a target folder. The flow branches on the
+    reported import status so a fully successful import ends cleanly while a
+    partial or failed import is surfaced. The Content Network uses OAuth 2.0
+    bearer authentication, so no logon token is threaded between steps. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: contentNetworkApi
+  url: ../openapi/sap-analytics-cloud-content-network-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: import-content-item
+  summary: Find a public content item and import it into a target folder.
+  description: >-
+    Lists public content items of a given type, reads the first match, and
+    imports it into the target folder, branching on the import status.
+  inputs:
+    type: object
+    required:
+    - type
+    - targetFolderId
+    properties:
+      type:
+        type: string
+        description: The content item type to discover (e.g. STORY, MODEL, PACKAGE).
+      targetFolderId:
+        type: string
+        description: The target folder id for the imported content.
+      overwrite:
+        type: boolean
+        description: Whether to overwrite existing content during import.
+        default: false
+  steps:
+  - stepId: findContent
+    description: >-
+      List public content items of the requested type and capture the id of
+      the first match.
+    operationId: listContentItems
+    parameters:
+    - name: type
+      in: query
+      value: $inputs.type
+    - name: visibility
+      in: query
+      value: PUBLIC
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstItemId: $response.body#/0/id
+      firstItemName: $response.body#/0/name
+    onSuccess:
+    - name: contentFound
+      type: goto
+      stepId: getContent
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+    - name: nothingFound
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.length == 0
+        type: jsonpath
+  - stepId: getContent
+    description: Read the detail of the first matching content item.
+    operationId: getContentItem
+    parameters:
+    - name: itemId
+      in: path
+      value: $steps.findContent.outputs.firstItemId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      itemName: $response.body#/name
+      itemType: $response.body#/type
+      itemVersion: $response.body#/version
+  - stepId: importContent
+    description: >-
+      Import the selected content item into the target folder and branch on
+      the reported import status.
+    operationId: importContentItem
+    parameters:
+    - name: itemId
+      in: path
+      value: $steps.findContent.outputs.firstItemId
+    requestBody:
+      contentType: application/json
+      payload:
+        targetFolderId: $inputs.targetFolderId
+        overwrite: $inputs.overwrite
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      importStatus: $response.body#/status
+      firstImportedId: $response.body#/importedResources/0/id
+    onSuccess:
+    - name: importSucceeded
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == 'SUCCESS'
+        type: jsonpath
+    - name: importNotClean
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status != 'SUCCESS'
+        type: jsonpath
+  outputs:
+    firstItemId: $steps.findContent.outputs.firstItemId
+    itemName: $steps.getContent.outputs.itemName
+    importStatus: $steps.importContent.outputs.importStatus
+    firstImportedId: $steps.importContent.outputs.firstImportedId

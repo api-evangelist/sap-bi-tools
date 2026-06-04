@@ -1,0 +1,115 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Export Model Fact Data
+  summary: Discover a SAC export model, read its OData metadata, and pull a filtered, paged page of fact data.
+  description: >-
+    A data-extraction pattern for the SAP Analytics Cloud Data Export API. The
+    workflow lists the providers (models) available in the sac namespace,
+    reads the OData metadata document of the first model to understand its
+    structure, and then pulls a filtered, top-limited page of fact data from
+    that model. The Data Export API uses OAuth 2.0 bearer authentication, so no
+    logon token is threaded between steps. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: dataExportApi
+  url: ../openapi/sap-analytics-cloud-data-export-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: export-model-fact-data
+  summary: Pick an export model, read its metadata, and pull a page of fact data.
+  description: >-
+    Lists providers in the sac namespace, reads the first model's OData
+    metadata, and retrieves a filtered, paged page of its fact data.
+  inputs:
+    type: object
+    properties:
+      namespaceId:
+        type: string
+        description: The namespace identifier to list providers from.
+        default: sac
+      filter:
+        type: string
+        description: An OData filter expression to apply to the fact data.
+      top:
+        type: integer
+        description: Maximum number of fact data records to return.
+        default: 100
+  steps:
+  - stepId: listProviders
+    description: >-
+      List the providers (models) available in the namespace and capture the
+      id of the first model.
+    operationId: listProviders
+    parameters:
+    - name: namespaceId
+      in: path
+      value: $inputs.namespaceId
+    - name: $format
+      in: query
+      value: JSON
+    - name: $top
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstModelId: $response.body#/value/0/ProviderID
+      firstModelName: $response.body#/value/0/ProviderName
+    onSuccess:
+    - name: providersFound
+      type: goto
+      stepId: getMetadata
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: noProviders
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: getMetadata
+    description: >-
+      Read the OData metadata document for the first model to understand its
+      structure.
+    operationId: getModelMetadata
+    parameters:
+    - name: modelId
+      in: path
+      value: $steps.listProviders.outputs.firstModelId
+    - name: $format
+      in: query
+      value: JSON
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      metadataStatus: $statusCode
+  - stepId: getFactData
+    description: >-
+      Pull a filtered, top-limited page of fact data from the first model.
+    operationId: getFactData
+    parameters:
+    - name: modelId
+      in: path
+      value: $steps.listProviders.outputs.firstModelId
+    - name: $format
+      in: query
+      value: JSON
+    - name: $filter
+      in: query
+      value: $inputs.filter
+    - name: $top
+      in: query
+      value: $inputs.top
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      factContext: $response.body#/@odata.context
+      firstFactRow: $response.body#/value/0
+  outputs:
+    firstModelId: $steps.listProviders.outputs.firstModelId
+    firstModelName: $steps.listProviders.outputs.firstModelName
+    factContext: $steps.getFactData.outputs.factContext

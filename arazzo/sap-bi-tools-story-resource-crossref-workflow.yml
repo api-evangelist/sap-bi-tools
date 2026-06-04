@@ -1,0 +1,95 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Story and Resource Cross-Reference
+  summary: Find a SAC story, fetch its detail, then list MODEL resources from the file repository to cross-reference its data sources.
+  description: >-
+    Connects a SAP Analytics Cloud story to the model resources in the tenant
+    file repository. The workflow lists stories to pick a starting point,
+    retrieves that story's detail with its model references, and then lists the
+    MODEL resources from the repository so the story's models can be matched
+    against the catalog of available models. SAP Analytics Cloud uses OAuth 2.0
+    bearer authentication, so no logon token is threaded between steps. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsCloudApi
+  url: ../openapi/sap-analytics-cloud-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: story-resource-crossref
+  summary: Inspect a story and cross-reference its models against repository resources.
+  description: >-
+    Picks the first story, reads its model references, and lists MODEL
+    resources from the file repository for cross-referencing.
+  inputs:
+    type: object
+    properties:
+      top:
+        type: integer
+        description: Maximum number of resources to return.
+        default: 100
+  steps:
+  - stepId: listStories
+    description: List stories with their models and capture the first story id.
+    operationId: listStories
+    parameters:
+    - name: include
+      in: query
+      value: models
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstStoryId: $response.body#/0/id
+    onSuccess:
+    - name: hasStories
+      type: goto
+      stepId: getStory
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+    - name: noStories
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.length == 0
+        type: jsonpath
+  - stepId: getStory
+    description: Retrieve the first story's detail including the models it references.
+    operationId: getStory
+    parameters:
+    - name: storyId
+      in: path
+      value: $steps.listStories.outputs.firstStoryId
+    - name: include
+      in: query
+      value: models
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      storyName: $response.body#/name
+      firstModelId: $response.body#/models/0/id
+      firstModelName: $response.body#/models/0/name
+  - stepId: listModelResources
+    description: >-
+      List MODEL resources from the file repository to cross-reference against
+      the story's models.
+    operationId: listResources
+    parameters:
+    - name: resourceType
+      in: query
+      value: MODEL
+    - name: $top
+      in: query
+      value: $inputs.top
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstResourceId: $response.body#/0/id
+      firstResourceName: $response.body#/0/name
+  outputs:
+    firstStoryId: $steps.listStories.outputs.firstStoryId
+    storyName: $steps.getStory.outputs.storyName
+    firstModelId: $steps.getStory.outputs.firstModelId
+    firstResourceId: $steps.listModelResources.outputs.firstResourceId

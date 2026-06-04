@@ -1,0 +1,145 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Query and Schedule a Document
+  summary: Log on, find documents with a CMS query, schedule the first match for immediate execution, and confirm the instance.
+  description: >-
+    A core reporting automation pattern for the BI Platform. The workflow
+    authenticates to obtain a logon token, runs a CMS query to locate documents
+    of a given kind, schedules the first matching document for immediate
+    execution with the requested output format, and then reads the scheduled
+    instance back from the InfoStore to confirm it was created. The logon token
+    captured at logon is supplied on every subsequent call via the
+    X-SAP-LogonToken header. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: biPlatformApi
+  url: ../openapi/sap-businessobjects-bi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: query-and-schedule-document
+  summary: Find a document via CMS query and schedule it for immediate execution.
+  description: >-
+    Locates documents with a CMS query, schedules the first match to run now,
+    and reads the resulting scheduled instance object back from the InfoStore.
+  inputs:
+    type: object
+    required:
+    - userName
+    - password
+    - query
+    properties:
+      userName:
+        type: string
+        description: The BI Platform username to authenticate with.
+      password:
+        type: string
+        description: The password for the supplied user.
+      auth:
+        type: string
+        description: The authentication type (secEnterprise, secLDAP, secWinAD).
+        default: secEnterprise
+      query:
+        type: string
+        description: >-
+          The CMS query selecting documents to schedule (e.g. SELECT SI_ID,
+          SI_NAME FROM CI_INFOOBJECTS WHERE SI_KIND='Webi').
+      format:
+        type: string
+        description: The output format for the scheduled instance (e.g. pdf, xlsx).
+        default: pdf
+  steps:
+  - stepId: logon
+    description: Authenticate and capture the logon token.
+    operationId: logon
+    requestBody:
+      contentType: application/json
+      payload:
+        userName: $inputs.userName
+        password: $inputs.password
+        auth: $inputs.auth
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      logonToken: $response.body#/logonToken
+  - stepId: findDocuments
+    description: >-
+      Run the CMS query to find candidate documents and capture the id of the
+      first match.
+    operationId: executeCmsQueryGet
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    - name: query
+      in: query
+      value: $inputs.query
+    - name: page
+      in: query
+      value: 1
+    - name: pageSize
+      in: query
+      value: 50
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchCount: $response.body#/__count
+      documentId: $response.body#/entries/0/SI_ID
+    onSuccess:
+    - name: documentsFound
+      type: goto
+      stepId: scheduleNow
+      criteria:
+      - context: $response.body
+        condition: $.entries.length > 0
+        type: jsonpath
+    - name: noDocuments
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.entries.length == 0
+        type: jsonpath
+  - stepId: scheduleNow
+    description: >-
+      Schedule the first matched document for immediate execution in the
+      requested output format.
+    operationId: scheduleDocumentNow
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    - name: documentId
+      in: path
+      value: $steps.findDocuments.outputs.documentId
+    requestBody:
+      contentType: application/json
+      payload:
+        format: $inputs.format
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      instanceId: $response.body#/SI_ID
+      scheduleStatus: $response.body#/status
+  - stepId: confirmInstance
+    description: >-
+      Read the newly created scheduled instance object back from the InfoStore
+      to confirm it exists.
+    operationId: getInfoStoreObject
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    - name: objectId
+      in: path
+      value: $steps.scheduleNow.outputs.instanceId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      instanceName: $response.body#/SI_NAME
+      instanceKind: $response.body#/SI_KIND
+  outputs:
+    documentId: $steps.findDocuments.outputs.documentId
+    instanceId: $steps.scheduleNow.outputs.instanceId
+    scheduleStatus: $steps.scheduleNow.outputs.scheduleStatus
+    instanceName: $steps.confirmInstance.outputs.instanceName

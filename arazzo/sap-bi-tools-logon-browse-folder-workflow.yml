@@ -1,0 +1,110 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Logon and Browse a Folder
+  summary: Log on to the BI Platform, list the children of a folder, and read the metadata of the first document found.
+  description: >-
+    The foundational BI Platform navigation pattern. The workflow authenticates
+    against the BusinessObjects BI Platform to obtain a logon token, lists the
+    child objects of a target InfoStore folder, and then reads the full
+    metadata of the first child object returned. The logon token is captured
+    from the logon step and passed as the X-SAP-LogonToken header on every
+    subsequent call. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: biPlatformApi
+  url: ../openapi/sap-businessobjects-bi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: logon-browse-folder
+  summary: Authenticate, browse a folder's children, and inspect the first child object.
+  description: >-
+    Obtains a logon token, lists the children of the supplied folder object,
+    and retrieves the metadata for the first child returned by the listing.
+  inputs:
+    type: object
+    required:
+    - userName
+    - password
+    - folderObjectId
+    properties:
+      userName:
+        type: string
+        description: The BI Platform username to authenticate with.
+      password:
+        type: string
+        description: The password for the supplied user.
+      auth:
+        type: string
+        description: The authentication type (secEnterprise, secLDAP, secWinAD).
+        default: secEnterprise
+      folderObjectId:
+        type: string
+        description: The CMS object id of the folder whose children to list.
+      pageSize:
+        type: integer
+        description: The number of children to return per page.
+        default: 50
+  steps:
+  - stepId: logon
+    description: >-
+      Authenticate against the BI Platform and capture the logon token used
+      by all subsequent calls.
+    operationId: logon
+    requestBody:
+      contentType: application/json
+      payload:
+        userName: $inputs.userName
+        password: $inputs.password
+        auth: $inputs.auth
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      logonToken: $response.body#/logonToken
+  - stepId: listChildren
+    description: >-
+      List the child objects of the target folder using the captured logon
+      token in the X-SAP-LogonToken header.
+    operationId: getInfoStoreChildren
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    - name: objectId
+      in: path
+      value: $inputs.folderObjectId
+    - name: page
+      in: query
+      value: 1
+    - name: pageSize
+      in: query
+      value: $inputs.pageSize
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      childCount: $response.body#/__count
+      firstChildId: $response.body#/entries/0/SI_ID
+  - stepId: getFirstChild
+    description: >-
+      Retrieve the full metadata of the first child object returned by the
+      folder listing.
+    operationId: getInfoStoreObject
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    - name: objectId
+      in: path
+      value: $steps.listChildren.outputs.firstChildId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      objectName: $response.body#/SI_NAME
+      objectKind: $response.body#/SI_KIND
+      objectPath: $response.body#/SI_PATH
+  outputs:
+    logonToken: $steps.logon.outputs.logonToken
+    childCount: $steps.listChildren.outputs.childCount
+    firstChildId: $steps.listChildren.outputs.firstChildId
+    objectName: $steps.getFirstChild.outputs.objectName
+    objectKind: $steps.getFirstChild.outputs.objectKind

@@ -1,0 +1,120 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Schedule and Poll the BI Inbox
+  summary: Log on, schedule a document for immediate execution, then poll the BI Inbox until the completed instance is delivered.
+  description: >-
+    Automates a schedule-and-wait reporting pattern on the BI Platform. After
+    authenticating, the workflow schedules a known document for immediate
+    execution and then repeatedly polls the authenticated user's BI Inbox,
+    branching back to poll again while the inbox is still empty and ending once
+    items are present. The logon token captured at logon is supplied on every
+    subsequent call via the X-SAP-LogonToken header. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: biPlatformApi
+  url: ../openapi/sap-businessobjects-bi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: schedule-and-poll-inbox
+  summary: Schedule a document and poll the BI Inbox until output is delivered.
+  description: >-
+    Schedules a document to run immediately, then polls the BI Inbox, looping
+    while empty and ending once the inbox contains delivered items.
+  inputs:
+    type: object
+    required:
+    - userName
+    - password
+    - documentId
+    properties:
+      userName:
+        type: string
+        description: The BI Platform username to authenticate with.
+      password:
+        type: string
+        description: The password for the supplied user.
+      auth:
+        type: string
+        description: The authentication type (secEnterprise, secLDAP, secWinAD).
+        default: secEnterprise
+      documentId:
+        type: string
+        description: The CMS id of the document to schedule for immediate execution.
+      format:
+        type: string
+        description: The output format for the scheduled instance (e.g. pdf, xlsx).
+        default: pdf
+  steps:
+  - stepId: logon
+    description: Authenticate and capture the logon token.
+    operationId: logon
+    requestBody:
+      contentType: application/json
+      payload:
+        userName: $inputs.userName
+        password: $inputs.password
+        auth: $inputs.auth
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      logonToken: $response.body#/logonToken
+  - stepId: scheduleNow
+    description: Schedule the document for immediate execution.
+    operationId: scheduleDocumentNow
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    - name: documentId
+      in: path
+      value: $inputs.documentId
+    requestBody:
+      contentType: application/json
+      payload:
+        format: $inputs.format
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      instanceId: $response.body#/SI_ID
+      scheduleStatus: $response.body#/status
+  - stepId: pollInbox
+    description: >-
+      Poll the BI Inbox for delivered items. While the inbox is still empty,
+      loop back and poll again; once items are present, finish.
+    operationId: listInboxItems
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    - name: page
+      in: query
+      value: 1
+    - name: pageSize
+      in: query
+      value: 50
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      inboxCount: $response.body#/__count
+      firstInboxItemId: $response.body#/entries/0/SI_ID
+    onSuccess:
+    - name: stillEmpty
+      type: goto
+      stepId: pollInbox
+      criteria:
+      - context: $response.body
+        condition: $.entries.length == 0
+        type: jsonpath
+    - name: delivered
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.entries.length > 0
+        type: jsonpath
+  outputs:
+    instanceId: $steps.scheduleNow.outputs.instanceId
+    scheduleStatus: $steps.scheduleNow.outputs.scheduleStatus
+    inboxCount: $steps.pollInbox.outputs.inboxCount
+    firstInboxItemId: $steps.pollInbox.outputs.firstInboxItemId

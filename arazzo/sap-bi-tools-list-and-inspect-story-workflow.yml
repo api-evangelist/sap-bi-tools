@@ -1,0 +1,68 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools List and Inspect a SAC Story
+  summary: List SAP Analytics Cloud stories and retrieve the first story's full detail including the models it uses.
+  description: >-
+    A reporting-inventory pattern for SAP Analytics Cloud. The workflow lists
+    the stories available on the tenant (including their model references) and
+    then retrieves the full detail of the first story, again requesting its
+    model references so the underlying data sources are visible. SAP Analytics
+    Cloud uses OAuth 2.0 bearer authentication rather than the BI Platform
+    logon token, so no token is threaded between steps here. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsCloudApi
+  url: ../openapi/sap-analytics-cloud-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: list-and-inspect-story
+  summary: List stories and fetch the first story's detail with its models.
+  description: >-
+    Lists tenant stories with their model references, then retrieves the first
+    story by id including the models it uses.
+  inputs:
+    type: object
+    properties:
+      include:
+        type: string
+        description: Related resources to include in the response (e.g. models).
+        default: models
+  steps:
+  - stepId: listStories
+    description: >-
+      List the stories available on the tenant, including their model
+      references, and capture the id of the first story.
+    operationId: listStories
+    parameters:
+    - name: include
+      in: query
+      value: $inputs.include
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstStoryId: $response.body#/0/id
+      firstStoryName: $response.body#/0/name
+  - stepId: getStory
+    description: >-
+      Retrieve the full detail of the first story, including the models it
+      uses.
+    operationId: getStory
+    parameters:
+    - name: storyId
+      in: path
+      value: $steps.listStories.outputs.firstStoryId
+    - name: include
+      in: query
+      value: $inputs.include
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      storyName: $response.body#/name
+      storyDescription: $response.body#/description
+      firstModelId: $response.body#/models/0/id
+  outputs:
+    firstStoryId: $steps.listStories.outputs.firstStoryId
+    storyName: $steps.getStory.outputs.storyName
+    firstModelId: $steps.getStory.outputs.firstModelId

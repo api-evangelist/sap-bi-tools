@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Retire a Content Network Item
+  summary: Find a private content item by type, delete it from the Content Network, and confirm it is gone.
+  description: >-
+    A content-retirement pattern for SAP Analytics Cloud. The workflow lists
+    private content items of a requested type, deletes the first match from the
+    Content Network, and then attempts to read the deleted item back, ending
+    cleanly when the read returns a not-found status that confirms removal. The
+    Content Network uses OAuth 2.0 bearer authentication, so no logon token is
+    threaded between steps. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: contentNetworkApi
+  url: ../openapi/sap-analytics-cloud-content-network-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: retire-content-item
+  summary: Delete a private content item and confirm its removal.
+  description: >-
+    Finds the first private content item of a given type, deletes it, then
+    confirms it is gone by checking the read returns a not-found status.
+  inputs:
+    type: object
+    required:
+    - type
+    properties:
+      type:
+        type: string
+        description: The content item type to retire (e.g. STORY, MODEL, PACKAGE).
+  steps:
+  - stepId: findContent
+    description: >-
+      List private content items of the requested type and capture the id of
+      the first match.
+    operationId: listContentItems
+    parameters:
+    - name: type
+      in: query
+      value: $inputs.type
+    - name: visibility
+      in: query
+      value: PRIVATE
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstItemId: $response.body#/0/id
+      firstItemName: $response.body#/0/name
+    onSuccess:
+    - name: contentFound
+      type: goto
+      stepId: deleteContent
+      criteria:
+      - context: $response.body
+        condition: $.length > 0
+        type: jsonpath
+    - name: nothingToRetire
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.length == 0
+        type: jsonpath
+  - stepId: deleteContent
+    description: Delete the first matching private content item from the Content Network.
+    operationId: deleteContentItem
+    parameters:
+    - name: itemId
+      in: path
+      value: $steps.findContent.outputs.firstItemId
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      deleteStatus: $statusCode
+  - stepId: confirmGone
+    description: >-
+      Attempt to read the deleted item back; a not-found status confirms the
+      item was removed.
+    operationId: getContentItem
+    parameters:
+    - name: itemId
+      in: path
+      value: $steps.findContent.outputs.firstItemId
+    successCriteria:
+    - condition: $statusCode == 404
+    outputs:
+      confirmStatus: $statusCode
+  outputs:
+    firstItemId: $steps.findContent.outputs.firstItemId
+    deleteStatus: $steps.deleteContent.outputs.deleteStatus
+    confirmStatus: $steps.confirmGone.outputs.confirmStatus

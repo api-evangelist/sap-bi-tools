@@ -1,0 +1,120 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Provision a SAC User
+  summary: Look up a SAP Analytics Cloud user by userName via SCIM 2.0 and create the user when no match exists.
+  description: >-
+    An idempotent SCIM 2.0 provisioning pattern for SAP Analytics Cloud. The
+    workflow searches the user directory with a SCIM filter on userName and
+    branches: when a matching user already exists it reads that user's detail,
+    and when no match is found it creates a new user from the supplied profile
+    attributes. SAP Analytics Cloud uses OAuth 2.0 bearer authentication, so no
+    logon token is threaded between steps. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsCloudApi
+  url: ../openapi/sap-analytics-cloud-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-scim-user
+  summary: Find a user by userName and create it if it does not already exist.
+  description: >-
+    Searches for a user by userName using a SCIM 2.0 filter, then either reads
+    the existing user or creates a new one from the supplied attributes.
+  inputs:
+    type: object
+    required:
+    - userName
+    - givenName
+    - familyName
+    - email
+    properties:
+      userName:
+        type: string
+        description: The login username to search for and provision.
+      givenName:
+        type: string
+        description: The first name of the user.
+      familyName:
+        type: string
+        description: The last name of the user.
+      email:
+        type: string
+        description: The primary email address of the user.
+  steps:
+  - stepId: findUser
+    description: >-
+      Search the SCIM 2.0 user directory for an existing user with the
+      supplied userName.
+    operationId: listUsersScim2
+    parameters:
+    - name: filter
+      in: query
+      value: userName eq "$inputs.userName"
+    - name: count
+      in: query
+      value: 1
+    - name: startIndex
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      totalResults: $response.body#/totalResults
+      existingUserId: $response.body#/Resources/0/id
+    onSuccess:
+    - name: userExists
+      type: goto
+      stepId: getExistingUser
+      criteria:
+      - context: $response.body
+        condition: $.totalResults > 0
+        type: jsonpath
+    - name: userMissing
+      type: goto
+      stepId: createUser
+      criteria:
+      - context: $response.body
+        condition: $.totalResults == 0
+        type: jsonpath
+  - stepId: getExistingUser
+    description: Read the detail of the existing matched user.
+    operationId: getUserScim2
+    parameters:
+    - name: userId
+      in: path
+      value: $steps.findUser.outputs.existingUserId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/id
+      userDisplayName: $response.body#/displayName
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: createUser
+    description: >-
+      Create a new SCIM 2.0 user from the supplied profile attributes when no
+      existing user matched.
+    operationId: createUserScim2
+    requestBody:
+      contentType: application/json
+      payload:
+        userName: $inputs.userName
+        name:
+          givenName: $inputs.givenName
+          familyName: $inputs.familyName
+        emails:
+        - value: $inputs.email
+          primary: true
+        active: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      userId: $response.body#/id
+      userDisplayName: $response.body#/displayName
+  outputs:
+    userId: $steps.createUser.outputs.userId
+    existingUserId: $steps.findUser.outputs.existingUserId
+    userDisplayName: $steps.getExistingUser.outputs.userDisplayName

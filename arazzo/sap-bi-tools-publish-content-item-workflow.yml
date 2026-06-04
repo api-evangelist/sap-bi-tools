@@ -1,0 +1,80 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Publish a Content Network Item
+  summary: Publish a local resource to the SAP Analytics Cloud Content Network and confirm it by reading the published item back.
+  description: >-
+    A content-distribution pattern for SAP Analytics Cloud. The workflow
+    publishes a local resource to the Content Network with the requested
+    visibility, captures the id assigned to the published item, and reads that
+    item back from the Content Network to confirm the publish succeeded and to
+    capture its version. The Content Network uses OAuth 2.0 bearer
+    authentication, so no logon token is threaded between steps. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: contentNetworkApi
+  url: ../openapi/sap-analytics-cloud-content-network-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: publish-content-item
+  summary: Publish a resource to the Content Network and read the published item back.
+  description: >-
+    Publishes a local resource to the Content Network, then retrieves the newly
+    published item by id to confirm it and capture its version.
+  inputs:
+    type: object
+    required:
+    - name
+    - resourceId
+    properties:
+      name:
+        type: string
+        description: The display name for the published content item.
+      description:
+        type: string
+        description: A description of the content item.
+      resourceId:
+        type: string
+        description: The id of the local resource to publish.
+      visibility:
+        type: string
+        description: The visibility scope for the published item (PRIVATE or PUBLIC).
+        default: PRIVATE
+  steps:
+  - stepId: publishItem
+    description: >-
+      Publish the local resource to the Content Network and capture the id of
+      the published item.
+    operationId: publishContentItem
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        description: $inputs.description
+        resourceId: $inputs.resourceId
+        visibility: $inputs.visibility
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      itemId: $response.body#/id
+      itemVisibility: $response.body#/visibility
+  - stepId: confirmItem
+    description: >-
+      Read the newly published content item back from the Content Network to
+      confirm it and capture its version.
+    operationId: getContentItem
+    parameters:
+    - name: itemId
+      in: path
+      value: $steps.publishItem.outputs.itemId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      itemName: $response.body#/name
+      itemType: $response.body#/type
+      itemVersion: $response.body#/version
+  outputs:
+    itemId: $steps.publishItem.outputs.itemId
+    itemName: $steps.confirmItem.outputs.itemName
+    itemVersion: $steps.confirmItem.outputs.itemVersion

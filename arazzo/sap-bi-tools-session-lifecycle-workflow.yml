@@ -1,0 +1,103 @@
+arazzo: 1.0.1
+info:
+  title: SAP BI Tools Session Lifecycle
+  summary: Open a BI Platform session, read the InfoStore root and its top-level folders, then cleanly log off.
+  description: >-
+    Demonstrates the complete BI Platform session lifecycle. The workflow logs
+    on to obtain a logon token, reads the InfoStore root entry, lists the
+    top-level objects directly under the root, and finally logs off to
+    invalidate the token. This is the recommended bracket for any short-lived
+    automation that should not leave a session token live. The logon token
+    captured at logon is supplied on every subsequent call via the
+    X-SAP-LogonToken header. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: biPlatformApi
+  url: ../openapi/sap-businessobjects-bi-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: session-lifecycle
+  summary: Logon, read the InfoStore root and its children, then logoff.
+  description: >-
+    Brackets a short InfoStore read with a clean logon and logoff so the
+    session token is invalidated once the work is complete.
+  inputs:
+    type: object
+    required:
+    - userName
+    - password
+    properties:
+      userName:
+        type: string
+        description: The BI Platform username to authenticate with.
+      password:
+        type: string
+        description: The password for the supplied user.
+      auth:
+        type: string
+        description: The authentication type (secEnterprise, secLDAP, secWinAD).
+        default: secEnterprise
+  steps:
+  - stepId: logon
+    description: Authenticate and capture the logon token.
+    operationId: logon
+    requestBody:
+      contentType: application/json
+      payload:
+        userName: $inputs.userName
+        password: $inputs.password
+        auth: $inputs.auth
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      logonToken: $response.body#/logonToken
+  - stepId: getRoot
+    description: Read the InfoStore root entry using the captured logon token.
+    operationId: getInfoStoreRoot
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rootId: $response.body#/SI_ID
+      rootName: $response.body#/SI_NAME
+  - stepId: listRootChildren
+    description: List the top-level objects directly under the InfoStore root.
+    operationId: getInfoStoreChildren
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    - name: objectId
+      in: path
+      value: $steps.getRoot.outputs.rootId
+    - name: page
+      in: query
+      value: 1
+    - name: pageSize
+      in: query
+      value: 50
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topLevelCount: $response.body#/__count
+  - stepId: logoff
+    description: Invalidate the logon token and terminate the session.
+    operationId: logoff
+    parameters:
+    - name: X-SAP-LogonToken
+      in: header
+      value: $steps.logon.outputs.logonToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      loggedOff: $statusCode
+  outputs:
+    rootId: $steps.getRoot.outputs.rootId
+    rootName: $steps.getRoot.outputs.rootName
+    topLevelCount: $steps.listRootChildren.outputs.topLevelCount
+    loggedOff: $steps.logoff.outputs.loggedOff
