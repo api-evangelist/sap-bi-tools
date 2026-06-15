@@ -1,0 +1,275 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services",
+    "version": "4.3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SAP-LogonToken",
+      "value": "{{X-SAP-LogonToken}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools Log on to BI Platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{server}:{port}/biprws/logon/long",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates a user against the BI Platform and returns a logon token that must be included in subsequent API requests. Supports Enterprise, LDAP, and Windows AD authentication types."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Log off from BI Platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{server}:{port}/biprws/logoff"
+          },
+          "docs": "Invalidates the current logon token and terminates the session. The logon token provided in the header is no longer valid after this call."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "InfoStore",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools Get InfoStore root",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{server}:{port}/biprws/v1/infostore",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the root entry of the InfoStore repository. The InfoStore is the central object repository of the BI Platform containing all documents, folders, users, and other managed objects."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Get an InfoStore object by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{server}:{port}/biprws/v1/infostore/:objectId",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "The CMS object identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific object from the InfoStore repository by its unique CMS object identifier. Returns the object metadata including name, type, creation date, and parent folder."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools List children of an InfoStore object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{server}:{port}/biprws/v1/infostore/:objectId/children",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "The CMS object identifier"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number for pagination (1-based)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieves the child objects of a specific InfoStore folder or container object. Supports pagination with page and pageSize query parameters. Commonly used to browse the folder hierarchy."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "CMS Query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools Execute a CMS query (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{server}:{port}/biprws/v1/cmsquery",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The CMS query string (e.g., SELECT * FROM CI_INFOOBJECTS WHERE SI_KIND='Webi')"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number for pagination (1-based)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              }
+            ]
+          },
+          "docs": "Executes a CMS query against the BI Platform repository using the query parameter. CMS queries use a SQL-like syntax to search for objects by type, name, and other properties."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Execute a CMS query (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{server}:{port}/biprws/v1/cmsquery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a CMS query against the BI Platform repository using a POST request body. Preferred for complex queries that may exceed URL length limits."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Scheduling",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools Schedule a document for immediate execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://{server}:{port}/biprws/v1/infostore/:documentId/scheduleForms/now",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "The CMS ID of the document to schedule"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Schedules a document for immediate execution on the BI Platform. Creates a new scheduled instance that runs the document with the specified parameters and delivers the output to the configured destination."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inbox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools List BI Inbox items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://{server}:{port}/biprws/v1/inbox",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number for pagination (1-based)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of items in the authenticated user's BI Inbox. The inbox contains reports and documents that have been sent to the user or scheduled instances that have completed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

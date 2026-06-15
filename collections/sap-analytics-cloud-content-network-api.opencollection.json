@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BI Tools SAP Analytics Cloud Content Network REST API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize",
+      "accessTokenUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Content Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools List content items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/contentnetwork/items",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by content item type (e.g., STORY, MODEL, PACKAGE)"
+              },
+              {
+                "name": "visibility",
+                "value": "",
+                "type": "query",
+                "description": "Filter by visibility (PRIVATE or PUBLIC)"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of content items available in the Content Network. Returns both private and public content items with their metadata including name, description, type, and version information."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Publish a content item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/contentnetwork/items",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publishes a content item to the Content Network making it available for other tenants to discover and import. The content item is packaged with its dependencies and metadata."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Get a content item by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/contentnetwork/items/:itemId",
+            "params": [
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the content item"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific content item from the Content Network identified by its unique item ID."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Delete a content item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/contentnetwork/items/:itemId",
+            "params": [
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the content item"
+              }
+            ]
+          },
+          "docs": "Deletes a content item from the Content Network. Only private content items owned by the current tenant can be deleted."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Import",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools Import a content item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/contentnetwork/items/:itemId/import",
+            "params": [
+              {
+                "name": "itemId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the content item"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Imports a content item from the Content Network into the local SAP Analytics Cloud tenant. The imported content and its dependencies are created in the tenant's file repository."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,338 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BI Tools SAP Analytics Cloud API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize",
+      "accessTokenUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools List stories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/stories",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of related resources to include in the response (e.g., models)"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of stories available on the SAP Analytics Cloud tenant. Supports query parameters to include additional metadata such as models used in each story. Returns a JSON array of story objects with their identifiers, names, descriptions, and metadata."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Get a story by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/stories/:storyId",
+            "params": [
+              {
+                "name": "storyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the story"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of related resources to include in the response (e.g., models)"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific story identified by its unique story ID. Returns the story metadata, structure, and optionally the models used within it."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools List resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/Resources",
+            "params": [
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "query",
+                "description": "Filter resources by type (e.g., STORY, MODEL, FOLDER)"
+              },
+              {
+                "name": "resourceSubType",
+                "value": "",
+                "type": "query",
+                "description": "Filter resources by sub-type"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of resources from the SAP Analytics Cloud file repository. Resources include stories, models, folders, and other artifacts. Supports filtering by resource type and pagination."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools List users (SCIM 1.1)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/scim/Users",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "SCIM filter expression (e.g., userName eq \"john.doe\")"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "The starting index for pagination (1-based)"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of users provisioned in SAP Analytics Cloud using SCIM 1.1 protocol. Supports filtering by user attributes such as userName and email. Returns user records with profile information, roles, and team memberships."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools List users (SCIM 2.0)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/scim2/Users",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "SCIM 2.0 filter expression (e.g., userName eq \"john.doe\")"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "The starting index for pagination (1-based)"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of users provisioned in SAP Analytics Cloud using SCIM 2.0 protocol. Supports filtering by user attributes such as userName, email, and custom attributes. Returns user records with profile information, roles, and team memberships."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Create a user (SCIM 2.0)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/scim2/Users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new user in SAP Analytics Cloud using SCIM 2.0 protocol. Requires user profile attributes including userName, name, and email. Returns the created user record with its assigned ID."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Get a user by ID (SCIM 2.0)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/scim2/Users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific user identified by their unique user ID using SCIM 2.0 protocol."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Update a user (SCIM 2.0)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/scim2/Users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing user in SAP Analytics Cloud using SCIM 2.0 protocol. Replaces the entire user record with the provided data."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Delete a user (SCIM 2.0)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/scim2/Users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user"
+              }
+            ]
+          },
+          "docs": "Deletes a user from SAP Analytics Cloud using SCIM 2.0 protocol. Permanently removes the user account and associated data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools List teams (SCIM 2.0)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/scim2/Groups",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "SCIM 2.0 filter expression for teams"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "The starting index for pagination (1-based)"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of teams (groups) configured in SAP Analytics Cloud using SCIM 2.0 protocol. Teams are used for organizing users and managing access control to content."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Create a team (SCIM 2.0)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/scim2/Groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new team (group) in SAP Analytics Cloud using SCIM 2.0 protocol. Teams can be assigned members and used for content sharing and access control."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Calendars",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools List calendar events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/calendars"
+          },
+          "docs": "Retrieves a list of calendar events and tasks configured in SAP Analytics Cloud. Calendars support planning workflows, scheduling notifications, and organizing collaborative tasks."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

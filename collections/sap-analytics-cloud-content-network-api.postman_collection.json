@@ -1,0 +1,1453 @@
+{
+  "item": [
+    {
+      "id": "87025ce3-d1c1-435a-9b7f-50c96a9051fa",
+      "name": "Content Items",
+      "description": {
+        "content": "Manage content items in the Content Network including retrieving, publishing, and deleting both private and public content packages.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c75f920-7ee0-4173-be85-143617ef4d93",
+          "name": "SAP BI Tools List content items",
+          "request": {
+            "name": "SAP BI Tools List content items",
+            "description": {
+              "content": "Retrieves a list of content items available in the Content Network. Returns both private and public content items with their metadata including name, description, type, and version information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "contentnetwork",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by content item type (e.g., STORY, MODEL, PACKAGE)"
+                },
+                {
+                  "disabled": false,
+                  "key": "visibility",
+                  "value": "<string>",
+                  "description": "Filter by visibility (PRIVATE or PUBLIC)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16a7e189-a5f4-4038-a52e-99637f28bc60",
+              "name": "Successfully retrieved list of content items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"type\": \"string\",\n    \"visibility\": \"PUBLIC\",\n    \"version\": \"string\",\n    \"createdTime\": \"1994-06-04T08:51:10.397Z\",\n    \"modifiedTime\": \"1964-05-03T01:34:28.372Z\",\n    \"owner\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"type\": \"string\",\n    \"visibility\": \"PUBLIC\",\n    \"version\": \"string\",\n    \"createdTime\": \"2013-05-12T23:03:05.774Z\",\n    \"modifiedTime\": \"1987-11-10T12:36:14.132Z\",\n    \"owner\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9a5e3d0-9a85-4cda-be7d-aff5026ee2e2",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e91069a8-b7d7-4a2e-823f-76b1cdc47237",
+          "name": "SAP BI Tools Publish a content item",
+          "request": {
+            "name": "SAP BI Tools Publish a content item",
+            "description": {
+              "content": "Publishes a content item to the Content Network making it available for other tenants to discover and import. The content item is packaged with its dependencies and metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "contentnetwork",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"visibility\": \"PRIVATE\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9532c393-9a15-4168-95bc-b27c34e7eb4c",
+              "name": "Content item published successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"visibility\": \"PRIVATE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"string\",\n  \"visibility\": \"PUBLIC\",\n  \"version\": \"string\",\n  \"createdTime\": \"1985-11-23T20:56:33.516Z\",\n  \"modifiedTime\": \"1960-12-14T20:31:24.116Z\",\n  \"owner\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c353587c-2334-4c84-b952-3239fab50bad",
+              "name": "Bad request - invalid content item data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"visibility\": \"PRIVATE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "192e2b1b-7db8-4898-80b9-c91cf58d9e46",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"resourceId\": \"<string>\",\n  \"description\": \"<string>\",\n  \"visibility\": \"PRIVATE\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb9ddfa2-1b75-40bd-8377-2c89f1785be7",
+          "name": "SAP BI Tools Get a content item by ID",
+          "request": {
+            "name": "SAP BI Tools Get a content item by ID",
+            "description": {
+              "content": "Retrieves detailed information about a specific content item from the Content Network identified by its unique item ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "contentnetwork",
+                "items",
+                ":itemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemId",
+                  "description": "(Required) The unique identifier of the content item"
+                },
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b5697b8-7969-4a25-ad39-0bef28dc063a",
+              "name": "Successfully retrieved content item details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"string\",\n  \"visibility\": \"PUBLIC\",\n  \"version\": \"string\",\n  \"createdTime\": \"1985-11-23T20:56:33.516Z\",\n  \"modifiedTime\": \"1960-12-14T20:31:24.116Z\",\n  \"owner\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62f5d119-c7f3-451e-bbd3-92ec6f2ae860",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b9efd69f-e9d4-49a0-84f7-d0600b936221",
+              "name": "Content item not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "107ad885-b385-4f3a-b4df-9f5f89d6b9dc",
+          "name": "SAP BI Tools Delete a content item",
+          "request": {
+            "name": "SAP BI Tools Delete a content item",
+            "description": {
+              "content": "Deletes a content item from the Content Network. Only private content items owned by the current tenant can be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "contentnetwork",
+                "items",
+                ":itemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemId",
+                  "description": "(Required) The unique identifier of the content item"
+                },
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "669f4f54-892d-4a91-ab10-e9fea7c49731",
+              "name": "Content item deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1798a7d1-9164-4181-86d8-1e3f0522ad9a",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b30c5bb8-ee9a-48d5-97d7-f41a7b8b8a2f",
+              "name": "Forbidden - insufficient permissions to delete",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b0ea68d-b045-46fc-b8b2-351a1460dc11",
+              "name": "Content item not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c6c7b62b-fc72-4393-8ea6-573a2c52b5c9",
+      "name": "Import",
+      "description": {
+        "content": "Import content items from the Content Network into the local SAP Analytics Cloud tenant.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "88a15b27-587b-4496-aa19-5e631f17f6b0",
+          "name": "SAP BI Tools Import a content item",
+          "request": {
+            "name": "SAP BI Tools Import a content item",
+            "description": {
+              "content": "Imports a content item from the Content Network into the local SAP Analytics Cloud tenant. The imported content and its dependencies are created in the tenant's file repository.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "contentnetwork",
+                "items",
+                ":itemId",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemId",
+                  "description": "(Required) The unique identifier of the content item"
+                },
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetFolderId\": \"<string>\",\n  \"overwrite\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21fed94c-ac85-4c6f-a4ed-58e4121027d4",
+              "name": "Content item imported successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetFolderId\": \"<string>\",\n  \"overwrite\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"PARTIAL\",\n  \"importedResources\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d0afcfe-bb02-4d8b-9df5-bc89d1cdb1b2",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetFolderId\": \"<string>\",\n  \"overwrite\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1814446d-4a7c-4207-b716-7fca643c1be8",
+              "name": "Content item not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetFolderId\": \"<string>\",\n  \"overwrite\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19950cc0-f941-4b87-8f4a-7b0d49c5d437",
+              "name": "Conflict - content item already exists in tenant",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "contentnetwork",
+                    "items",
+                    ":itemId",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the content item"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetFolderId\": \"<string>\",\n  \"overwrite\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The SAP Analytics Cloud tenant name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "my-tenant",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "eu1",
+      "key": "datacenter"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.{{datacenter}}.sapanalytics.cloud",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "711dd50e-058f-4a88-8e52-72274273326f",
+    "name": "SAP BI Tools SAP Analytics Cloud Content Network REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing content in the SAP Analytics Cloud Content Network. Enables programmatic access to get, publish, and delete private and public content items available through the Content Network. Content items include stories, models, and other analytics artifacts that can be shared across SAP Analytics Cloud tenants. The API supports OAuth 2.0 Authorization Code Grant authentication flows.\n\nContact Support:\n Name: SAP Support",
+      "type": "text/plain"
+    }
+  }
+}

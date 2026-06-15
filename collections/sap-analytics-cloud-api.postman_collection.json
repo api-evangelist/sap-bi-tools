@@ -1,0 +1,3063 @@
+{
+  "item": [
+    {
+      "id": "1b44fd85-fd5e-4f01-b645-f0930d069948",
+      "name": "Calendars",
+      "description": {
+        "content": "Manage calendar events and tasks used for planning workflows and scheduling in SAP Analytics Cloud.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6c35430a-3aa5-4fff-97ae-1c048beb850b",
+          "name": "SAP BI Tools List calendar events",
+          "request": {
+            "name": "SAP BI Tools List calendar events",
+            "description": {
+              "content": "Retrieves a list of calendar events and tasks configured in SAP Analytics Cloud. Calendars support planning workflows, scheduling notifications, and organizing collaborative tasks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "calendars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a80a6f81-406f-4598-9b4e-8d9543857774",
+              "name": "Successfully retrieved calendar events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "calendars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"startDate\": \"1968-08-22T00:44:22.057Z\",\n    \"endDate\": \"2015-07-09T06:16:59.498Z\",\n    \"status\": \"NOT_STARTED\",\n    \"assignee\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"startDate\": \"1947-05-21T12:26:23.340Z\",\n    \"endDate\": \"1992-07-05T12:29:10.457Z\",\n    \"status\": \"COMPLETED\",\n    \"assignee\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcd7f058-c140-45a6-b609-bee32ba44cf9",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "calendars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "707315b9-6b41-4801-b227-1dde9a1b4aef",
+      "name": "Resources",
+      "description": {
+        "content": "Browse and manage resources within the SAP Analytics Cloud file repository including stories, models, and folders.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "81038a00-19b7-426e-afa3-2b0695b289f9",
+          "name": "SAP BI Tools List resources",
+          "request": {
+            "name": "SAP BI Tools List resources",
+            "description": {
+              "content": "Retrieves a list of resources from the SAP Analytics Cloud file repository. Resources include stories, models, folders, and other artifacts. Supports filtering by resource type and pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "Resources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "resourceType",
+                  "value": "<string>",
+                  "description": "Filter resources by type (e.g., STORY, MODEL, FOLDER)"
+                },
+                {
+                  "disabled": false,
+                  "key": "resourceSubType",
+                  "value": "<string>",
+                  "description": "Filter resources by sub-type"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of records to skip for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7255936-97fb-4fec-ab1b-77f9a13b3997",
+              "name": "Successfully retrieved list of resources",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "Resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resourceType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceSubType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"resourceType\": \"string\",\n    \"resourceSubType\": \"string\",\n    \"createdTime\": \"1990-09-10T21:58:50.774Z\",\n    \"modifiedTime\": \"2013-11-02T03:13:34.319Z\",\n    \"parentId\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"resourceType\": \"string\",\n    \"resourceSubType\": \"string\",\n    \"createdTime\": \"1990-03-24T22:51:23.726Z\",\n    \"modifiedTime\": \"1993-03-03T15:22:42.164Z\",\n    \"parentId\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da39eaaa-8590-4798-a7a0-ecbf8aa55551",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "Resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resourceType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceSubType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4b48fe74-724b-4028-af98-39d89f1ecac0",
+      "name": "Stories",
+      "description": {
+        "content": "Manage analytic stories including dashboards and reports. Stories are the primary visualization artifact in SAP Analytics Cloud.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9c85e0fd-5ac0-40db-86d3-216031227ab4",
+          "name": "SAP BI Tools List stories",
+          "request": {
+            "name": "SAP BI Tools List stories",
+            "description": {
+              "content": "Retrieves a list of stories available on the SAP Analytics Cloud tenant. Supports query parameters to include additional metadata such as models used in each story. Returns a JSON array of story objects with their identifiers, names, descriptions, and metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "stories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-separated list of related resources to include in the response (e.g., models)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1dff5794-5525-4883-b56b-e6900b5bcc0a",
+              "name": "Successfully retrieved list of stories",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "stories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"createdTime\": \"2006-11-30T12:04:31.323Z\",\n    \"modifiedTime\": \"1980-08-07T13:31:20.720Z\",\n    \"createdBy\": \"string\",\n    \"modifiedBy\": \"string\",\n    \"resourceType\": \"string\",\n    \"models\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\"\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"createdTime\": \"2010-08-19T12:43:58.829Z\",\n    \"modifiedTime\": \"2005-02-03T00:29:09.631Z\",\n    \"createdBy\": \"string\",\n    \"modifiedBy\": \"string\",\n    \"resourceType\": \"string\",\n    \"models\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cc0b4be-6da3-42e6-bee5-91dcf9f52216",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "stories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "326851fa-31f2-43a4-8d65-4e3dcb2e2477",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "stories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a22166f-bca2-461e-aef2-2105e06184dd",
+          "name": "SAP BI Tools Get a story by ID",
+          "request": {
+            "name": "SAP BI Tools Get a story by ID",
+            "description": {
+              "content": "Retrieves detailed information about a specific story identified by its unique story ID. Returns the story metadata, structure, and optionally the models used within it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "stories",
+                ":storyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-separated list of related resources to include in the response (e.g., models)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "storyId",
+                  "description": "(Required) The unique identifier of the story"
+                },
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a9fdcf2-97f0-49f4-9e31-1331dcf49e4d",
+              "name": "Successfully retrieved story details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "stories",
+                    ":storyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "storyId",
+                      "description": "(Required) The unique identifier of the story"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"createdTime\": \"1958-10-06T22:23:58.179Z\",\n  \"modifiedTime\": \"1953-05-28T01:54:51.855Z\",\n  \"createdBy\": \"string\",\n  \"modifiedBy\": \"string\",\n  \"resourceType\": \"string\",\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "402c1554-aabf-44e4-8bd5-6f17f2f57d3e",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "stories",
+                    ":storyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "storyId",
+                      "description": "(Required) The unique identifier of the story"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fd046f98-aae1-4c01-a031-89d10c0d468c",
+              "name": "Story not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "stories",
+                    ":storyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "storyId",
+                      "description": "(Required) The unique identifier of the story"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "464459ae-3372-4cb0-9711-0fef31845fde",
+      "name": "Teams",
+      "description": {
+        "content": "SCIM 2.0 endpoints for managing teams and group memberships for access control in SAP Analytics Cloud.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f9fb755-bf91-4fbb-be8b-85846d782b10",
+          "name": "SAP BI Tools List teams (SCIM 2.0)",
+          "request": {
+            "name": "SAP BI Tools List teams (SCIM 2.0)",
+            "description": {
+              "content": "Retrieves a list of teams (groups) configured in SAP Analytics Cloud using SCIM 2.0 protocol. Teams are used for organizing users and managing access control to content.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "scim2",
+                "Groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "SCIM 2.0 filter expression for teams"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "1",
+                  "description": "The starting index for pagination (1-based)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a494bdd-d0ce-4fab-96c1-730e6eec4fa8",
+              "name": "Successfully retrieved list of teams",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalResults\": 4141,\n  \"itemsPerPage\": 528,\n  \"startIndex\": 4003\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2523896-e30b-4539-b38a-d38548b029ea",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d7c5cb4-7b43-431e-9d6c-06a43426dd52",
+          "name": "SAP BI Tools Create a team (SCIM 2.0)",
+          "request": {
+            "name": "SAP BI Tools Create a team (SCIM 2.0)",
+            "description": {
+              "content": "Creates a new team (group) in SAP Analytics Cloud using SCIM 2.0 protocol. Teams can be assigned members and used for content sharing and access control.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "scim2",
+                "Groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31ee8e82-d2d3-4308-b82e-5a387db0aae1",
+              "name": "Team created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"displayName\": \"string\",\n  \"members\": [\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e78ed59-8562-40d1-996a-5481a1394ea4",
+              "name": "Bad request - invalid team data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0e7b6bc6-f72c-4f7e-882e-07921ee8f58a",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "75df1901-5f0f-4d2b-a5b9-6c3032cb6b65",
+      "name": "Users",
+      "description": {
+        "content": "SCIM 2.0 endpoints for managing user accounts, provisioning, and deprovisioning in SAP Analytics Cloud.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40adaa89-9ba6-4ebc-9443-96f8e1cc0e86",
+          "name": "SAP BI Tools List users (SCIM 1.1)",
+          "request": {
+            "name": "SAP BI Tools List users (SCIM 1.1)",
+            "description": {
+              "content": "Retrieves a list of users provisioned in SAP Analytics Cloud using SCIM 1.1 protocol. Supports filtering by user attributes such as userName and email. Returns user records with profile information, roles, and team memberships.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "scim",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "SCIM filter expression (e.g., userName eq \"john.doe\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "1",
+                  "description": "The starting index for pagination (1-based)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c11c2e2-2be5-4494-ba4e-eb48c5825b7e",
+              "name": "Successfully retrieved list of users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalResults\": 4141,\n  \"itemsPerPage\": 528,\n  \"startIndex\": 4003\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95f806eb-7ee1-4f2b-b87a-bd690eebc676",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bfcc0279-39d1-4d21-8a8c-0c84a55b7c5b",
+          "name": "SAP BI Tools List users (SCIM 2.0)",
+          "request": {
+            "name": "SAP BI Tools List users (SCIM 2.0)",
+            "description": {
+              "content": "Retrieves a list of users provisioned in SAP Analytics Cloud using SCIM 2.0 protocol. Supports filtering by user attributes such as userName, email, and custom attributes. Returns user records with profile information, roles, and team memberships.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "scim2",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "SCIM 2.0 filter expression (e.g., userName eq \"john.doe\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "1",
+                  "description": "The starting index for pagination (1-based)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e672825f-c96d-453e-acaa-938d57cebb73",
+              "name": "Successfully retrieved list of users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalResults\": 4141,\n  \"itemsPerPage\": 528,\n  \"startIndex\": 4003\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5378c80e-1122-4b8c-8de3-78aee72ffc24",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9e59f1d-df36-4ff8-8757-bdd627695dfb",
+          "name": "SAP BI Tools Create a user (SCIM 2.0)",
+          "request": {
+            "name": "SAP BI Tools Create a user (SCIM 2.0)",
+            "description": {
+              "content": "Creates a new user in SAP Analytics Cloud using SCIM 2.0 protocol. Requires user profile attributes including userName, name, and email. Returns the created user record with its assigned ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "scim2",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea835adf-b51a-4c5a-86d6-ac2d8a6491ca",
+              "name": "User created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"userName\": \"string\",\n  \"name\": {\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"formatted\": \"string\"\n  },\n  \"displayName\": \"string\",\n  \"emails\": [\n    {\n      \"value\": \"p07Fs7ec@bpmRQyOIWxAQq.okzb\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"WkxPcyY6gQN0@NbeWRNBybVDS.qg\",\n      \"primary\": false\n    }\n  ],\n  \"active\": true,\n  \"roles\": [\n    {\n      \"value\": \"string\"\n    },\n    {\n      \"value\": \"string\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e6fbf54-0a1d-424f-bf61-81d8c7d5e1c4",
+              "name": "Bad request - invalid user data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "598173b4-e495-4d62-ae05-d39228a0877b",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "506f0a4d-cf08-41b8-a153-d52bd1e681d1",
+              "name": "Conflict - user already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b433f6d1-73ca-4237-9f93-2b765accc356",
+          "name": "SAP BI Tools Get a user by ID (SCIM 2.0)",
+          "request": {
+            "name": "SAP BI Tools Get a user by ID (SCIM 2.0)",
+            "description": {
+              "content": "Retrieves detailed information about a specific user identified by their unique user ID using SCIM 2.0 protocol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "scim2",
+                "Users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The unique identifier of the user"
+                },
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce94e9c7-fa3a-4184-a88f-44d240d3e2da",
+              "name": "Successfully retrieved user details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"userName\": \"string\",\n  \"name\": {\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"formatted\": \"string\"\n  },\n  \"displayName\": \"string\",\n  \"emails\": [\n    {\n      \"value\": \"p07Fs7ec@bpmRQyOIWxAQq.okzb\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"WkxPcyY6gQN0@NbeWRNBybVDS.qg\",\n      \"primary\": false\n    }\n  ],\n  \"active\": true,\n  \"roles\": [\n    {\n      \"value\": \"string\"\n    },\n    {\n      \"value\": \"string\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e81a722-d205-43f0-8f64-b086c36e7a37",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "21346fe8-2926-4440-b4d5-2f5124a6bd36",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f5ee087-7ea7-4141-9226-ab22cc970dc9",
+          "name": "SAP BI Tools Update a user (SCIM 2.0)",
+          "request": {
+            "name": "SAP BI Tools Update a user (SCIM 2.0)",
+            "description": {
+              "content": "Updates an existing user in SAP Analytics Cloud using SCIM 2.0 protocol. Replaces the entire user record with the provided data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "scim2",
+                "Users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The unique identifier of the user"
+                },
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "175ff769-febe-4835-8442-3fc4f2a7d924",
+              "name": "User updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"userName\": \"string\",\n  \"name\": {\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"formatted\": \"string\"\n  },\n  \"displayName\": \"string\",\n  \"emails\": [\n    {\n      \"value\": \"p07Fs7ec@bpmRQyOIWxAQq.okzb\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"WkxPcyY6gQN0@NbeWRNBybVDS.qg\",\n      \"primary\": false\n    }\n  ],\n  \"active\": true,\n  \"roles\": [\n    {\n      \"value\": \"string\"\n    },\n    {\n      \"value\": \"string\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95675b48-be81-4235-966f-d1a75d2b0451",
+              "name": "Bad request - invalid user data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7959893b-cfda-4d50-b452-253ceb22c9dc",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c034635f-807f-466b-b838-2676bb3f4974",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e3e59ed-0033-40e5-944c-4a4147607d18",
+          "name": "SAP BI Tools Delete a user (SCIM 2.0)",
+          "request": {
+            "name": "SAP BI Tools Delete a user (SCIM 2.0)",
+            "description": {
+              "content": "Deletes a user from SAP Analytics Cloud using SCIM 2.0 protocol. Permanently removes the user account and associated data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "scim2",
+                "Users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The unique identifier of the user"
+                },
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48bbaaa4-f75f-4662-ad9e-a3508e0ded4c",
+              "name": "User deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "83528ac4-50de-415b-a9e3-8e873f2b6137",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e4ceb2fe-7b58-4c08-85f1-6427da5e7142",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "scim2",
+                    "Users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user"
+                    },
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The SAP Analytics Cloud tenant name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "my-tenant",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "eu1",
+      "key": "datacenter"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.{{datacenter}}.sapanalytics.cloud",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "90a2fc85-6c9c-4c49-a935-36f73149ac2e",
+    "name": "SAP BI Tools SAP Analytics Cloud API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.\n\nContact Support:\n Name: SAP Support",
+      "type": "text/plain"
+    }
+  }
+}

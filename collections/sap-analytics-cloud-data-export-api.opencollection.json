@@ -1,0 +1,294 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BI Tools SAP Analytics Cloud Data Export API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize",
+      "accessTokenUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Administration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools List available namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/dataexport/administration/Namespaces",
+            "params": [
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "The response format (JSON or XML)"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of namespaces available for data export. The primary namespace is 'sac' which contains all SAP Analytics Cloud models."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools List available providers (models)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/dataexport/administration/Namespaces(NamespaceID=':namespaceId')/Providers",
+            "params": [
+              {
+                "name": "namespaceId",
+                "value": "",
+                "type": "path",
+                "description": "The namespace identifier (typically 'sac')"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "The response format (JSON or XML)"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression to apply"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of providers (models) available for data export within a specific namespace. Each provider represents an SAP Analytics Cloud model with its name, description, and provider ID that can be used to access its data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools Get model metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/dataexport/providers/sac/:modelId/$metadata",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique provider (model) identifier"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "The response format (JSON or XML)"
+              }
+            ]
+          },
+          "docs": "Retrieves the OData metadata document for a specific model. The metadata describes the structure of the model including its dimensions, measures, and available entity sets for querying fact data and master data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fact Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools Get fact data from a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/dataexport/providers/sac/:modelId/FactData",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique provider (model) identifier"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "The response format (JSON or XML)"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression to apply"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "Property name and direction to sort by"
+              }
+            ]
+          },
+          "docs": "Retrieves fact data (transactional records) from a specific SAP Analytics Cloud model. Fact data includes dimension member values and measure values. Supports OData query parameters for filtering, selecting specific columns, ordering, and pagination."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Master Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools Get master data overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/dataexport/providers/sac/:modelId/MasterData",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique provider (model) identifier"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "The response format (JSON or XML)"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves an overview of available master data (dimension members with navigation attributes) from a specific model. Returns fact data enriched with dimension property values."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Get master data for a dimension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/dataexport/providers/sac/:modelId/:dimensionNameMaster",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique provider (model) identifier"
+              },
+              {
+                "name": "dimensionName",
+                "value": "",
+                "type": "path",
+                "description": "The technical name of the dimension whose master data to retrieve"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "The response format (JSON or XML)"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression to apply"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include"
+              }
+            ]
+          },
+          "docs": "Retrieves the master data (member list with attributes) for a specific dimension within a model. The dimension name is appended with 'Master' to form the entity set name. Supports OData query parameters for filtering and pagination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2230 @@
+{
+  "item": [
+    {
+      "id": "a7c4dd8d-c9f3-442c-afee-7abef960aa77",
+      "name": "Authentication",
+      "description": {
+        "content": "Logon and logoff endpoints for obtaining and invalidating session tokens required for all subsequent API calls.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "86e9b85a-d726-4f5a-ab17-514ca70c8c97",
+          "name": "SAP BI Tools Log on to BI Platform",
+          "request": {
+            "name": "SAP BI Tools Log on to BI Platform",
+            "description": {
+              "content": "Authenticates a user against the BI Platform and returns a logon token that must be included in subsequent API requests. Supports Enterprise, LDAP, and Windows AD authentication types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logon",
+                "long"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The BI Platform server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "The WACS port number",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"<string>\",\n  \"password\": \"<password>\",\n  \"auth\": \"secEnterprise\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "165d46d8-26af-4c0a-bf44-c35069e6a49f",
+              "name": "Successfully authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logon",
+                    "long"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"password\": \"<password>\",\n  \"auth\": \"secEnterprise\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logonToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6d5044e-380e-405d-8c91-9a3371dab86f",
+              "name": "Authentication failed - invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logon",
+                    "long"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"password\": \"<password>\",\n  \"auth\": \"secEnterprise\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "269e7877-bbc2-4ebe-b59d-f75c371b4450",
+          "name": "SAP BI Tools Log off from BI Platform",
+          "request": {
+            "name": "SAP BI Tools Log off from BI Platform",
+            "description": {
+              "content": "Invalidates the current logon token and terminates the session. The logon token provided in the header is no longer valid after this call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logoff"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The BI Platform server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "The WACS port number",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adab7220-d8bb-4c90-addf-2b3f6e310c0f",
+              "name": "Successfully logged off",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logoff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3de2dc7e-2788-42d2-a1ac-3f28fee494cd",
+              "name": "Invalid or expired logon token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logoff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3d93dfa6-70ef-402a-ba8a-60f8714655c4",
+      "name": "CMS Query",
+      "description": {
+        "content": "Execute CMS queries against the BI Platform repository to search for objects using CMS query language syntax.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bede60ed-7c1f-4f6c-8555-9e3ad70bb56b",
+          "name": "SAP BI Tools Execute a CMS query (GET)",
+          "request": {
+            "name": "SAP BI Tools Execute a CMS query (GET)",
+            "description": {
+              "content": "Executes a CMS query against the BI Platform repository using the query parameter. CMS queries use a SQL-like syntax to search for objects by type, name, and other properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cmsquery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) The CMS query string (e.g., SELECT * FROM CI_INFOOBJECTS WHERE SI_KIND='Webi')"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number for pagination (1-based)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "The number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The BI Platform server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "The WACS port number",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b609512a-ffaf-46c1-9e3c-c05a2f3da98b",
+              "name": "Successfully executed query",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cmsquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"SI_ID\": 8323,\n      \"SI_NAME\": \"string\",\n      \"SI_KIND\": \"string\",\n      \"SI_DESCRIPTION\": \"string\",\n      \"SI_CREATION_TIME\": \"1996-04-13T03:35:48.419Z\",\n      \"SI_UPDATE_TS\": \"1998-04-30T13:38:03.839Z\",\n      \"SI_OWNER\": \"string\",\n      \"SI_PARENTID\": 4762,\n      \"SI_PATH\": \"string\"\n    },\n    {\n      \"SI_ID\": 7009,\n      \"SI_NAME\": \"string\",\n      \"SI_KIND\": \"string\",\n      \"SI_DESCRIPTION\": \"string\",\n      \"SI_CREATION_TIME\": \"1982-05-10T03:14:36.487Z\",\n      \"SI_UPDATE_TS\": \"1996-05-29T05:46:11.294Z\",\n      \"SI_OWNER\": \"string\",\n      \"SI_PARENTID\": 3862,\n      \"SI_PATH\": \"string\"\n    }\n  ],\n  \"__count\": 52\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7831712b-feaa-44df-8376-881af661377b",
+              "name": "Invalid query syntax",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cmsquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c33077f4-c915-4a59-92cf-0c359a3004b8",
+              "name": "Invalid or expired logon token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cmsquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43d5b024-3396-44c9-878a-208ff57cacc6",
+          "name": "SAP BI Tools Execute a CMS query (POST)",
+          "request": {
+            "name": "SAP BI Tools Execute a CMS query (POST)",
+            "description": {
+              "content": "Executes a CMS query against the BI Platform repository using a POST request body. Preferred for complex queries that may exceed URL length limits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cmsquery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The BI Platform server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "The WACS port number",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17fadeec-9fd9-4773-8fd9-d1124d498496",
+              "name": "Successfully executed query",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cmsquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"SI_ID\": 8323,\n      \"SI_NAME\": \"string\",\n      \"SI_KIND\": \"string\",\n      \"SI_DESCRIPTION\": \"string\",\n      \"SI_CREATION_TIME\": \"1996-04-13T03:35:48.419Z\",\n      \"SI_UPDATE_TS\": \"1998-04-30T13:38:03.839Z\",\n      \"SI_OWNER\": \"string\",\n      \"SI_PARENTID\": 4762,\n      \"SI_PATH\": \"string\"\n    },\n    {\n      \"SI_ID\": 7009,\n      \"SI_NAME\": \"string\",\n      \"SI_KIND\": \"string\",\n      \"SI_DESCRIPTION\": \"string\",\n      \"SI_CREATION_TIME\": \"1982-05-10T03:14:36.487Z\",\n      \"SI_UPDATE_TS\": \"1996-05-29T05:46:11.294Z\",\n      \"SI_OWNER\": \"string\",\n      \"SI_PARENTID\": 3862,\n      \"SI_PATH\": \"string\"\n    }\n  ],\n  \"__count\": 52\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "591d3884-1b85-4ed3-9898-5bbc31e2fa9a",
+              "name": "Invalid query syntax",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cmsquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e313c423-905e-42e1-be85-686935a126c8",
+              "name": "Invalid or expired logon token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cmsquery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f593af7b-0dec-41b7-88c5-26549354a8a4",
+      "name": "Inbox",
+      "description": {
+        "content": "Manage BI Inbox items including viewing received reports and scheduled instances.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "04d7d901-faad-4b35-9ebe-54dc549bbe1f",
+          "name": "SAP BI Tools List BI Inbox items",
+          "request": {
+            "name": "SAP BI Tools List BI Inbox items",
+            "description": {
+              "content": "Retrieves a list of items in the authenticated user's BI Inbox. The inbox contains reports and documents that have been sent to the user or scheduled instances that have completed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "inbox"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number for pagination (1-based)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "The number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The BI Platform server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "The WACS port number",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22830369-330b-44c0-8e81-7fb623cce3a4",
+              "name": "Successfully retrieved inbox items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "inbox"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"SI_ID\": 8323,\n      \"SI_NAME\": \"string\",\n      \"SI_KIND\": \"string\",\n      \"SI_DESCRIPTION\": \"string\",\n      \"SI_CREATION_TIME\": \"1996-04-13T03:35:48.419Z\",\n      \"SI_UPDATE_TS\": \"1998-04-30T13:38:03.839Z\",\n      \"SI_OWNER\": \"string\",\n      \"SI_PARENTID\": 4762,\n      \"SI_PATH\": \"string\"\n    },\n    {\n      \"SI_ID\": 7009,\n      \"SI_NAME\": \"string\",\n      \"SI_KIND\": \"string\",\n      \"SI_DESCRIPTION\": \"string\",\n      \"SI_CREATION_TIME\": \"1982-05-10T03:14:36.487Z\",\n      \"SI_UPDATE_TS\": \"1996-05-29T05:46:11.294Z\",\n      \"SI_OWNER\": \"string\",\n      \"SI_PARENTID\": 3862,\n      \"SI_PATH\": \"string\"\n    }\n  ],\n  \"__count\": 52\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d94f8e0d-d6f1-4feb-b329-7b0f20ce8e98",
+              "name": "Invalid or expired logon token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "inbox"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e693f42d-bda2-47a9-82bf-663d028197dc",
+      "name": "InfoStore",
+      "description": {
+        "content": "Browse and query the CMS InfoStore repository to access documents, folders, users, groups, and other BI Platform objects.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a9791a8c-1373-40d5-a675-2f1c47c10d78",
+          "name": "SAP BI Tools Get InfoStore root",
+          "request": {
+            "name": "SAP BI Tools Get InfoStore root",
+            "description": {
+              "content": "Retrieves the root entry of the InfoStore repository. The InfoStore is the central object repository of the BI Platform containing all documents, folders, users, and other managed objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "infostore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The BI Platform server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "The WACS port number",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90126216-5778-4b35-bacc-01a0c7ff4706",
+              "name": "Successfully retrieved InfoStore root",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SI_ID\": 3015,\n  \"SI_NAME\": \"string\",\n  \"SI_KIND\": \"string\",\n  \"SI_DESCRIPTION\": \"string\",\n  \"SI_CREATION_TIME\": \"1950-05-02T06:30:38.836Z\",\n  \"SI_UPDATE_TS\": \"2017-10-11T08:58:25.364Z\",\n  \"SI_OWNER\": \"string\",\n  \"SI_PARENTID\": 8313,\n  \"SI_PATH\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8d73c73-e8dd-4d0c-ac79-63e17a71d060",
+              "name": "Invalid or expired logon token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d51cef2e-83d3-4004-b954-c588fa786924",
+          "name": "SAP BI Tools Get an InfoStore object by ID",
+          "request": {
+            "name": "SAP BI Tools Get an InfoStore object by ID",
+            "description": {
+              "content": "Retrieves a specific object from the InfoStore repository by its unique CMS object identifier. Returns the object metadata including name, type, creation date, and parent folder.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "infostore",
+                ":objectId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectId",
+                  "description": "(Required) The CMS object identifier"
+                },
+                {
+                  "description": "The BI Platform server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "The WACS port number",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f862f43-7b2f-4529-8b13-833a47831999",
+              "name": "Successfully retrieved object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The CMS object identifier"
+                    },
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SI_ID\": 3015,\n  \"SI_NAME\": \"string\",\n  \"SI_KIND\": \"string\",\n  \"SI_DESCRIPTION\": \"string\",\n  \"SI_CREATION_TIME\": \"1950-05-02T06:30:38.836Z\",\n  \"SI_UPDATE_TS\": \"2017-10-11T08:58:25.364Z\",\n  \"SI_OWNER\": \"string\",\n  \"SI_PARENTID\": 8313,\n  \"SI_PATH\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da1c01ef-0fa2-4ed1-a3c9-b9163032d393",
+              "name": "Invalid or expired logon token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The CMS object identifier"
+                    },
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b253d54-ef70-4270-b5b6-6a3afb3eb11b",
+              "name": "Object not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The CMS object identifier"
+                    },
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e86fdee6-1498-4bb0-942d-3aef188f62ad",
+          "name": "SAP BI Tools List children of an InfoStore object",
+          "request": {
+            "name": "SAP BI Tools List children of an InfoStore object",
+            "description": {
+              "content": "Retrieves the child objects of a specific InfoStore folder or container object. Supports pagination with page and pageSize query parameters. Commonly used to browse the folder hierarchy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "infostore",
+                ":objectId",
+                "children"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number for pagination (1-based)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "50",
+                  "description": "The number of items per page"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectId",
+                  "description": "(Required) The CMS object identifier"
+                },
+                {
+                  "description": "The BI Platform server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "The WACS port number",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3301fd6-41f3-4bf6-916c-1dc72a031df6",
+              "name": "Successfully retrieved children",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore",
+                    ":objectId",
+                    "children"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The CMS object identifier"
+                    },
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"SI_ID\": 8323,\n      \"SI_NAME\": \"string\",\n      \"SI_KIND\": \"string\",\n      \"SI_DESCRIPTION\": \"string\",\n      \"SI_CREATION_TIME\": \"1996-04-13T03:35:48.419Z\",\n      \"SI_UPDATE_TS\": \"1998-04-30T13:38:03.839Z\",\n      \"SI_OWNER\": \"string\",\n      \"SI_PARENTID\": 4762,\n      \"SI_PATH\": \"string\"\n    },\n    {\n      \"SI_ID\": 7009,\n      \"SI_NAME\": \"string\",\n      \"SI_KIND\": \"string\",\n      \"SI_DESCRIPTION\": \"string\",\n      \"SI_CREATION_TIME\": \"1982-05-10T03:14:36.487Z\",\n      \"SI_UPDATE_TS\": \"1996-05-29T05:46:11.294Z\",\n      \"SI_OWNER\": \"string\",\n      \"SI_PARENTID\": 3862,\n      \"SI_PATH\": \"string\"\n    }\n  ],\n  \"__count\": 52\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a3df213-f0f1-458c-b541-224f783bd987",
+              "name": "Invalid or expired logon token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore",
+                    ":objectId",
+                    "children"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The CMS object identifier"
+                    },
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b4c71b7f-07fd-424b-9eaa-cfed7409c7a0",
+              "name": "Parent object not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore",
+                    ":objectId",
+                    "children"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The CMS object identifier"
+                    },
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "886af108-94b6-4ee5-b88d-ba04443460cb",
+      "name": "Scheduling",
+      "description": {
+        "content": "Schedule reports and documents for execution with configurable parameters, recurrence, and destination options.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d206c84-4ca7-4eb1-83f8-1cf1f73392c2",
+          "name": "SAP BI Tools Schedule a document for immediate execution",
+          "request": {
+            "name": "SAP BI Tools Schedule a document for immediate execution",
+            "description": {
+              "content": "Schedules a document for immediate execution on the BI Platform. Creates a new scheduled instance that runs the document with the specified parameters and delivers the output to the configured destination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "infostore",
+                ":documentId",
+                "scheduleForms",
+                "now"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentId",
+                  "description": "(Required) The CMS ID of the document to schedule"
+                },
+                {
+                  "description": "The BI Platform server hostname",
+                  "type": "any",
+                  "value": "{{server}}",
+                  "key": "server"
+                },
+                {
+                  "description": "The WACS port number",
+                  "type": "any",
+                  "value": "{{port}}",
+                  "key": "port"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"format\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d843149b-da07-494f-a18a-451e296a3637",
+              "name": "Document scheduled successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore",
+                    ":documentId",
+                    "scheduleForms",
+                    "now"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) The CMS ID of the document to schedule"
+                    },
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"format\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SI_ID\": 9578,\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76f8e742-315c-48fe-9014-04a152237057",
+              "name": "Invalid or expired logon token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore",
+                    ":documentId",
+                    "scheduleForms",
+                    "now"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) The CMS ID of the document to schedule"
+                    },
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"format\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "07c7a723-5f8a-42dd-a3a8-653f37577e33",
+              "name": "Document not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "infostore",
+                    ":documentId",
+                    "scheduleForms",
+                    "now"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) The CMS ID of the document to schedule"
+                    },
+                    {
+                      "description": "The BI Platform server hostname",
+                      "type": "any",
+                      "value": "{{server}}",
+                      "key": "server"
+                    },
+                    {
+                      "description": "The WACS port number",
+                      "type": "any",
+                      "value": "{{port}}",
+                      "key": "port"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SAP-LogonToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The desired response format",
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"parameters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"format\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The BI Platform server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "server"
+    },
+    {
+      "description": {
+        "content": "The WACS port number",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "6405",
+      "key": "port"
+    },
+    {
+      "type": "string",
+      "value": "http://{{server}}:{{port}}/biprws",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-SAP-LogonToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f6f93e76-1589-4a84-a2cb-d3534f17d552",
+    "name": "SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for SAP BusinessObjects BI Platform (biprws) for managing documents, users, scheduling reports, and querying the CMS repository. The API provides endpoints for authentication via logon tokens, browsing the InfoStore repository, managing BI Inbox items, scheduling report execution, and performing CMS queries. Supports both JSON and XML response formats. Requires a logon token obtained through the logon endpoint for subsequent API calls.\n\nContact Support:\n Name: SAP Support",
+      "type": "text/plain"
+    }
+  }
+}

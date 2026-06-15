@@ -1,0 +1,2417 @@
+{
+  "info": {
+    "_postman_id": "ba471008-6b20-4b6a-a5cd-b06a42a92149",
+    "name": "SAP BI Tools SAP Analytics Cloud API",
+    "description": "RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.\n\nContact Support:\n Name: SAP Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T16:51:05.000Z",
+    "updatedAt": "2026-06-05T16:51:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ba471008-6b20-4b6a-a5cd-b06a42a92149"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "stories",
+              "item": [
+                {
+                  "name": "{storyId}",
+                  "item": [
+                    {
+                      "name": "SAP BI Tools Get a story by ID",
+                      "id": "da70c910-48cf-4082-88be-a9fbfc7bad30",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/stories/:storyId?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "stories",
+                            ":storyId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Comma-separated list of related resources to include in the response (e.g., models)",
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "e8c44d6c-54c6-4093-9088-97fe09943f29",
+                              "key": "storyId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the story"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves detailed information about a specific story identified by its unique story ID. Returns the story metadata, structure, and optionally the models used within it."
+                      },
+                      "response": [
+                        {
+                          "id": "3c68682e-dcd2-4fad-a723-f7be7915d94c",
+                          "name": "Successfully retrieved story details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/stories/:storyId?include=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "stories",
+                                ":storyId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Comma-separated list of related resources to include in the response (e.g., models)",
+                                  "key": "include",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "storyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"createdTime\": \"<dateTime>\",\n  \"modifiedTime\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"modifiedBy\": \"<string>\",\n  \"resourceType\": \"<string>\",\n  \"models\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-3c68682e-dcd2-4fad-a723-f7be7915d94c"
+                        },
+                        {
+                          "id": "42d155d6-c88d-4b73-b09e-985c34fe8fb3",
+                          "name": "Unauthorized - invalid or missing authentication token",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/stories/:storyId?include=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "stories",
+                                ":storyId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Comma-separated list of related resources to include in the response (e.g., models)",
+                                  "key": "include",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "storyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-42d155d6-c88d-4b73-b09e-985c34fe8fb3"
+                        },
+                        {
+                          "id": "e1d6d882-f222-4c80-8947-47b3e40216dc",
+                          "name": "Story not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/stories/:storyId?include=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "stories",
+                                ":storyId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Comma-separated list of related resources to include in the response (e.g., models)",
+                                  "key": "include",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "storyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-e1d6d882-f222-4c80-8947-47b3e40216dc"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-da70c910-48cf-4082-88be-a9fbfc7bad30"
+                    }
+                  ],
+                  "id": "045cf937-86d8-4502-82f2-b267c4311fa4",
+                  "createdAt": "2026-06-05T16:51:05.000Z",
+                  "updatedAt": "2026-06-05T16:51:05.000Z",
+                  "uid": "35240-045cf937-86d8-4502-82f2-b267c4311fa4"
+                },
+                {
+                  "name": "SAP BI Tools List stories",
+                  "id": "bebdc9bc-dfcc-41e1-af74-6969049add1c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/stories?include=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "stories"
+                      ],
+                      "query": [
+                        {
+                          "description": "Comma-separated list of related resources to include in the response (e.g., models)",
+                          "key": "include",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of stories available on the SAP Analytics Cloud tenant. Supports query parameters to include additional metadata such as models used in each story. Returns a JSON array of story objects with their identifiers, names, descriptions, and metadata."
+                  },
+                  "response": [
+                    {
+                      "id": "42aea7ea-ac02-4b3e-a65f-3b41d68d61b5",
+                      "name": "Successfully retrieved list of stories",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/stories?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "stories"
+                          ],
+                          "query": [
+                            {
+                              "description": "Comma-separated list of related resources to include in the response (e.g., models)",
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"createdTime\": \"<dateTime>\",\n    \"modifiedTime\": \"<dateTime>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"resourceType\": \"<string>\",\n    \"models\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"createdTime\": \"<dateTime>\",\n    \"modifiedTime\": \"<dateTime>\",\n    \"createdBy\": \"<string>\",\n    \"modifiedBy\": \"<string>\",\n    \"resourceType\": \"<string>\",\n    \"models\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\"\n      }\n    ]\n  }\n]",
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-42aea7ea-ac02-4b3e-a65f-3b41d68d61b5"
+                    },
+                    {
+                      "id": "f7aaf353-e912-424a-acc9-9e00e4d50cec",
+                      "name": "Unauthorized - invalid or missing authentication token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/stories?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "stories"
+                          ],
+                          "query": [
+                            {
+                              "description": "Comma-separated list of related resources to include in the response (e.g., models)",
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-f7aaf353-e912-424a-acc9-9e00e4d50cec"
+                    },
+                    {
+                      "id": "fecc9222-cb4a-4248-8dbc-f00b98e871cb",
+                      "name": "Forbidden - insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/stories?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "stories"
+                          ],
+                          "query": [
+                            {
+                              "description": "Comma-separated list of related resources to include in the response (e.g., models)",
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-fecc9222-cb4a-4248-8dbc-f00b98e871cb"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T16:51:05.000Z",
+                  "updatedAt": "2026-06-05T16:51:05.000Z",
+                  "uid": "35240-bebdc9bc-dfcc-41e1-af74-6969049add1c"
+                }
+              ],
+              "id": "142ee1e8-b34b-43bb-bbf0-a7d9e88684c2",
+              "createdAt": "2026-06-05T16:51:05.000Z",
+              "updatedAt": "2026-06-05T16:51:05.000Z",
+              "uid": "35240-142ee1e8-b34b-43bb-bbf0-a7d9e88684c2"
+            },
+            {
+              "name": "Resources",
+              "item": [
+                {
+                  "name": "SAP BI Tools List resources",
+                  "id": "db1399f3-c14e-4d1d-9476-5e417b67b7cc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/Resources?resourceType=<string>&resourceSubType=<string>&$top=<integer>&$skip=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "Resources"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter resources by type (e.g., STORY, MODEL, FOLDER)",
+                          "key": "resourceType",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter resources by sub-type",
+                          "key": "resourceSubType",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of records to return",
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Number of records to skip for pagination",
+                          "key": "$skip",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of resources from the SAP Analytics Cloud file repository. Resources include stories, models, folders, and other artifacts. Supports filtering by resource type and pagination."
+                  },
+                  "response": [
+                    {
+                      "id": "b31e6e9d-5204-4979-8c73-af087fb4e62e",
+                      "name": "Successfully retrieved list of resources",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/Resources?resourceType=<string>&resourceSubType=<string>&$top=<integer>&$skip=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "Resources"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter resources by type (e.g., STORY, MODEL, FOLDER)",
+                              "key": "resourceType",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter resources by sub-type",
+                              "key": "resourceSubType",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of records to return",
+                              "key": "$top",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Number of records to skip for pagination",
+                              "key": "$skip",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"resourceType\": \"<string>\",\n    \"resourceSubType\": \"<string>\",\n    \"createdTime\": \"<dateTime>\",\n    \"modifiedTime\": \"<dateTime>\",\n    \"parentId\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"resourceType\": \"<string>\",\n    \"resourceSubType\": \"<string>\",\n    \"createdTime\": \"<dateTime>\",\n    \"modifiedTime\": \"<dateTime>\",\n    \"parentId\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-b31e6e9d-5204-4979-8c73-af087fb4e62e"
+                    },
+                    {
+                      "id": "8170caa8-f22c-4250-aa83-7d61fee0fb39",
+                      "name": "Unauthorized - invalid or missing authentication token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/Resources?resourceType=<string>&resourceSubType=<string>&$top=<integer>&$skip=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "Resources"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter resources by type (e.g., STORY, MODEL, FOLDER)",
+                              "key": "resourceType",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter resources by sub-type",
+                              "key": "resourceSubType",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of records to return",
+                              "key": "$top",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Number of records to skip for pagination",
+                              "key": "$skip",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-8170caa8-f22c-4250-aa83-7d61fee0fb39"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T16:51:05.000Z",
+                  "updatedAt": "2026-06-05T16:51:05.000Z",
+                  "uid": "35240-db1399f3-c14e-4d1d-9476-5e417b67b7cc"
+                }
+              ],
+              "id": "8018d914-a9e9-4f4a-afa9-dee0ea646ff7",
+              "createdAt": "2026-06-05T16:51:05.000Z",
+              "updatedAt": "2026-06-05T16:51:05.000Z",
+              "uid": "35240-8018d914-a9e9-4f4a-afa9-dee0ea646ff7"
+            },
+            {
+              "name": "scim",
+              "item": [
+                {
+                  "name": "Users",
+                  "item": [
+                    {
+                      "name": "SAP BI Tools List users (SCIM 1.1)",
+                      "id": "2825d995-03c6-4acb-a698-54fc96d9f9af",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/scim/Users?filter=<string>&count=<integer>&startIndex=1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "scim",
+                            "Users"
+                          ],
+                          "query": [
+                            {
+                              "description": "SCIM filter expression (e.g., userName eq \"john.doe\")",
+                              "key": "filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of results to return per page",
+                              "key": "count",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The starting index for pagination (1-based)",
+                              "key": "startIndex",
+                              "value": "1"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a list of users provisioned in SAP Analytics Cloud using SCIM 1.1 protocol. Supports filtering by user attributes such as userName and email. Returns user records with profile information, roles, and team memberships."
+                      },
+                      "response": [
+                        {
+                          "id": "c1fd149d-10d2-4e6d-91fc-e1e9a64e3f10",
+                          "name": "Successfully retrieved list of users",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim/Users?filter=<string>&count=<integer>&startIndex=1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim",
+                                "Users"
+                              ],
+                              "query": [
+                                {
+                                  "description": "SCIM filter expression (e.g., userName eq \"john.doe\")",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The starting index for pagination (1-based)",
+                                  "key": "startIndex",
+                                  "value": "1"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"totalResults\": \"<integer>\",\n  \"itemsPerPage\": \"<integer>\",\n  \"startIndex\": \"<integer>\"\n}",
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-c1fd149d-10d2-4e6d-91fc-e1e9a64e3f10"
+                        },
+                        {
+                          "id": "dd9aa13e-18e0-45e3-a89e-6eb2547ed495",
+                          "name": "Unauthorized - invalid or missing authentication token",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim/Users?filter=<string>&count=<integer>&startIndex=1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim",
+                                "Users"
+                              ],
+                              "query": [
+                                {
+                                  "description": "SCIM filter expression (e.g., userName eq \"john.doe\")",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The starting index for pagination (1-based)",
+                                  "key": "startIndex",
+                                  "value": "1"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-dd9aa13e-18e0-45e3-a89e-6eb2547ed495"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-2825d995-03c6-4acb-a698-54fc96d9f9af"
+                    }
+                  ],
+                  "id": "8b416606-5d42-421d-83e0-5dac5ef2b6b5",
+                  "createdAt": "2026-06-05T16:51:05.000Z",
+                  "updatedAt": "2026-06-05T16:51:05.000Z",
+                  "uid": "35240-8b416606-5d42-421d-83e0-5dac5ef2b6b5"
+                }
+              ],
+              "id": "dac8867b-8142-406d-acb7-bbc35c6121ad",
+              "createdAt": "2026-06-05T16:51:05.000Z",
+              "updatedAt": "2026-06-05T16:51:05.000Z",
+              "uid": "35240-dac8867b-8142-406d-acb7-bbc35c6121ad"
+            },
+            {
+              "name": "scim2",
+              "item": [
+                {
+                  "name": "Users",
+                  "item": [
+                    {
+                      "name": "{userId}",
+                      "item": [
+                        {
+                          "name": "SAP BI Tools Get a user by ID (SCIM 2.0)",
+                          "id": "3e16e184-2643-4ae7-9fe3-8884fc3e8d20",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Users",
+                                ":userId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9830487d-b2b5-46a4-b48e-857454b4a1b2",
+                                  "key": "userId",
+                                  "value": "<string>",
+                                  "description": "(Required) The unique identifier of the user"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves detailed information about a specific user identified by their unique user ID using SCIM 2.0 protocol."
+                          },
+                          "response": [
+                            {
+                              "id": "cf2877bf-e69d-4dcb-8a2c-32b28ad73a27",
+                              "name": "Successfully retrieved user details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "scim2",
+                                    "Users",
+                                    ":userId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T16:51:05.000Z",
+                              "updatedAt": "2026-06-05T16:51:05.000Z",
+                              "uid": "35240-cf2877bf-e69d-4dcb-8a2c-32b28ad73a27"
+                            },
+                            {
+                              "id": "0de38e75-fb40-49b0-8f20-d38db8873581",
+                              "name": "Unauthorized - invalid or missing authentication token",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "scim2",
+                                    "Users",
+                                    ":userId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T16:51:05.000Z",
+                              "updatedAt": "2026-06-05T16:51:05.000Z",
+                              "uid": "35240-0de38e75-fb40-49b0-8f20-d38db8873581"
+                            },
+                            {
+                              "id": "f568989a-b69b-4835-a2ee-98b637c83255",
+                              "name": "User not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "scim2",
+                                    "Users",
+                                    ":userId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T16:51:05.000Z",
+                              "updatedAt": "2026-06-05T16:51:05.000Z",
+                              "uid": "35240-f568989a-b69b-4835-a2ee-98b637c83255"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-3e16e184-2643-4ae7-9fe3-8884fc3e8d20"
+                        },
+                        {
+                          "name": "SAP BI Tools Update a user (SCIM 2.0)",
+                          "id": "7d342797-75c0-47ca-8cf4-22525c028d46",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Users",
+                                ":userId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d327e850-4e2b-4a7e-823e-a287a8c181a7",
+                                  "key": "userId",
+                                  "value": "<string>",
+                                  "description": "(Required) The unique identifier of the user"
+                                }
+                              ]
+                            },
+                            "description": "Updates an existing user in SAP Analytics Cloud using SCIM 2.0 protocol. Replaces the entire user record with the provided data."
+                          },
+                          "response": [
+                            {
+                              "id": "9107fc53-cc32-4f6f-ba7f-da3d4233125f",
+                              "name": "User updated successfully",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "scim2",
+                                    "Users",
+                                    ":userId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T16:51:05.000Z",
+                              "updatedAt": "2026-06-05T16:51:05.000Z",
+                              "uid": "35240-9107fc53-cc32-4f6f-ba7f-da3d4233125f"
+                            },
+                            {
+                              "id": "eaa9699e-055b-4754-8ccf-aa6029dac6d5",
+                              "name": "Bad request - invalid user data",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "scim2",
+                                    "Users",
+                                    ":userId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T16:51:05.000Z",
+                              "updatedAt": "2026-06-05T16:51:05.000Z",
+                              "uid": "35240-eaa9699e-055b-4754-8ccf-aa6029dac6d5"
+                            },
+                            {
+                              "id": "37c8b329-07b4-44dc-8c24-8739103b73f1",
+                              "name": "Unauthorized - invalid or missing authentication token",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "scim2",
+                                    "Users",
+                                    ":userId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T16:51:05.000Z",
+                              "updatedAt": "2026-06-05T16:51:05.000Z",
+                              "uid": "35240-37c8b329-07b4-44dc-8c24-8739103b73f1"
+                            },
+                            {
+                              "id": "0a724602-0c04-4258-9bd2-494fa11c02be",
+                              "name": "User not found",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "scim2",
+                                    "Users",
+                                    ":userId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T16:51:05.000Z",
+                              "updatedAt": "2026-06-05T16:51:05.000Z",
+                              "uid": "35240-0a724602-0c04-4258-9bd2-494fa11c02be"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-7d342797-75c0-47ca-8cf4-22525c028d46"
+                        },
+                        {
+                          "name": "SAP BI Tools Delete a user (SCIM 2.0)",
+                          "id": "d9279e3b-32a3-400f-9ea2-6e7033343b38",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Users",
+                                ":userId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9fa8fee6-1318-49ec-ab75-27420fe9f594",
+                                  "key": "userId",
+                                  "value": "<string>",
+                                  "description": "(Required) The unique identifier of the user"
+                                }
+                              ]
+                            },
+                            "description": "Deletes a user from SAP Analytics Cloud using SCIM 2.0 protocol. Permanently removes the user account and associated data."
+                          },
+                          "response": [
+                            {
+                              "id": "255eb3c2-2be3-4ebf-8c86-96e347d0170f",
+                              "name": "User deleted successfully",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "scim2",
+                                    "Users",
+                                    ":userId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T16:51:05.000Z",
+                              "updatedAt": "2026-06-05T16:51:05.000Z",
+                              "uid": "35240-255eb3c2-2be3-4ebf-8c86-96e347d0170f"
+                            },
+                            {
+                              "id": "6c9da412-c177-4319-a18b-7bafd82db5eb",
+                              "name": "Unauthorized - invalid or missing authentication token",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "scim2",
+                                    "Users",
+                                    ":userId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T16:51:05.000Z",
+                              "updatedAt": "2026-06-05T16:51:05.000Z",
+                              "uid": "35240-6c9da412-c177-4319-a18b-7bafd82db5eb"
+                            },
+                            {
+                              "id": "f36a889d-5f61-4719-be52-842e14bb44ae",
+                              "name": "User not found",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/scim2/Users/:userId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "scim2",
+                                    "Users",
+                                    ":userId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T16:51:05.000Z",
+                              "updatedAt": "2026-06-05T16:51:05.000Z",
+                              "uid": "35240-f36a889d-5f61-4719-be52-842e14bb44ae"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-d9279e3b-32a3-400f-9ea2-6e7033343b38"
+                        }
+                      ],
+                      "id": "498fe8f4-d38e-4d53-9254-4d8933f4d836",
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-498fe8f4-d38e-4d53-9254-4d8933f4d836"
+                    },
+                    {
+                      "name": "SAP BI Tools List users (SCIM 2.0)",
+                      "id": "02f821e0-51bf-41df-be0c-4313f85c63e2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/scim2/Users?filter=<string>&count=<integer>&startIndex=1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "scim2",
+                            "Users"
+                          ],
+                          "query": [
+                            {
+                              "description": "SCIM 2.0 filter expression (e.g., userName eq \"john.doe\")",
+                              "key": "filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of results to return per page",
+                              "key": "count",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The starting index for pagination (1-based)",
+                              "key": "startIndex",
+                              "value": "1"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a list of users provisioned in SAP Analytics Cloud using SCIM 2.0 protocol. Supports filtering by user attributes such as userName, email, and custom attributes. Returns user records with profile information, roles, and team memberships."
+                      },
+                      "response": [
+                        {
+                          "id": "f803439c-57f6-494f-b97c-fb1398dd2d04",
+                          "name": "Successfully retrieved list of users",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Users?filter=<string>&count=<integer>&startIndex=1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Users"
+                              ],
+                              "query": [
+                                {
+                                  "description": "SCIM 2.0 filter expression (e.g., userName eq \"john.doe\")",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The starting index for pagination (1-based)",
+                                  "key": "startIndex",
+                                  "value": "1"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"totalResults\": \"<integer>\",\n  \"itemsPerPage\": \"<integer>\",\n  \"startIndex\": \"<integer>\"\n}",
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-f803439c-57f6-494f-b97c-fb1398dd2d04"
+                        },
+                        {
+                          "id": "7ad4a76d-b1e3-40ac-aa2d-c74aea330be7",
+                          "name": "Unauthorized - invalid or missing authentication token",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Users?filter=<string>&count=<integer>&startIndex=1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Users"
+                              ],
+                              "query": [
+                                {
+                                  "description": "SCIM 2.0 filter expression (e.g., userName eq \"john.doe\")",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The starting index for pagination (1-based)",
+                                  "key": "startIndex",
+                                  "value": "1"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-7ad4a76d-b1e3-40ac-aa2d-c74aea330be7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-02f821e0-51bf-41df-be0c-4313f85c63e2"
+                    },
+                    {
+                      "name": "SAP BI Tools Create a user (SCIM 2.0)",
+                      "id": "61969e3d-84bd-4195-809c-4e520c171044",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/scim2/Users",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "scim2",
+                            "Users"
+                          ]
+                        },
+                        "description": "Creates a new user in SAP Analytics Cloud using SCIM 2.0 protocol. Requires user profile attributes including userName, name, and email. Returns the created user record with its assigned ID."
+                      },
+                      "response": [
+                        {
+                          "id": "7a5df2a9-c797-45e1-8ce5-3631f58f0218",
+                          "name": "User created successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Users",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Users"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-7a5df2a9-c797-45e1-8ce5-3631f58f0218"
+                        },
+                        {
+                          "id": "7220df33-dce9-4c22-ae33-15a953a30c8f",
+                          "name": "Bad request - invalid user data",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Users",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Users"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-7220df33-dce9-4c22-ae33-15a953a30c8f"
+                        },
+                        {
+                          "id": "d930adba-02a2-4f86-9723-c98508a94d62",
+                          "name": "Unauthorized - invalid or missing authentication token",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Users",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Users"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-d930adba-02a2-4f86-9723-c98508a94d62"
+                        },
+                        {
+                          "id": "1ba1811a-d075-49fa-b78a-1a8247592c59",
+                          "name": "Conflict - user already exists",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"formatted\": \"<string>\"\n  },\n  \"displayName\": \"<string>\",\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"groups\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Users",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Users"
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-1ba1811a-d075-49fa-b78a-1a8247592c59"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-61969e3d-84bd-4195-809c-4e520c171044"
+                    }
+                  ],
+                  "id": "a1cd1dd2-250a-4b43-9ba3-cba5f97d3812",
+                  "createdAt": "2026-06-05T16:51:05.000Z",
+                  "updatedAt": "2026-06-05T16:51:05.000Z",
+                  "uid": "35240-a1cd1dd2-250a-4b43-9ba3-cba5f97d3812"
+                },
+                {
+                  "name": "Groups",
+                  "item": [
+                    {
+                      "name": "SAP BI Tools List teams (SCIM 2.0)",
+                      "id": "937b5007-fb18-41ac-a1b1-dab166446513",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/scim2/Groups?filter=<string>&count=<integer>&startIndex=1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "scim2",
+                            "Groups"
+                          ],
+                          "query": [
+                            {
+                              "description": "SCIM 2.0 filter expression for teams",
+                              "key": "filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of results to return per page",
+                              "key": "count",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The starting index for pagination (1-based)",
+                              "key": "startIndex",
+                              "value": "1"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a list of teams (groups) configured in SAP Analytics Cloud using SCIM 2.0 protocol. Teams are used for organizing users and managing access control to content."
+                      },
+                      "response": [
+                        {
+                          "id": "56c5c09d-7082-4991-8cd1-c6a187e2ad32",
+                          "name": "Successfully retrieved list of teams",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Groups?filter=<string>&count=<integer>&startIndex=1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Groups"
+                              ],
+                              "query": [
+                                {
+                                  "description": "SCIM 2.0 filter expression for teams",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The starting index for pagination (1-based)",
+                                  "key": "startIndex",
+                                  "value": "1"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"totalResults\": \"<integer>\",\n  \"itemsPerPage\": \"<integer>\",\n  \"startIndex\": \"<integer>\"\n}",
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-56c5c09d-7082-4991-8cd1-c6a187e2ad32"
+                        },
+                        {
+                          "id": "921e0bdf-0f6c-4908-870c-82fcea4306f7",
+                          "name": "Unauthorized - invalid or missing authentication token",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Groups?filter=<string>&count=<integer>&startIndex=1",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Groups"
+                              ],
+                              "query": [
+                                {
+                                  "description": "SCIM 2.0 filter expression for teams",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of results to return per page",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "The starting index for pagination (1-based)",
+                                  "key": "startIndex",
+                                  "value": "1"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-921e0bdf-0f6c-4908-870c-82fcea4306f7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-937b5007-fb18-41ac-a1b1-dab166446513"
+                    },
+                    {
+                      "name": "SAP BI Tools Create a team (SCIM 2.0)",
+                      "id": "0b0d8c74-3e4a-4263-abce-213ac3e1a277",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/scim2/Groups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "scim2",
+                            "Groups"
+                          ]
+                        },
+                        "description": "Creates a new team (group) in SAP Analytics Cloud using SCIM 2.0 protocol. Teams can be assigned members and used for content sharing and access control."
+                      },
+                      "response": [
+                        {
+                          "id": "bd578268-f9bf-437d-8906-9366c40cd886",
+                          "name": "Team created successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Groups",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Groups"
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-bd578268-f9bf-437d-8906-9366c40cd886"
+                        },
+                        {
+                          "id": "be70dca5-b81f-43dc-9c2f-20b3cf595fd7",
+                          "name": "Bad request - invalid team data",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Groups",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Groups"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-be70dca5-b81f-43dc-9c2f-20b3cf595fd7"
+                        },
+                        {
+                          "id": "acbbc68d-5696-4207-82e4-90feff6b6a53",
+                          "name": "Unauthorized - invalid or missing authentication token",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"members\": [\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\",\n      \"display\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/scim2/Groups",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "scim2",
+                                "Groups"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T16:51:05.000Z",
+                          "updatedAt": "2026-06-05T16:51:05.000Z",
+                          "uid": "35240-acbbc68d-5696-4207-82e4-90feff6b6a53"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-0b0d8c74-3e4a-4263-abce-213ac3e1a277"
+                    }
+                  ],
+                  "id": "62a33425-5f79-4522-8696-5b60fc9b0703",
+                  "createdAt": "2026-06-05T16:51:05.000Z",
+                  "updatedAt": "2026-06-05T16:51:05.000Z",
+                  "uid": "35240-62a33425-5f79-4522-8696-5b60fc9b0703"
+                }
+              ],
+              "id": "0158e4d8-8cef-4c8a-ae2a-3a4a9b42ef28",
+              "createdAt": "2026-06-05T16:51:05.000Z",
+              "updatedAt": "2026-06-05T16:51:05.000Z",
+              "uid": "35240-0158e4d8-8cef-4c8a-ae2a-3a4a9b42ef28"
+            },
+            {
+              "name": "calendars",
+              "item": [
+                {
+                  "name": "SAP BI Tools List calendar events",
+                  "id": "9a696f77-a7e5-4604-8fdd-9206ff75832d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/calendars",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "calendars"
+                      ]
+                    },
+                    "description": "Retrieves a list of calendar events and tasks configured in SAP Analytics Cloud. Calendars support planning workflows, scheduling notifications, and organizing collaborative tasks."
+                  },
+                  "response": [
+                    {
+                      "id": "9573711f-d395-4ac3-adf6-ca334fe89a20",
+                      "name": "Successfully retrieved calendar events",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/calendars",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "calendars"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"status\": \"NOT_STARTED\",\n    \"assignee\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"status\": \"NOT_STARTED\",\n    \"assignee\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-9573711f-d395-4ac3-adf6-ca334fe89a20"
+                    },
+                    {
+                      "id": "a4af640b-8464-489b-a120-7d71a596cc6f",
+                      "name": "Unauthorized - invalid or missing authentication token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/calendars",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "calendars"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T16:51:05.000Z",
+                      "updatedAt": "2026-06-05T16:51:05.000Z",
+                      "uid": "35240-a4af640b-8464-489b-a120-7d71a596cc6f"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T16:51:05.000Z",
+                  "updatedAt": "2026-06-05T16:51:05.000Z",
+                  "uid": "35240-9a696f77-a7e5-4604-8fdd-9206ff75832d"
+                }
+              ],
+              "id": "e7513bc6-04ad-4e81-9048-ec75d7202677",
+              "createdAt": "2026-06-05T16:51:05.000Z",
+              "updatedAt": "2026-06-05T16:51:05.000Z",
+              "uid": "35240-e7513bc6-04ad-4e81-9048-ec75d7202677"
+            }
+          ],
+          "id": "48dfcae8-f638-4137-8235-a9c0bf8ab95b",
+          "createdAt": "2026-06-05T16:51:05.000Z",
+          "updatedAt": "2026-06-05T16:51:05.000Z",
+          "uid": "35240-48dfcae8-f638-4137-8235-a9c0bf8ab95b"
+        }
+      ],
+      "id": "9e5a494e-fcfd-4c6b-9fda-10e331324b65",
+      "createdAt": "2026-06-05T16:51:05.000Z",
+      "updatedAt": "2026-06-05T16:51:05.000Z",
+      "uid": "35240-9e5a494e-fcfd-4c6b-9fda-10e331324b65"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "tenant",
+      "value": "my-tenant"
+    },
+    {
+      "key": "datacenter",
+      "value": "eu1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{tenant}}.{{datacenter}}.sapanalytics.cloud"
+    }
+  ]
+}
