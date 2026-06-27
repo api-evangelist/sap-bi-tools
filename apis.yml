@@ -121,13 +121,13 @@ apis:
         url: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/
       - type: APIReference
         url: https://help.sap.com/doc/e39d9c134f1f4634addd5161f93dbf25/4.3/en-US/RESTful_Web_Services_User_Guide.pdf
-      - type: SDK
+      - type: SDKs
         url: >-
           https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/sdk
       - type: Authentication
         url: >-
           https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/authentication
-      - type: API Hub
+      - type: Portal
         url: https://api.sap.com/package/BIPlatformRESTfulAPI
     contact:
       - type: Support
@@ -152,10 +152,10 @@ apis:
       - type: Reference
         url: >-
           https://help.sap.com/docs/SAP_BUSINESSOBJECTS_WEB_INTELLIGENCE/58f583a7643e48cf944cf554eb961f5b/45f8735d6e041014910aba7db0e91070.html
-      - type: Quickstart
+      - type: GettingStarted
         url: >-
           https://help.sap.com/docs/SAP_BUSINESSOBJECTS_WEB_INTELLIGENCE/58f583a7643e48cf944cf554eb961f5b/7da2e2d66f701014aaab767bb0e91070.html
-      - type: API Hub
+      - type: Portal
         url: https://api.sap.com/api/SAPWebIntelligence/resource
     contact:
       - type: Support
@@ -272,7 +272,7 @@ apis:
         url: https://developers.sap.com/tutorials/data-lake-file-containers-restapi..html
       - type: Reference
         url: https://help.sap.com/doc/9d084a41830f46d6904fd4c23cd4bbfa/QRC_3_2021/en-US/html/index.html
-      - type: API Hub
+      - type: Portal
         url: https://api.sap.com/package/SAPHanaCloud/rest
     contact:
       - type: Support
@@ -297,7 +297,7 @@ apis:
         url: https://help.sap.com/docs/SAP_DATASPHERE/api-reference
       - type: OpenAPI
         url: https://api.sap.com/api/Datasphere/overview
-      - type: API Hub
+      - type: Portal
         url: https://api.sap.com/package/sapdatasphere/overview
     contact:
       - type: Support
@@ -318,7 +318,7 @@ apis:
       - type: Documentation
         url: >-
           https://help.sap.com/docs/SAP_DATASPHERE/43509d67b8b84e66a30851e832f66911/7a453609c8694b029493e7d87e0de60a.html
-      - type: API Hub
+      - type: Portal
         url: https://api.sap.com/package/sapdatasphere/odatav4
     contact:
       - type: Support
@@ -326,63 +326,48 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/sap-bi-tools/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/sap-bi-tools-cms-query-drilldown-workflow.yml
-        name: SAP BI Tools CMS Query Drilldown
-        summary: Log on, run a complex CMS query via POST, then drill into the first matching object and list its children.
-      - url: arazzo/sap-bi-tools-create-team-with-member-workflow.yml
-        name: SAP BI Tools Create a SAC Team With a Member
-        summary: Create a SAP Analytics Cloud user via SCIM 2.0, then create a team that includes the new user as a member.
-      - url: arazzo/sap-bi-tools-export-dimension-master-data-workflow.yml
-        name: SAP BI Tools Export Dimension Master Data
-        summary: >-
-          Discover export namespaces and providers, read a model's master data overview, then pull a named dimension's
-          master data.
-      - url: arazzo/sap-bi-tools-export-model-fact-data-workflow.yml
-        name: SAP BI Tools Export Model Fact Data
-        summary: Discover a SAC export model, read its OData metadata, and pull a filtered, paged page of fact data.
-      - url: arazzo/sap-bi-tools-import-content-item-workflow.yml
-        name: SAP BI Tools Import a Content Network Item
-        summary: >-
-          Discover a public content item in the Content Network and import it into a target folder, branching on the
-          import outcome.
-      - url: arazzo/sap-bi-tools-list-and-inspect-story-workflow.yml
-        name: SAP BI Tools List and Inspect a SAC Story
-        summary: List SAP Analytics Cloud stories and retrieve the first story's full detail including the models it uses.
-      - url: arazzo/sap-bi-tools-logon-browse-folder-workflow.yml
-        name: SAP BI Tools Logon and Browse a Folder
-        summary: Log on to the BI Platform, list the children of a folder, and read the metadata of the first document found.
-      - url: arazzo/sap-bi-tools-provision-scim-user-workflow.yml
-        name: SAP BI Tools Provision a SAC User
-        summary: Look up a SAP Analytics Cloud user by userName via SCIM 2.0 and create the user when no match exists.
-      - url: arazzo/sap-bi-tools-publish-content-item-workflow.yml
-        name: SAP BI Tools Publish a Content Network Item
-        summary: >-
-          Publish a local resource to the SAP Analytics Cloud Content Network and confirm it by reading the published
-          item back.
-      - url: arazzo/sap-bi-tools-query-and-schedule-document-workflow.yml
-        name: SAP BI Tools Query and Schedule a Document
-        summary: >-
-          Log on, find documents with a CMS query, schedule the first match for immediate execution, and confirm the
-          instance.
-      - url: arazzo/sap-bi-tools-retire-content-item-workflow.yml
-        name: SAP BI Tools Retire a Content Network Item
-        summary: Find a private content item by type, delete it from the Content Network, and confirm it is gone.
-      - url: arazzo/sap-bi-tools-schedule-and-poll-inbox-workflow.yml
-        name: SAP BI Tools Schedule and Poll the BI Inbox
-        summary: >-
-          Log on, schedule a document for immediate execution, then poll the BI Inbox until the completed instance is
-          delivered.
-      - url: arazzo/sap-bi-tools-session-lifecycle-workflow.yml
-        name: SAP BI Tools Session Lifecycle
-        summary: Open a BI Platform session, read the InfoStore root and its top-level folders, then cleanly log off.
-      - url: arazzo/sap-bi-tools-story-resource-crossref-workflow.yml
-        name: SAP BI Tools Story and Resource Cross-Reference
-        summary: >-
-          Find a SAC story, fetch its detail, then list MODEL resources from the file repository to cross-reference its
-          data sources.
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-cms-query-drilldown-workflow.yml
+    name: SAP BI Tools CMS Query Drilldown
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-create-team-with-member-workflow.yml
+    name: SAP BI Tools Create a SAC Team With a Member
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-export-dimension-master-data-workflow.yml
+    name: SAP BI Tools Export Dimension Master Data
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-export-model-fact-data-workflow.yml
+    name: SAP BI Tools Export Model Fact Data
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-import-content-item-workflow.yml
+    name: SAP BI Tools Import a Content Network Item
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-list-and-inspect-story-workflow.yml
+    name: SAP BI Tools List and Inspect a SAC Story
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-logon-browse-folder-workflow.yml
+    name: SAP BI Tools Logon and Browse a Folder
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-provision-scim-user-workflow.yml
+    name: SAP BI Tools Provision a SAC User
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-publish-content-item-workflow.yml
+    name: SAP BI Tools Publish a Content Network Item
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-query-and-schedule-document-workflow.yml
+    name: SAP BI Tools Query and Schedule a Document
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-retire-content-item-workflow.yml
+    name: SAP BI Tools Retire a Content Network Item
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-schedule-and-poll-inbox-workflow.yml
+    name: SAP BI Tools Schedule and Poll the BI Inbox
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-session-lifecycle-workflow.yml
+    name: SAP BI Tools Session Lifecycle
+  - type: Arazzo
+    url: arazzo/sap-bi-tools-story-resource-crossref-workflow.yml
+    name: SAP BI Tools Story and Resource Cross-Reference
   - type: Portal
     url: https://api.sap.com
   - type: GettingStarted
@@ -412,7 +397,7 @@ common:
     url: https://github.com/SAP
   - type: Website
     url: https://www.sap.com
-  - type: SignUp
+  - type: Signup
     url: https://developers.sap.com
   - type: SDKs
     url: https://developers.sap.com/topics/cloud-sdk.html

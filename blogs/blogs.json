@@ -10,9 +10,12 @@
     },
     {
       "source": "https://community.sap.com",
-      "error": "HTTPError"
+      "feed_url": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
+      "title": "",
+      "saved": 14,
+      "method": "discovered"
     }
   ],
-  "post_count": 23,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 37,
+  "fetched": "2026-06-27T12:03:07Z"
 }
