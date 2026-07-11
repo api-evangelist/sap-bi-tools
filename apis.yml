@@ -324,6 +324,10 @@ apis:
       - type: Support
         url: https://support.sap.com/en/index.html
 common:
+  - type: VulnerabilityDisclosure
+    url: security/sap-bi-tools-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/sap-bi-tools-domain-security.yml
   - type: Authentication
     url: authentication/sap-bi-tools-authentication.yml
   - type: OAuthScopes
