@@ -3,19 +3,17 @@
   "feeds": [
     {
       "source": "https://community.sap.com/khhcw49343/rss/board?board.id=application-developmentblog-board",
-      "feed_url": "https://community.sap.com/khhcw49343/rss/board?board.id=application-developmentblog-board",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
+      "error": "HTTPError"
+    },
+    {
+      "source": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
+      "error": "HTTPError"
     },
     {
       "source": "https://community.sap.com",
-      "feed_url": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
-      "title": "",
-      "saved": 14,
-      "method": "discovered"
+      "error": "HTTPError"
     }
   ],
   "post_count": 37,
-  "fetched": "2026-06-27T12:03:07Z"
+  "fetched": "2026-07-11T11:50:51Z"
 }
