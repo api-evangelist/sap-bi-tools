@@ -1,0 +1,112 @@
+openapi: 3.1.0
+info:
+  title: SAP BI Tools SAP Analytics Cloud Administration Import API
+  description: RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.{datacenter}.sapanalytics.cloud
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: my-tenant
+      description: The SAP Analytics Cloud tenant name
+    datacenter:
+      default: eu1
+      description: The data center region (e.g., eu1, eu10, us1, us10, ap1)
+security:
+- oauth2: []
+tags:
+- name: Import
+  description: Import content items from the Content Network into the local SAP Analytics Cloud tenant.
+paths:
+  /api/v1/contentnetwork/items/{itemId}/import:
+    post:
+      operationId: importContentItem
+      summary: SAP BI Tools Import a content item
+      description: Imports a content item from the Content Network into the local SAP Analytics Cloud tenant. The imported content and its dependencies are created in the tenant's file repository.
+      tags:
+      - Import
+      parameters:
+      - $ref: '#/components/parameters/ItemIdParam'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportOptions'
+      responses:
+        '200':
+          description: Content item imported successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResult'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: Content item not found
+        '409':
+          description: Conflict - content item already exists in tenant
+components:
+  parameters:
+    ItemIdParam:
+      name: itemId
+      in: path
+      required: true
+      description: The unique identifier of the content item
+      schema:
+        type: string
+  schemas:
+    ImportOptions:
+      type: object
+      description: Options for importing a content item
+      properties:
+        targetFolderId:
+          type: string
+          description: The target folder ID for the imported content
+        overwrite:
+          type: boolean
+          description: Whether to overwrite existing content
+          default: false
+    ImportResult:
+      type: object
+      description: The result of a content import operation
+      properties:
+        status:
+          type: string
+          description: The status of the import operation
+          enum:
+          - SUCCESS
+          - PARTIAL
+          - FAILED
+        importedResources:
+          type: array
+          description: List of resources that were imported
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the imported resource
+              name:
+                type: string
+                description: The name of the imported resource
+              type:
+                type: string
+                description: The type of the imported resource
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+          tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud REST API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html

@@ -1,0 +1,171 @@
+openapi: 3.1.0
+info:
+  title: SAP BI Tools SAP Analytics Cloud Administration CMS Query API
+  description: RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.{datacenter}.sapanalytics.cloud
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: my-tenant
+      description: The SAP Analytics Cloud tenant name
+    datacenter:
+      default: eu1
+      description: The data center region (e.g., eu1, eu10, us1, us10, ap1)
+security:
+- oauth2: []
+tags:
+- name: CMS Query
+  description: Execute CMS queries against the BI Platform repository to search for objects using CMS query language syntax.
+paths:
+  /v1/cmsquery:
+    get:
+      operationId: executeCmsQueryGet
+      summary: SAP BI Tools Execute a CMS query (GET)
+      description: Executes a CMS query against the BI Platform repository using the query parameter. CMS queries use a SQL-like syntax to search for objects by type, name, and other properties.
+      tags:
+      - CMS Query
+      parameters:
+      - name: query
+        in: query
+        required: true
+        description: The CMS query string (e.g., SELECT * FROM CI_INFOOBJECTS WHERE SI_KIND='Webi')
+        schema:
+          type: string
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/PageSizeParam'
+      - $ref: '#/components/parameters/AcceptHeader'
+      responses:
+        '200':
+          description: Successfully executed query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoStoreCollection'
+        '400':
+          description: Invalid query syntax
+        '401':
+          description: Invalid or expired logon token
+    post:
+      operationId: executeCmsQueryPost
+      summary: SAP BI Tools Execute a CMS query (POST)
+      description: Executes a CMS query against the BI Platform repository using a POST request body. Preferred for complex queries that may exceed URL length limits.
+      tags:
+      - CMS Query
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The CMS query string
+          application/xml:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The CMS query string
+      responses:
+        '200':
+          description: Successfully executed query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoStoreCollection'
+        '400':
+          description: Invalid query syntax
+        '401':
+          description: Invalid or expired logon token
+components:
+  schemas:
+    InfoStoreCollection:
+      type: object
+      description: A paginated collection of InfoStore entries
+      properties:
+        entries:
+          type: array
+          description: The list of InfoStore entries in this page
+          items:
+            $ref: '#/components/schemas/InfoStoreEntry'
+        __count:
+          type: integer
+          description: Total number of matching entries
+    InfoStoreEntry:
+      type: object
+      description: Represents an object in the BI Platform CMS InfoStore repository. All managed objects including documents, folders, users, and groups are represented as InfoStore entries.
+      properties:
+        SI_ID:
+          type: integer
+          description: The unique CMS object identifier
+        SI_NAME:
+          type: string
+          description: The display name of the object
+        SI_KIND:
+          type: string
+          description: The object type (e.g., Webi, CrystalReport, Folder, FullClient, Publication)
+        SI_DESCRIPTION:
+          type: string
+          description: A text description of the object
+        SI_CREATION_TIME:
+          type: string
+          format: date-time
+          description: The timestamp when the object was created
+        SI_UPDATE_TS:
+          type: string
+          format: date-time
+          description: The timestamp when the object was last updated
+        SI_OWNER:
+          type: string
+          description: The owner of the object
+        SI_PARENTID:
+          type: integer
+          description: The CMS ID of the parent folder
+        SI_PATH:
+          type: string
+          description: The full path to the object in the repository
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      description: The page number for pagination (1-based)
+      schema:
+        type: integer
+        default: 1
+    AcceptHeader:
+      name: Accept
+      in: header
+      description: The desired response format
+      schema:
+        type: string
+        enum:
+        - application/json
+        - application/xml
+        default: application/json
+    PageSizeParam:
+      name: pageSize
+      in: query
+      description: The number of items per page
+      schema:
+        type: integer
+        default: 50
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+          tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud REST API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html

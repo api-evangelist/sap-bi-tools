@@ -1,0 +1,138 @@
+openapi: 3.1.0
+info:
+  title: SAP BI Tools SAP Analytics Cloud Administration Teams API
+  description: RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.{datacenter}.sapanalytics.cloud
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: my-tenant
+      description: The SAP Analytics Cloud tenant name
+    datacenter:
+      default: eu1
+      description: The data center region (e.g., eu1, eu10, us1, us10, ap1)
+security:
+- oauth2: []
+tags:
+- name: Teams
+  description: SCIM 2.0 endpoints for managing teams and group memberships for access control in SAP Analytics Cloud.
+paths:
+  /api/v1/scim2/Groups:
+    get:
+      operationId: listTeams
+      summary: SAP BI Tools List teams (SCIM 2.0)
+      description: Retrieves a list of teams (groups) configured in SAP Analytics Cloud using SCIM 2.0 protocol. Teams are used for organizing users and managing access control to content.
+      tags:
+      - Teams
+      parameters:
+      - name: filter
+        in: query
+        description: SCIM 2.0 filter expression for teams
+        schema:
+          type: string
+      - $ref: '#/components/parameters/CountParam'
+      - name: startIndex
+        in: query
+        description: The starting index for pagination (1-based)
+        schema:
+          type: integer
+          default: 1
+      responses:
+        '200':
+          description: Successfully retrieved list of teams
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimListResponse'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+    post:
+      operationId: createTeam
+      summary: SAP BI Tools Create a team (SCIM 2.0)
+      description: Creates a new team (group) in SAP Analytics Cloud using SCIM 2.0 protocol. Teams can be assigned members and used for content sharing and access control.
+      tags:
+      - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScimGroup'
+      responses:
+        '201':
+          description: Team created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimGroup'
+        '400':
+          description: Bad request - invalid team data
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+components:
+  schemas:
+    ScimGroup:
+      type: object
+      description: A team (group) record conforming to SCIM 2.0 protocol. Used for organizing users and managing content access control.
+      properties:
+        id:
+          type: string
+          description: The unique identifier assigned to the team
+        displayName:
+          type: string
+          description: The display name of the team
+        members:
+          type: array
+          description: The members of the team
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: The member user ID
+              display:
+                type: string
+                description: The member display name
+    ScimListResponse:
+      type: object
+      description: A paginated list response conforming to SCIM 2.0 protocol.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results matching the query
+        itemsPerPage:
+          type: integer
+          description: The number of results returned per page
+        startIndex:
+          type: integer
+          description: The starting index of the returned results
+        Resources:
+          type: array
+          description: The list of resources in the current page
+          items:
+            type: object
+  parameters:
+    CountParam:
+      name: count
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+          tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud REST API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html

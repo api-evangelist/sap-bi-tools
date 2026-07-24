@@ -1,0 +1,125 @@
+openapi: 3.1.0
+info:
+  title: SAP BI Tools SAP Analytics Cloud Administration Fact Data API
+  description: RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.{datacenter}.sapanalytics.cloud
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: my-tenant
+      description: The SAP Analytics Cloud tenant name
+    datacenter:
+      default: eu1
+      description: The data center region (e.g., eu1, eu10, us1, us10, ap1)
+security:
+- oauth2: []
+tags:
+- name: Fact Data
+  description: Provider service endpoints for retrieving fact data from specific models. Fact data includes the transactional records with associated dimension values and measures.
+paths:
+  /providers/sac/{modelId}/FactData:
+    get:
+      operationId: getFactData
+      summary: SAP BI Tools Get fact data from a model
+      description: Retrieves fact data (transactional records) from a specific SAP Analytics Cloud model. Fact data includes dimension member values and measure values. Supports OData query parameters for filtering, selecting specific columns, ordering, and pagination.
+      tags:
+      - Fact Data
+      parameters:
+      - $ref: '#/components/parameters/ModelIdParam'
+      - $ref: '#/components/parameters/FormatParam'
+      - $ref: '#/components/parameters/ODataTopParam'
+      - $ref: '#/components/parameters/ODataSkipParam'
+      - $ref: '#/components/parameters/ODataFilterParam'
+      - $ref: '#/components/parameters/ODataSelectParam'
+      - $ref: '#/components/parameters/ODataOrderByParam'
+      responses:
+        '200':
+          description: Successfully retrieved fact data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ODataCollection'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+        '404':
+          description: Model not found
+components:
+  parameters:
+    FormatParam:
+      name: $format
+      in: query
+      description: The response format (JSON or XML)
+      schema:
+        type: string
+        enum:
+        - JSON
+        - XML
+        default: JSON
+    ODataSkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+    ModelIdParam:
+      name: modelId
+      in: path
+      required: true
+      description: The unique provider (model) identifier
+      schema:
+        type: string
+    ODataFilterParam:
+      name: $filter
+      in: query
+      description: OData filter expression to apply
+      schema:
+        type: string
+    ODataSelectParam:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include
+      schema:
+        type: string
+    ODataTopParam:
+      name: $top
+      in: query
+      description: Maximum number of records to return
+      schema:
+        type: integer
+    ODataOrderByParam:
+      name: $orderby
+      in: query
+      description: Property name and direction to sort by
+      schema:
+        type: string
+  schemas:
+    ODataCollection:
+      type: object
+      description: A standard OData collection response wrapper
+      properties:
+        '@odata.context':
+          type: string
+          description: The OData context URL
+        value:
+          type: array
+          description: The collection of results
+          items:
+            type: object
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+          tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud REST API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html

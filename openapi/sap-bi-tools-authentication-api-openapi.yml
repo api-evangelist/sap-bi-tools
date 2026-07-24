@@ -1,0 +1,107 @@
+openapi: 3.1.0
+info:
+  title: SAP BI Tools SAP Analytics Cloud Administration Authentication API
+  description: RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.{datacenter}.sapanalytics.cloud
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: my-tenant
+      description: The SAP Analytics Cloud tenant name
+    datacenter:
+      default: eu1
+      description: The data center region (e.g., eu1, eu10, us1, us10, ap1)
+security:
+- oauth2: []
+tags:
+- name: Authentication
+  description: Logon and logoff endpoints for obtaining and invalidating session tokens required for all subsequent API calls.
+paths:
+  /logon/long:
+    post:
+      operationId: logon
+      summary: SAP BI Tools Log on to BI Platform
+      description: Authenticates a user against the BI Platform and returns a logon token that must be included in subsequent API requests. Supports Enterprise, LDAP, and Windows AD authentication types.
+      tags:
+      - Authentication
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogonRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/LogonRequest'
+      responses:
+        '200':
+          description: Successfully authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogonResponse'
+        '401':
+          description: Authentication failed - invalid credentials
+  /logoff:
+    post:
+      operationId: logoff
+      summary: SAP BI Tools Log off from BI Platform
+      description: Invalidates the current logon token and terminates the session. The logon token provided in the header is no longer valid after this call.
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Successfully logged off
+        '401':
+          description: Invalid or expired logon token
+components:
+  schemas:
+    LogonRequest:
+      type: object
+      description: Authentication credentials for logging on to the BI Platform
+      required:
+      - userName
+      - password
+      - auth
+      properties:
+        userName:
+          type: string
+          description: The username for authentication
+        password:
+          type: string
+          description: The password for authentication
+          format: password
+        auth:
+          type: string
+          description: The authentication type (secEnterprise, secLDAP, secWinAD)
+          enum:
+          - secEnterprise
+          - secLDAP
+          - secWinAD
+          default: secEnterprise
+    LogonResponse:
+      type: object
+      description: Response containing the logon token and session information
+      properties:
+        logonToken:
+          type: string
+          description: The logon token to use in subsequent API requests via the X-SAP-LogonToken header
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+          tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud REST API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html

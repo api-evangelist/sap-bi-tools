@@ -1,0 +1,111 @@
+openapi: 3.1.0
+info:
+  title: SAP BI Tools SAP Analytics Cloud Administration Scheduling API
+  description: RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.{datacenter}.sapanalytics.cloud
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: my-tenant
+      description: The SAP Analytics Cloud tenant name
+    datacenter:
+      default: eu1
+      description: The data center region (e.g., eu1, eu10, us1, us10, ap1)
+security:
+- oauth2: []
+tags:
+- name: Scheduling
+  description: Schedule reports and documents for execution with configurable parameters, recurrence, and destination options.
+paths:
+  /v1/infostore/{documentId}/scheduleForms/now:
+    post:
+      operationId: scheduleDocumentNow
+      summary: SAP BI Tools Schedule a document for immediate execution
+      description: Schedules a document for immediate execution on the BI Platform. Creates a new scheduled instance that runs the document with the specified parameters and delivers the output to the configured destination.
+      tags:
+      - Scheduling
+      parameters:
+      - name: documentId
+        in: path
+        required: true
+        description: The CMS ID of the document to schedule
+        schema:
+          type: string
+      - $ref: '#/components/parameters/AcceptHeader'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleRequest'
+      responses:
+        '200':
+          description: Document scheduled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleResponse'
+        '401':
+          description: Invalid or expired logon token
+        '404':
+          description: Document not found
+components:
+  schemas:
+    ScheduleResponse:
+      type: object
+      description: Response from scheduling a document
+      properties:
+        SI_ID:
+          type: integer
+          description: The CMS ID of the scheduled instance
+        status:
+          type: string
+          description: The scheduling status
+    ScheduleRequest:
+      type: object
+      description: Request parameters for scheduling a document
+      properties:
+        parameters:
+          type: array
+          description: Report parameters to set before execution
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The parameter name
+              value:
+                type: string
+                description: The parameter value
+        format:
+          type: string
+          description: The output format for the scheduled instance (e.g., pdf, xlsx)
+  parameters:
+    AcceptHeader:
+      name: Accept
+      in: header
+      description: The desired response format
+      schema:
+        type: string
+        enum:
+        - application/json
+        - application/xml
+        default: application/json
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+          tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud REST API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html

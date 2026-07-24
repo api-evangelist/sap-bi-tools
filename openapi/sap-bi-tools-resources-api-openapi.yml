@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: SAP BI Tools SAP Analytics Cloud Administration Resources API
+  description: RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.{datacenter}.sapanalytics.cloud
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: my-tenant
+      description: The SAP Analytics Cloud tenant name
+    datacenter:
+      default: eu1
+      description: The data center region (e.g., eu1, eu10, us1, us10, ap1)
+security:
+- oauth2: []
+tags:
+- name: Resources
+  description: Browse and manage resources within the SAP Analytics Cloud file repository including stories, models, and folders.
+paths:
+  /api/v1/Resources:
+    get:
+      operationId: listResources
+      summary: SAP BI Tools List resources
+      description: Retrieves a list of resources from the SAP Analytics Cloud file repository. Resources include stories, models, folders, and other artifacts. Supports filtering by resource type and pagination.
+      tags:
+      - Resources
+      parameters:
+      - name: resourceType
+        in: query
+        description: Filter resources by type (e.g., STORY, MODEL, FOLDER)
+        schema:
+          type: string
+      - name: resourceSubType
+        in: query
+        description: Filter resources by sub-type
+        schema:
+          type: string
+      - $ref: '#/components/parameters/TopParam'
+      - $ref: '#/components/parameters/SkipParam'
+      responses:
+        '200':
+          description: Successfully retrieved list of resources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resource'
+        '401':
+          description: Unauthorized - invalid or missing authentication token
+components:
+  schemas:
+    Resource:
+      type: object
+      description: Represents a resource in the SAP Analytics Cloud file repository. Resources can be stories, models, folders, or other content types.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the resource
+        name:
+          type: string
+          description: The display name of the resource
+        description:
+          type: string
+          description: A text description of the resource
+        resourceType:
+          type: string
+          description: The type of resource (e.g., STORY, MODEL, FOLDER)
+        resourceSubType:
+          type: string
+          description: The sub-type of the resource
+        createdTime:
+          type: string
+          format: date-time
+          description: The timestamp when the resource was created
+        modifiedTime:
+          type: string
+          format: date-time
+          description: The timestamp when the resource was last modified
+        parentId:
+          type: string
+          description: The ID of the parent folder
+  parameters:
+    SkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+    TopParam:
+      name: $top
+      in: query
+      description: Maximum number of records to return
+      schema:
+        type: integer
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+          tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud REST API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html
