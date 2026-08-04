@@ -2,18 +2,13 @@
   "repo": "sap-bi-tools",
   "feeds": [
     {
-      "source": "https://community.sap.com/khhcw49343/rss/board?board.id=application-developmentblog-board",
-      "error": "HTTPError"
-    },
-    {
-      "source": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
-      "error": "HTTPError"
-    },
-    {
       "source": "https://community.sap.com",
-      "error": "HTTPError"
+      "feed_url": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
+      "title": "",
+      "saved": 20,
+      "method": "discovered"
     }
   ],
-  "post_count": 37,
-  "fetched": "2026-07-11T11:50:51Z"
+  "post_count": 75,
+  "fetched": "2026-08-01T15:49:00Z"
 }
