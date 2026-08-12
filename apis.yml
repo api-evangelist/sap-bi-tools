@@ -958,6 +958,9 @@ apis:
   - type: Portal
     url: https://api.sap.com/package/sapdatasphere/overview
 common:
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/SAP-samples/analytics-cloud-export-api-wrapper/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/sap-bi-tools-agentic-access.yml
   - type: VulnerabilityDisclosure
@@ -1046,13 +1049,13 @@ common:
   - type: SDKs
     url: https://developers.sap.com/topics/cloud-sdk.html
   - type: OpenAPI
-    url: openapi/sap-analytics-cloud-api-openapi.yml
+    url: openapi/_original/sap-analytics-cloud-api-openapi.yml
   - type: OpenAPI
-    url: openapi/sap-analytics-cloud-content-network-api-openapi.yml
+    url: openapi/_original/sap-analytics-cloud-content-network-api-openapi.yml
   - type: OpenAPI
-    url: openapi/sap-analytics-cloud-data-export-api-openapi.yml
+    url: openapi/_original/sap-analytics-cloud-data-export-api-openapi.yml
   - type: OpenAPI
-    url: openapi/sap-businessobjects-bi-platform-api-openapi.yml
+    url: openapi/_original/sap-businessobjects-bi-platform-api-openapi.yml
   - type: JSONSchema
     url: json-schema/sap-bi-tools-story-schema.json
   - type: JSONSchema
