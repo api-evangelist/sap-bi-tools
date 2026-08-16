@@ -5,7 +5,7 @@
       "source": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
       "feed_url": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
       "title": "",
-      "saved": 0,
+      "saved": 19,
       "method": "feed"
     },
     {
@@ -16,6 +16,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 90,
-  "fetched": "2026-08-06T14:08:46Z"
+  "post_count": 109,
+  "fetched": "2026-08-15T12:11:08Z"
 }
