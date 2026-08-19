@@ -16,7 +16,7 @@ accessModel:
 image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
 created: '2024-01-20'
 modified: '2026-05-19'
-specificationVersion: '0.18'
+specificationVersion: '0.23'
 url: https://api.sap.com/bi-tools
 tags:
   - Analytics
