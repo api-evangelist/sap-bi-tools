@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BI Tools SAP Analytics Cloud Administration CMS Query API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize",
+      "accessTokenUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CMS Query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools Execute a CMS query (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/v1/cmsquery",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The CMS query string (e.g., SELECT * FROM CI_INFOOBJECTS WHERE SI_KIND='Webi')"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number for pagination (1-based)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              }
+            ]
+          },
+          "docs": "Executes a CMS query against the BI Platform repository using the query parameter. CMS queries use a SQL-like syntax to search for objects by type, name, and other properties."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Execute a CMS query (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/v1/cmsquery",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a CMS query against the BI Platform repository using a POST request body. Preferred for complex queries that may exceed URL length limits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

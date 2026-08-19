@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BI Tools SAP Analytics Cloud Administration Teams API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize",
+      "accessTokenUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools List teams (SCIM 2.0)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/scim2/Groups",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "SCIM 2.0 filter expression for teams"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "The starting index for pagination (1-based)"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of teams (groups) configured in SAP Analytics Cloud using SCIM 2.0 protocol. Teams are used for organizing users and managing access control to content."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Create a team (SCIM 2.0)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/api/v1/scim2/Groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new team (group) in SAP Analytics Cloud using SCIM 2.0 protocol. Teams can be assigned members and used for content sharing and access control."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

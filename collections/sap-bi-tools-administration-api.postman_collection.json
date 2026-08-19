@@ -1,0 +1,563 @@
+{
+  "item": [
+    {
+      "id": "93add928-44c7-4720-be4e-cfce8d890a20",
+      "name": "Administration",
+      "description": {
+        "content": "Administration service endpoints for discovering available namespaces and providers (models) on the SAP Analytics Cloud tenant.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a8306f9a-1ba1-4a9b-b1b2-ac3ac0622f65",
+          "name": "SAP BI Tools List available namespaces",
+          "request": {
+            "name": "SAP BI Tools List available namespaces",
+            "description": {
+              "content": "Retrieves a list of namespaces available for data export. The primary namespace is 'sac' which contains all SAP Analytics Cloud models.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "administration",
+                "Namespaces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$format",
+                  "value": "JSON",
+                  "description": "The response format (JSON or XML)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d8c5502-a26c-4a58-88d5-8dabc616ee7e",
+              "name": "Successfully retrieved list of namespaces",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "administration",
+                    "Namespaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$format",
+                      "value": "JSON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4feed6d-52e4-4c80-a297-df9a6c6e5794",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "administration",
+                    "Namespaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$format",
+                      "value": "JSON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5cb2cfd9-0c39-4e47-9484-a3d224f74a72",
+          "name": "SAP BI Tools List available providers (models)",
+          "request": {
+            "name": "SAP BI Tools List available providers (models)",
+            "description": {
+              "content": "Retrieves a list of providers (models) available for data export within a specific namespace. Each provider represents an SAP Analytics Cloud model with its name, description, and provider ID that can be used to access its data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "administration",
+                "Namespaces(NamespaceID='{{namespaceId}}')",
+                "Providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$format",
+                  "value": "JSON",
+                  "description": "The response format (JSON or XML)"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression to apply"
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de3ae2ca-b3bf-4c27-bced-363ae90c37f5",
+              "name": "Successfully retrieved list of providers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "administration",
+                    "Namespaces(NamespaceID='{{namespaceId}}')",
+                    "Providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$format",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"string\",\n  \"value\": [\n    {\n      \"ProviderID\": \"string\",\n      \"Description\": \"string\",\n      \"ProviderName\": \"string\"\n    },\n    {\n      \"ProviderID\": \"string\",\n      \"Description\": \"string\",\n      \"ProviderName\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f518879e-1b87-4e09-a786-372f77484547",
+              "name": "Unauthorized - invalid or missing authentication token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "administration",
+                    "Namespaces(NamespaceID='{{namespaceId}}')",
+                    "Providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$format",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fedddb7b-0de5-4d55-a172-603772c5fdd6",
+              "name": "Namespace not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "administration",
+                    "Namespaces(NamespaceID='{{namespaceId}}')",
+                    "Providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$format",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The SAP Analytics Cloud tenant name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "my-tenant",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "eu1",
+      "key": "datacenter"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.{{datacenter}}.sapanalytics.cloud",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The namespace identifier (typically 'sac')",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "sac",
+      "key": "namespaceId"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "acb03e04-645b-4fda-a090-ee2d1435b285",
+    "name": "SAP BI Tools SAP Analytics Cloud Administration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.\n\nContact Support:\n Name: SAP Support",
+      "type": "text/plain"
+    }
+  }
+}

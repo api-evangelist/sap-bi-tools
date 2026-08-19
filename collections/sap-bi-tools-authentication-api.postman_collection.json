@@ -1,0 +1,401 @@
+{
+  "item": [
+    {
+      "id": "7d4690d0-f50a-43c8-a498-aa0e8d9df203",
+      "name": "Authentication",
+      "description": {
+        "content": "Logon and logoff endpoints for obtaining and invalidating session tokens required for all subsequent API calls.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43d81cb8-406c-4520-b7c8-a3d1fce9977a",
+          "name": "SAP BI Tools Log on to BI Platform",
+          "request": {
+            "name": "SAP BI Tools Log on to BI Platform",
+            "description": {
+              "content": "Authenticates a user against the BI Platform and returns a logon token that must be included in subsequent API requests. Supports Enterprise, LDAP, and Windows AD authentication types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logon",
+                "long"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"<string>\",\n  \"password\": \"<password>\",\n  \"auth\": \"secEnterprise\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "efb82c65-0f84-427b-a097-24e86a20fdad",
+              "name": "Successfully authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logon",
+                    "long"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"password\": \"<password>\",\n  \"auth\": \"secEnterprise\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"logonToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c4c6144-b20e-40eb-a687-adab4f8d52e6",
+              "name": "Authentication failed - invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logon",
+                    "long"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"<string>\",\n  \"password\": \"<password>\",\n  \"auth\": \"secEnterprise\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5292e3b6-9ab2-4bbf-b8fc-3b920a3056df",
+          "name": "SAP BI Tools Log off from BI Platform",
+          "request": {
+            "name": "SAP BI Tools Log off from BI Platform",
+            "description": {
+              "content": "Invalidates the current logon token and terminates the session. The logon token provided in the header is no longer valid after this call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logoff"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The SAP Analytics Cloud tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                  "type": "any",
+                  "value": "{{datacenter}}",
+                  "key": "datacenter"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5607bbc4-a206-4c52-affc-6f9283e6a234",
+              "name": "Successfully logged off",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logoff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "02954ac3-2867-4111-9a85-ef5818f52429",
+              "name": "Invalid or expired logon token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logoff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The SAP Analytics Cloud tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+                      "type": "any",
+                      "value": "{{datacenter}}",
+                      "key": "datacenter"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The SAP Analytics Cloud tenant name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "my-tenant",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "The data center region (e.g., eu1, eu10, us1, us10, ap1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "eu1",
+      "key": "datacenter"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}.{{datacenter}}.sapanalytics.cloud",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c79fb123-3be3-4f1a-8f15-1d65f8ee1196",
+    "name": "SAP BI Tools SAP Analytics Cloud Administration Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.\n\nContact Support:\n Name: SAP Support",
+      "type": "text/plain"
+    }
+  }
+}

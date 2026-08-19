@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP BI Tools SAP Analytics Cloud Administration Master Data API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize",
+      "accessTokenUrl": "https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Master Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP BI Tools Get master data overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/providers/sac/:modelId/MasterData",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique provider (model) identifier"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "The response format (JSON or XML)"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieves an overview of available master data (dimension members with navigation attributes) from a specific model. Returns fact data enriched with dimension property values."
+        },
+        {
+          "info": {
+            "name": "SAP BI Tools Get master data for a dimension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{datacenter}.sapanalytics.cloud/providers/sac/:modelId/:dimensionNameMaster",
+            "params": [
+              {
+                "name": "modelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique provider (model) identifier"
+              },
+              {
+                "name": "dimensionName",
+                "value": "",
+                "type": "path",
+                "description": "The technical name of the dimension whose master data to retrieve"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "The response format (JSON or XML)"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression to apply"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include"
+              }
+            ]
+          },
+          "docs": "Retrieves the master data (member list with attributes) for a specific dimension within a model. The dimension name is appended with 'Master' to form the entity set name. Supports OData query parameters for filtering and pagination."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
