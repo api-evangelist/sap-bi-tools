@@ -94,6 +94,11 @@ apis:
   baseURL: https://server:port/biprws
   version: '4.3'
   tags:
+  - Business Objects
+  - Documents
+  - Reports
+  - Scheduling
+  tags_raw:
   - BusinessObjects
   - Documents
   - Reports
@@ -126,6 +131,11 @@ apis:
   baseURL: https://server:port/biprws
   version: '4.3'
   tags:
+  - Business Objects
+  - Data Providers
+  - Reports
+  - Web Intelligence
+  tags_raw:
   - BusinessObjects
   - Data Providers
   - Reports
@@ -155,6 +165,11 @@ apis:
   baseURL: https://server:port/biprws
   version: '4.3'
   tags:
+  - Business Objects
+  - Data Access
+  - Semantic Layer
+  - Universes
+  tags_raw:
   - BusinessObjects
   - Data Access
   - Semantic Layer
@@ -878,6 +893,8 @@ apis:
   humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
   baseURL: https://api.sapanalytics.cloud
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
@@ -921,6 +938,8 @@ apis:
   humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
   baseURL: https://api.sapanalytics.cloud
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
