@@ -13,8 +13,11 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: dataExportApi
-  url: ../openapi/sap-analytics-cloud-data-export-api-openapi.yml
+- name: administrationApi
+  url: ../openapi/sap-bi-tools-administration-api-openapi.yml
+  type: openapi
+- name: masterDataApi
+  url: ../openapi/sap-bi-tools-master-data-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: export-dimension-master-data

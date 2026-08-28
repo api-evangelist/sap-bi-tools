@@ -13,8 +13,14 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: dataExportApi
-  url: ../openapi/sap-analytics-cloud-data-export-api-openapi.yml
+- name: administrationApi
+  url: ../openapi/sap-bi-tools-administration-api-openapi.yml
+  type: openapi
+- name: factDataApi
+  url: ../openapi/sap-bi-tools-fact-data-api-openapi.yml
+  type: openapi
+- name: metadataApi
+  url: ../openapi/sap-bi-tools-metadata-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: export-model-fact-data

@@ -12,8 +12,11 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsCloudApi
-  url: ../openapi/sap-analytics-cloud-api-openapi.yml
+- name: teamsApi
+  url: ../openapi/sap-bi-tools-teams-api-openapi.yml
+  type: openapi
+- name: usersApi
+  url: ../openapi/sap-bi-tools-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-team-with-member

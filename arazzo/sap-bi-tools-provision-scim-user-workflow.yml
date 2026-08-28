@@ -13,8 +13,8 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsCloudApi
-  url: ../openapi/sap-analytics-cloud-api-openapi.yml
+- name: usersApi
+  url: ../openapi/sap-bi-tools-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-scim-user

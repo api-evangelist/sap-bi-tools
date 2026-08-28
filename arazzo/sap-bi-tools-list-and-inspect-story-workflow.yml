@@ -13,8 +13,8 @@ info:
     the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsCloudApi
-  url: ../openapi/sap-analytics-cloud-api-openapi.yml
+- name: storiesApi
+  url: ../openapi/sap-bi-tools-stories-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: list-and-inspect-story

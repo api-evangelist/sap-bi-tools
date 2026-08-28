@@ -13,8 +13,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: contentNetworkApi
-  url: ../openapi/sap-analytics-cloud-content-network-api-openapi.yml
+- name: contentItemsApi
+  url: ../openapi/sap-bi-tools-content-items-api-openapi.yml
+  type: openapi
+- name: importApi
+  url: ../openapi/sap-bi-tools-import-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: import-content-item

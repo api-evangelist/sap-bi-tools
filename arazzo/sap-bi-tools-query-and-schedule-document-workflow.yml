@@ -14,8 +14,17 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: biPlatformApi
-  url: ../openapi/sap-businessobjects-bi-platform-api-openapi.yml
+- name: authenticationApi
+  url: ../openapi/sap-bi-tools-authentication-api-openapi.yml
+  type: openapi
+- name: cmsQueryApi
+  url: ../openapi/sap-bi-tools-cms-query-api-openapi.yml
+  type: openapi
+- name: infostoreApi
+  url: ../openapi/sap-bi-tools-infostore-api-openapi.yml
+  type: openapi
+- name: schedulingApi
+  url: ../openapi/sap-bi-tools-scheduling-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: query-and-schedule-document
