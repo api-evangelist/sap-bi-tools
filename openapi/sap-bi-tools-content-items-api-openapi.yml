@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SAP BI Tools SAP Analytics Cloud Administration Content Items API
-  description: RESTful API for SAP Analytics Cloud enabling programmatic access to system data stored on an SAP Analytics Cloud tenant. The API provides endpoints for managing stories, models, users, teams, calendars, and other resources. It supports SCIM 2.0 for user provisioning, OData for data access, and standard REST patterns for content management. Authentication uses OAuth 2.0 with SAML bearer assertion or authorization code grant flows.
+  title: SAP BI Tools SAP Analytics Cloud Content Network REST Content Items API
+  description: REST API for managing content in the SAP Analytics Cloud Content Network. Enables programmatic access to get, publish, and delete private and public content items available through the Content Network. Content items include stories, models, and other analytics artifacts that can be shared across SAP Analytics Cloud tenants. The API supports OAuth 2.0 Authorization Code Grant authentication flows.
   version: '1.0'
   contact:
     name: SAP Support
@@ -116,14 +116,6 @@ paths:
         '404':
           description: Content item not found
 components:
-  parameters:
-    ItemIdParam:
-      name: itemId
-      in: path
-      required: true
-      description: The unique identifier of the content item
-      schema:
-        type: string
   schemas:
     ContentItemPublish:
       type: object
@@ -184,15 +176,23 @@ components:
         owner:
           type: string
           description: The tenant that published the content item
+  parameters:
+    ItemIdParam:
+      name: itemId
+      in: path
+      required: true
+      description: The unique identifier of the content item
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant flow.
+      description: OAuth 2.0 authentication using authorization code grant flow.
       flows:
         authorizationCode:
           authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
           tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
           scopes: {}
 externalDocs:
-  description: SAP Analytics Cloud REST API Documentation
-  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html
+  description: SAP Analytics Cloud Content Network REST API Developer Guide
+  url: https://help.sap.com/doc/9825c700f68e489ca5634a3da101a94c/release/en-US/ca804ae1c3874053a1e140e7c9cea019.pdf
