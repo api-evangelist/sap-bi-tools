@@ -1,5 +1,17 @@
 name: SAP BI Tools
 description: Collection of SAP Business Intelligence tools and APIs for analytics, reporting, and data visualization.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
@@ -835,6 +847,8 @@ apis:
   - type: Portal
     url: https://api.sap.com/package/sapdatasphere/overview
 common:
+- type: IssueTracker
+  url: https://github.com/SAP-samples/analytics-cloud-export-api-wrapper/issues
 - type: ParentCompany
   url: https://apis.io/providers/sap/
   name: Sap
