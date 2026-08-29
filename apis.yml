@@ -228,7 +228,7 @@ apis:
     url: https://help.sap.com/docs/LUMIRA/82b8ad67e9b74a48bad806dc52c96fcc/
   - type: Extension API
     url: https://help.sap.com/docs/LUMIRA/extensions-api
-  - type: Samples
+  - type: Examples
     url: https://github.com/SAP/lumira-extension-viz
   - type: Developer Guide
     url: https://help.sap.com/doc/9d0bf4daa0cb41cbb630e093450b1bd8/2.3.0.0/en-US/lum_23SP00_ds_devguide_en.pdf
