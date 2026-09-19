@@ -334,6 +334,8 @@ apis:
   humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
   baseURL: https://api.sapanalytics.cloud
   tags:
+  - Calendar
+  tags_raw:
   - Calendars
   properties:
   - type: OpenAPI
