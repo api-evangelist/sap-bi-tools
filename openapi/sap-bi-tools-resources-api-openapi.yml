@@ -55,6 +55,19 @@ paths:
         '401':
           description: Unauthorized - invalid or missing authentication token
 components:
+  parameters:
+    TopParam:
+      name: $top
+      in: query
+      description: Maximum number of records to return
+      schema:
+        type: integer
+    SkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
   schemas:
     Resource:
       type: object
@@ -86,19 +99,6 @@ components:
         parentId:
           type: string
           description: The ID of the parent folder
-  parameters:
-    TopParam:
-      name: $top
-      in: query
-      description: Maximum number of records to return
-      schema:
-        type: integer
-    SkipParam:
-      name: $skip
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

@@ -169,21 +169,25 @@ paths:
         '404':
           description: User not found
 components:
-  parameters:
-    CountParam:
-      name: count
-      in: query
-      description: Maximum number of results to return per page
-      schema:
-        type: integer
-    UserIdParam:
-      name: userId
-      in: path
-      required: true
-      description: The unique identifier of the user
-      schema:
-        type: string
   schemas:
+    ScimListResponse:
+      type: object
+      description: A paginated list response conforming to SCIM 2.0 protocol.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results matching the query
+        itemsPerPage:
+          type: integer
+          description: The number of results returned per page
+        startIndex:
+          type: integer
+          description: The starting index of the returned results
+        Resources:
+          type: array
+          description: The list of resources in the current page
+          items:
+            type: object
     ScimUser:
       type: object
       description: A user record conforming to SCIM 2.0 protocol. Contains user profile attributes, roles, and team memberships.
@@ -247,24 +251,20 @@ components:
               display:
                 type: string
                 description: The team display name
-    ScimListResponse:
-      type: object
-      description: A paginated list response conforming to SCIM 2.0 protocol.
-      properties:
-        totalResults:
-          type: integer
-          description: The total number of results matching the query
-        itemsPerPage:
-          type: integer
-          description: The number of results returned per page
-        startIndex:
-          type: integer
-          description: The starting index of the returned results
-        Resources:
-          type: array
-          description: The list of resources in the current page
-          items:
-            type: object
+  parameters:
+    UserIdParam:
+      name: userId
+      in: path
+      required: true
+      description: The unique identifier of the user
+      schema:
+        type: string
+    CountParam:
+      name: count
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

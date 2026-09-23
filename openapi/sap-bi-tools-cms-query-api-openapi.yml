@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services CMS Query API
+  title: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web…
   description: REST API for SAP BusinessObjects BI Platform (biprws) for managing documents, users, scheduling reports, and querying the CMS repository. The API provides endpoints for authentication via logon tokens, browsing the InfoStore repository, managing BI Inbox items, scheduling report execution, and performing CMS queries. Supports both JSON and XML response formats. Requires a logon token obtained through the logon endpoint for subsequent API calls.
   version: '4.3'
   contact:
@@ -86,19 +86,32 @@ paths:
         '401':
           description: Invalid or expired logon token
 components:
+  parameters:
+    PageSizeParam:
+      name: pageSize
+      in: query
+      description: The number of items per page
+      schema:
+        type: integer
+        default: 50
+    PageParam:
+      name: page
+      in: query
+      description: The page number for pagination (1-based)
+      schema:
+        type: integer
+        default: 1
+    AcceptHeader:
+      name: Accept
+      in: header
+      description: The desired response format
+      schema:
+        type: string
+        enum:
+        - application/json
+        - application/xml
+        default: application/json
   schemas:
-    InfoStoreCollection:
-      type: object
-      description: A paginated collection of InfoStore entries
-      properties:
-        entries:
-          type: array
-          description: The list of InfoStore entries in this page
-          items:
-            $ref: '#/components/schemas/InfoStoreEntry'
-        __count:
-          type: integer
-          description: Total number of matching entries
     InfoStoreEntry:
       type: object
       description: Represents an object in the BI Platform CMS InfoStore repository. All managed objects including documents, folders, users, and groups are represented as InfoStore entries.
@@ -132,31 +145,18 @@ components:
         SI_PATH:
           type: string
           description: The full path to the object in the repository
-  parameters:
-    PageParam:
-      name: page
-      in: query
-      description: The page number for pagination (1-based)
-      schema:
-        type: integer
-        default: 1
-    PageSizeParam:
-      name: pageSize
-      in: query
-      description: The number of items per page
-      schema:
-        type: integer
-        default: 50
-    AcceptHeader:
-      name: Accept
-      in: header
-      description: The desired response format
-      schema:
-        type: string
-        enum:
-        - application/json
-        - application/xml
-        default: application/json
+    InfoStoreCollection:
+      type: object
+      description: A paginated collection of InfoStore entries
+      properties:
+        entries:
+          type: array
+          description: The list of InfoStore entries in this page
+          items:
+            $ref: '#/components/schemas/InfoStoreEntry'
+        __count:
+          type: integer
+          description: Total number of matching entries
   securitySchemes:
     logonToken:
       type: apiKey

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services Scheduling API
+  title: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web…
   description: REST API for SAP BusinessObjects BI Platform (biprws) for managing documents, users, scheduling reports, and querying the CMS repository. The API provides endpoints for authentication via logon tokens, browsing the InfoStore repository, managing BI Inbox items, scheduling report execution, and performing CMS queries. Supports both JSON and XML response formats. Requires a logon token obtained through the logon endpoint for subsequent API calls.
   version: '4.3'
   contact:

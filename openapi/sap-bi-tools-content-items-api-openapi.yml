@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SAP BI Tools SAP Analytics Cloud Content Network REST Content Items API
+  title: SAP BI Tools SAP Analytics Cloud Content Network REST…
   description: REST API for managing content in the SAP Analytics Cloud Content Network. Enables programmatic access to get, publish, and delete private and public content items available through the Content Network. Content items include stories, models, and other analytics artifacts that can be shared across SAP Analytics Cloud tenants. The API supports OAuth 2.0 Authorization Code Grant authentication flows.
   version: '1.0'
   contact:
@@ -116,6 +116,14 @@ paths:
         '404':
           description: Content item not found
 components:
+  parameters:
+    ItemIdParam:
+      name: itemId
+      in: path
+      required: true
+      description: The unique identifier of the content item
+      schema:
+        type: string
   schemas:
     ContentItemPublish:
       type: object
@@ -176,14 +184,6 @@ components:
         owner:
           type: string
           description: The tenant that published the content item
-  parameters:
-    ItemIdParam:
-      name: itemId
-      in: path
-      required: true
-      description: The unique identifier of the content item
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

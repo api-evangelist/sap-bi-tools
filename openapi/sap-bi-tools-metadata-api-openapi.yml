@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: SAP BI Tools SAP Analytics Cloud Data Export Metadata API
-  description: 'OData-based API for exporting fact data and master data from SAP Analytics Cloud models. The API consists of two services: the Administration service for discovering available models (providers) and namespaces, and the Provider service for retrieving metadata, fact data, and master data from specific planning models. Supports standard OData query parameters for filtering, selecting, and paging data. Enables programmatic extraction of underlying data for integration with external systems and data pipelines.'
+  description: OData-based API for exporting fact data and master data from SAP Analytics Cloud models.
   version: '1.0'
   contact:
     name: SAP Support

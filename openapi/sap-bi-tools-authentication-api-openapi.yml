@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services Authentication API
+  title: SAP BI Tools SAP BusinessObjects BI Platform RESTful Web…
   description: REST API for SAP BusinessObjects BI Platform (biprws) for managing documents, users, scheduling reports, and querying the CMS repository. The API provides endpoints for authentication via logon tokens, browsing the InfoStore repository, managing BI Inbox items, scheduling report execution, and performing CMS queries. Supports both JSON and XML response formats. Requires a logon token obtained through the logon endpoint for subsequent API calls.
   version: '4.3'
   contact:
@@ -63,13 +63,6 @@ paths:
           description: Invalid or expired logon token
 components:
   schemas:
-    LogonResponse:
-      type: object
-      description: Response containing the logon token and session information
-      properties:
-        logonToken:
-          type: string
-          description: The logon token to use in subsequent API requests via the X-SAP-LogonToken header
     LogonRequest:
       type: object
       description: Authentication credentials for logging on to the BI Platform
@@ -93,6 +86,13 @@ components:
           - secLDAP
           - secWinAD
           default: secEnterprise
+    LogonResponse:
+      type: object
+      description: Response containing the logon token and session information
+      properties:
+        logonToken:
+          type: string
+          description: The logon token to use in subsequent API requests via the X-SAP-LogonToken header
   securitySchemes:
     logonToken:
       type: apiKey

@@ -32,7 +32,8 @@
     "sap-analytics-cloud-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "sap-analytics-cloud-content-network-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "sap-analytics-cloud-data-export-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "sap-businessobjects-bi-platform-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+    "sap-businessobjects-bi-platform-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "sap-bi-tools-administration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
