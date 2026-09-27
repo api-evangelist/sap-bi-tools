@@ -51,19 +51,18 @@ paths:
           description: Model not found
 components:
   parameters:
-    ModelIdParam:
-      name: modelId
-      in: path
-      required: true
-      description: The unique provider (model) identifier
-      schema:
-        type: string
     ODataOrderByParam:
       name: $orderby
       in: query
       description: Property name and direction to sort by
       schema:
         type: string
+    ODataSkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
     FormatParam:
       name: $format
       in: query
@@ -80,12 +79,6 @@ components:
       description: OData filter expression to apply
       schema:
         type: string
-    ODataSkipParam:
-      name: $skip
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
     ODataTopParam:
       name: $top
       in: query
@@ -96,6 +89,13 @@ components:
       name: $select
       in: query
       description: Comma-separated list of properties to include
+      schema:
+        type: string
+    ModelIdParam:
+      name: modelId
+      in: path
+      required: true
+      description: The unique provider (model) identifier
       schema:
         type: string
   schemas:

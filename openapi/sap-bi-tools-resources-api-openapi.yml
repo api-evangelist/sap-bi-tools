@@ -56,16 +56,16 @@ paths:
           description: Unauthorized - invalid or missing authentication token
 components:
   parameters:
-    TopParam:
-      name: $top
-      in: query
-      description: Maximum number of records to return
-      schema:
-        type: integer
     SkipParam:
       name: $skip
       in: query
       description: Number of records to skip for pagination
+      schema:
+        type: integer
+    TopParam:
+      name: $top
+      in: query
+      description: Maximum number of records to return
       schema:
         type: integer
   schemas:

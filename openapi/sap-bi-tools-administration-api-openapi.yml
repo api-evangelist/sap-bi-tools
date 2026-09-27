@@ -67,7 +67,74 @@ paths:
         '404':
           description: Namespace not found
 components:
+  parameters:
+    ODataFilterParam:
+      name: $filter
+      in: query
+      description: OData filter expression to apply
+      schema:
+        type: string
+    ODataSkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+    FormatParam:
+      name: $format
+      in: query
+      description: The response format (JSON or XML)
+      schema:
+        type: string
+        enum:
+        - JSON
+        - XML
+        default: JSON
+    ODataSelectParam:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include
+      schema:
+        type: string
+    NamespaceIdParam:
+      name: namespaceId
+      in: path
+      required: true
+      description: The namespace identifier (typically 'sac')
+      schema:
+        type: string
+        default: sac
+    ODataTopParam:
+      name: $top
+      in: query
+      description: Maximum number of records to return
+      schema:
+        type: integer
   schemas:
+    ODataCollection:
+      type: object
+      description: A standard OData collection response wrapper
+      properties:
+        '@odata.context':
+          type: string
+          description: The OData context URL
+        value:
+          type: array
+          description: The collection of results
+          items:
+            type: object
+    ProviderCollection:
+      type: object
+      description: A collection of providers (models) available for export
+      properties:
+        '@odata.context':
+          type: string
+          description: The OData context URL
+        value:
+          type: array
+          description: The list of providers
+          items:
+            $ref: '#/components/schemas/Provider'
     Provider:
       type: object
       description: Represents an SAP Analytics Cloud model available for data export. Providers contain fact data and master data that can be queried via the Provider service endpoints.
@@ -81,73 +148,6 @@ components:
         ProviderName:
           type: string
           description: The display name of the model
-    ProviderCollection:
-      type: object
-      description: A collection of providers (models) available for export
-      properties:
-        '@odata.context':
-          type: string
-          description: The OData context URL
-        value:
-          type: array
-          description: The list of providers
-          items:
-            $ref: '#/components/schemas/Provider'
-    ODataCollection:
-      type: object
-      description: A standard OData collection response wrapper
-      properties:
-        '@odata.context':
-          type: string
-          description: The OData context URL
-        value:
-          type: array
-          description: The collection of results
-          items:
-            type: object
-  parameters:
-    NamespaceIdParam:
-      name: namespaceId
-      in: path
-      required: true
-      description: The namespace identifier (typically 'sac')
-      schema:
-        type: string
-        default: sac
-    FormatParam:
-      name: $format
-      in: query
-      description: The response format (JSON or XML)
-      schema:
-        type: string
-        enum:
-        - JSON
-        - XML
-        default: JSON
-    ODataFilterParam:
-      name: $filter
-      in: query
-      description: OData filter expression to apply
-      schema:
-        type: string
-    ODataSkipParam:
-      name: $skip
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-    ODataTopParam:
-      name: $top
-      in: query
-      description: Maximum number of records to return
-      schema:
-        type: integer
-    ODataSelectParam:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

@@ -79,23 +79,6 @@ paths:
           description: Model or dimension not found
 components:
   parameters:
-    ModelIdParam:
-      name: modelId
-      in: path
-      required: true
-      description: The unique provider (model) identifier
-      schema:
-        type: string
-    FormatParam:
-      name: $format
-      in: query
-      description: The response format (JSON or XML)
-      schema:
-        type: string
-        enum:
-        - JSON
-        - XML
-        default: JSON
     ODataFilterParam:
       name: $filter
       in: query
@@ -108,6 +91,16 @@ components:
       description: Number of records to skip for pagination
       schema:
         type: integer
+    FormatParam:
+      name: $format
+      in: query
+      description: The response format (JSON or XML)
+      schema:
+        type: string
+        enum:
+        - JSON
+        - XML
+        default: JSON
     ODataTopParam:
       name: $top
       in: query
@@ -118,6 +111,13 @@ components:
       name: $select
       in: query
       description: Comma-separated list of properties to include
+      schema:
+        type: string
+    ModelIdParam:
+      name: modelId
+      in: path
+      required: true
+      description: The unique provider (model) identifier
       schema:
         type: string
   schemas:
