@@ -116,7 +116,38 @@ paths:
         '404':
           description: Content item not found
 components:
+  parameters:
+    ItemIdParam:
+      name: itemId
+      in: path
+      required: true
+      description: The unique identifier of the content item
+      schema:
+        type: string
   schemas:
+    ContentItemPublish:
+      type: object
+      description: Request body for publishing a content item
+      required:
+      - name
+      - resourceId
+      properties:
+        name:
+          type: string
+          description: The display name for the published content item
+        description:
+          type: string
+          description: A description of the content item
+        resourceId:
+          type: string
+          description: The ID of the local resource to publish
+        visibility:
+          type: string
+          description: The visibility scope for the published item
+          enum:
+          - PRIVATE
+          - PUBLIC
+          default: PRIVATE
     ContentItem:
       type: object
       description: Represents a content item in the SAP Analytics Cloud Content Network. Content items are shareable artifacts such as stories, models, and packages.
@@ -153,37 +184,6 @@ components:
         owner:
           type: string
           description: The tenant that published the content item
-    ContentItemPublish:
-      type: object
-      description: Request body for publishing a content item
-      required:
-      - name
-      - resourceId
-      properties:
-        name:
-          type: string
-          description: The display name for the published content item
-        description:
-          type: string
-          description: A description of the content item
-        resourceId:
-          type: string
-          description: The ID of the local resource to publish
-        visibility:
-          type: string
-          description: The visibility scope for the published item
-          enum:
-          - PRIVATE
-          - PUBLIC
-          default: PRIVATE
-  parameters:
-    ItemIdParam:
-      name: itemId
-      in: path
-      required: true
-      description: The unique identifier of the content item
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

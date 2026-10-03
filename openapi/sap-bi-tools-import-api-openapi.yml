@@ -52,15 +52,18 @@ paths:
         '409':
           description: Conflict - content item already exists in tenant
 components:
-  parameters:
-    ItemIdParam:
-      name: itemId
-      in: path
-      required: true
-      description: The unique identifier of the content item
-      schema:
-        type: string
   schemas:
+    ImportOptions:
+      type: object
+      description: Options for importing a content item
+      properties:
+        targetFolderId:
+          type: string
+          description: The target folder ID for the imported content
+        overwrite:
+          type: boolean
+          description: Whether to overwrite existing content
+          default: false
     ImportResult:
       type: object
       description: The result of a content import operation
@@ -87,17 +90,14 @@ components:
               type:
                 type: string
                 description: The type of the imported resource
-    ImportOptions:
-      type: object
-      description: Options for importing a content item
-      properties:
-        targetFolderId:
-          type: string
-          description: The target folder ID for the imported content
-        overwrite:
-          type: boolean
-          description: Whether to overwrite existing content
-          default: false
+  parameters:
+    ItemIdParam:
+      name: itemId
+      in: path
+      required: true
+      description: The unique identifier of the content item
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

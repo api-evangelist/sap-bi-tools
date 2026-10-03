@@ -169,20 +169,6 @@ paths:
         '404':
           description: User not found
 components:
-  parameters:
-    UserIdParam:
-      name: userId
-      in: path
-      required: true
-      description: The unique identifier of the user
-      schema:
-        type: string
-    CountParam:
-      name: count
-      in: query
-      description: Maximum number of results to return per page
-      schema:
-        type: integer
   schemas:
     ScimUser:
       type: object
@@ -265,6 +251,20 @@ components:
           description: The list of resources in the current page
           items:
             type: object
+  parameters:
+    CountParam:
+      name: count
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+    UserIdParam:
+      name: userId
+      in: path
+      required: true
+      description: The unique identifier of the user
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

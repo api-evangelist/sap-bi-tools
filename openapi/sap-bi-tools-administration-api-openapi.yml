@@ -68,18 +68,12 @@ paths:
           description: Namespace not found
 components:
   parameters:
-    ODataFilterParam:
-      name: $filter
+    ODataSelectParam:
+      name: $select
       in: query
-      description: OData filter expression to apply
+      description: Comma-separated list of properties to include
       schema:
         type: string
-    ODataSkipParam:
-      name: $skip
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
     FormatParam:
       name: $format
       in: query
@@ -90,10 +84,22 @@ components:
         - JSON
         - XML
         default: JSON
-    ODataSelectParam:
-      name: $select
+    ODataTopParam:
+      name: $top
       in: query
-      description: Comma-separated list of properties to include
+      description: Maximum number of records to return
+      schema:
+        type: integer
+    ODataSkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+    ODataFilterParam:
+      name: $filter
+      in: query
+      description: OData filter expression to apply
       schema:
         type: string
     NamespaceIdParam:
@@ -104,12 +110,6 @@ components:
       schema:
         type: string
         default: sac
-    ODataTopParam:
-      name: $top
-      in: query
-      description: Maximum number of records to return
-      schema:
-        type: integer
   schemas:
     ODataCollection:
       type: object
