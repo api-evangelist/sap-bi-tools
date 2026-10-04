@@ -133,6 +133,13 @@ components:
           type: integer
           description: Total number of matching entries
   parameters:
+    PageSizeParam:
+      name: pageSize
+      in: query
+      description: The number of items per page
+      schema:
+        type: integer
+        default: 50
     AcceptHeader:
       name: Accept
       in: header
@@ -143,13 +150,6 @@ components:
         - application/json
         - application/xml
         default: application/json
-    PageSizeParam:
-      name: pageSize
-      in: query
-      description: The number of items per page
-      schema:
-        type: integer
-        default: 50
     PageParam:
       name: page
       in: query

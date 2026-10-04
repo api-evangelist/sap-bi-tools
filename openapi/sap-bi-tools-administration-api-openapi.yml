@@ -67,50 +67,20 @@ paths:
         '404':
           description: Namespace not found
 components:
-  parameters:
-    ODataSelectParam:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include
-      schema:
-        type: string
-    FormatParam:
-      name: $format
-      in: query
-      description: The response format (JSON or XML)
-      schema:
-        type: string
-        enum:
-        - JSON
-        - XML
-        default: JSON
-    ODataTopParam:
-      name: $top
-      in: query
-      description: Maximum number of records to return
-      schema:
-        type: integer
-    ODataSkipParam:
-      name: $skip
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-    ODataFilterParam:
-      name: $filter
-      in: query
-      description: OData filter expression to apply
-      schema:
-        type: string
-    NamespaceIdParam:
-      name: namespaceId
-      in: path
-      required: true
-      description: The namespace identifier (typically 'sac')
-      schema:
-        type: string
-        default: sac
   schemas:
+    Provider:
+      type: object
+      description: Represents an SAP Analytics Cloud model available for data export. Providers contain fact data and master data that can be queried via the Provider service endpoints.
+      properties:
+        ProviderID:
+          type: string
+          description: The unique provider identifier for the model
+        Description:
+          type: string
+          description: The human-readable description of the model
+        ProviderName:
+          type: string
+          description: The display name of the model
     ODataCollection:
       type: object
       description: A standard OData collection response wrapper
@@ -135,19 +105,49 @@ components:
           description: The list of providers
           items:
             $ref: '#/components/schemas/Provider'
-    Provider:
-      type: object
-      description: Represents an SAP Analytics Cloud model available for data export. Providers contain fact data and master data that can be queried via the Provider service endpoints.
-      properties:
-        ProviderID:
-          type: string
-          description: The unique provider identifier for the model
-        Description:
-          type: string
-          description: The human-readable description of the model
-        ProviderName:
-          type: string
-          description: The display name of the model
+  parameters:
+    NamespaceIdParam:
+      name: namespaceId
+      in: path
+      required: true
+      description: The namespace identifier (typically 'sac')
+      schema:
+        type: string
+        default: sac
+    ODataSkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+    FormatParam:
+      name: $format
+      in: query
+      description: The response format (JSON or XML)
+      schema:
+        type: string
+        enum:
+        - JSON
+        - XML
+        default: JSON
+    ODataFilterParam:
+      name: $filter
+      in: query
+      description: OData filter expression to apply
+      schema:
+        type: string
+    ODataSelectParam:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include
+      schema:
+        type: string
+    ODataTopParam:
+      name: $top
+      in: query
+      description: Maximum number of records to return
+      schema:
+        type: integer
   securitySchemes:
     oauth2:
       type: oauth2

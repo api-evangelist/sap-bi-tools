@@ -51,18 +51,18 @@ paths:
           description: Model not found
 components:
   parameters:
-    ODataSelectParam:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include
-      schema:
-        type: string
     ODataOrderByParam:
       name: $orderby
       in: query
       description: Property name and direction to sort by
       schema:
         type: string
+    ODataSkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
     FormatParam:
       name: $format
       in: query
@@ -73,6 +73,18 @@ components:
         - JSON
         - XML
         default: JSON
+    ODataFilterParam:
+      name: $filter
+      in: query
+      description: OData filter expression to apply
+      schema:
+        type: string
+    ODataSelectParam:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include
+      schema:
+        type: string
     ModelIdParam:
       name: modelId
       in: path
@@ -86,18 +98,6 @@ components:
       description: Maximum number of records to return
       schema:
         type: integer
-    ODataSkipParam:
-      name: $skip
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-    ODataFilterParam:
-      name: $filter
-      in: query
-      description: OData filter expression to apply
-      schema:
-        type: string
   schemas:
     ODataCollection:
       type: object

@@ -57,6 +57,16 @@ paths:
           description: Document not found
 components:
   schemas:
+    ScheduleResponse:
+      type: object
+      description: Response from scheduling a document
+      properties:
+        SI_ID:
+          type: integer
+          description: The CMS ID of the scheduled instance
+        status:
+          type: string
+          description: The scheduling status
     ScheduleRequest:
       type: object
       description: Request parameters for scheduling a document
@@ -76,16 +86,6 @@ components:
         format:
           type: string
           description: The output format for the scheduled instance (e.g., pdf, xlsx)
-    ScheduleResponse:
-      type: object
-      description: Response from scheduling a document
-      properties:
-        SI_ID:
-          type: integer
-          description: The CMS ID of the scheduled instance
-        status:
-          type: string
-          description: The scheduling status
   parameters:
     AcceptHeader:
       name: Accept

@@ -78,48 +78,6 @@ paths:
         '404':
           description: Model or dimension not found
 components:
-  parameters:
-    ODataSelectParam:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include
-      schema:
-        type: string
-    FormatParam:
-      name: $format
-      in: query
-      description: The response format (JSON or XML)
-      schema:
-        type: string
-        enum:
-        - JSON
-        - XML
-        default: JSON
-    ModelIdParam:
-      name: modelId
-      in: path
-      required: true
-      description: The unique provider (model) identifier
-      schema:
-        type: string
-    ODataTopParam:
-      name: $top
-      in: query
-      description: Maximum number of records to return
-      schema:
-        type: integer
-    ODataSkipParam:
-      name: $skip
-      in: query
-      description: Number of records to skip for pagination
-      schema:
-        type: integer
-    ODataFilterParam:
-      name: $filter
-      in: query
-      description: OData filter expression to apply
-      schema:
-        type: string
   schemas:
     ODataCollection:
       type: object
@@ -133,6 +91,48 @@ components:
           description: The collection of results
           items:
             type: object
+  parameters:
+    ODataSkipParam:
+      name: $skip
+      in: query
+      description: Number of records to skip for pagination
+      schema:
+        type: integer
+    FormatParam:
+      name: $format
+      in: query
+      description: The response format (JSON or XML)
+      schema:
+        type: string
+        enum:
+        - JSON
+        - XML
+        default: JSON
+    ODataFilterParam:
+      name: $filter
+      in: query
+      description: OData filter expression to apply
+      schema:
+        type: string
+    ODataSelectParam:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include
+      schema:
+        type: string
+    ModelIdParam:
+      name: modelId
+      in: path
+      required: true
+      description: The unique provider (model) identifier
+      schema:
+        type: string
+    ODataTopParam:
+      name: $top
+      in: query
+      description: Maximum number of records to return
+      schema:
+        type: integer
   securitySchemes:
     oauth2:
       type: oauth2
