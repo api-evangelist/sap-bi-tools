@@ -853,6 +853,9 @@ apis:
   - type: Portal
     url: https://api.sap.com/package/sapdatasphere/overview
 common:
+- type: CapabilityMap
+  url: capabilities/sap-bi-tools-capability-edges.yml
+  name: SAP BI Tools Business Capability Map
 - type: IssueTracker
   url: https://github.com/SAP-samples/analytics-cloud-export-api-wrapper/issues
 - type: ParentCompany

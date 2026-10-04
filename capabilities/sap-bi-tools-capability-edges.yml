@@ -1,0 +1,57 @@
+slug: sap-bi-tools
+provider: SAP BI Tools
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Stories
+  spec_file: sap-bi-tools-stories-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.82
+  evidence: GET /api/v1/stories  listStories; schemas Story, ModelReference; "endpoints for managing stories,
+    models"
+  reason: Stories in SAP Analytics Cloud are dashboards/reports built on analytic models; managing and
+    retrieving them is Analytics & BI Management. Read-only scope is the only caveat.
+- tag: Users
+  spec_file: sap-bi-tools-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: '"GET /api/v1/scim2/Users listUsersScim2", "POST /api/v1/scim2/Users createUserScim2", "It
+    supports SCIM 2.0 for user provisioning"'
+  reason: The operations create, read, update and delete user accounts via SCIM on a tenant — this is
+    user identity provisioning/deprovisioning, i.e. Identity & Access Management, not an analytics capability
+    despite the BI product context.
+- tag: Content Items
+  spec_file: sap-bi-tools-content-items-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.7
+  evidence: '"Content items include stories, models, and other analytics artifacts that can be shared
+    across SAP Analytics Cloud tenants" with operations "Publish a content item" / "Delete a content item"'
+  reason: Lifecycle management (publish, retrieve, delete) of analytics artefacts — stories and models
+    — is delivery of reporting/BI content, i.e. Analytics & BI Management. Some ambiguity because the
+    operations are a generic content repository CRUD.
+- tag: Scheduling
+  spec_file: sap-bi-tools-scheduling-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.7
+  evidence: POST /v1/infostore/{documentId}/scheduleForms/now  "Schedule a document for immediate execution";
+    "scheduling report execution"
+  reason: Scheduling execution of BI documents/reports is report production and distribution, i.e. Analytics
+    & BI delivery. It is job scheduling in form, but the scheduled object is explicitly a report document.
