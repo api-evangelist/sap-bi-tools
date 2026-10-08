@@ -853,6 +853,12 @@ apis:
   - type: Portal
     url: https://api.sap.com/package/sapdatasphere/overview
 common:
+- type: Plans
+  url: plans/sap-bi-tools-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/sap-bi-tools-rate-limits.yml
+- type: FinOps
+  url: finops/sap-bi-tools-finops.yml
 - type: CapabilityMap
   url: capabilities/sap-bi-tools-capability-edges.yml
   name: SAP BI Tools Business Capability Map
