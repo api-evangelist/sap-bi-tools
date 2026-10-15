@@ -1,15 +1,14 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/sap-analytics-cloud-api-openapi.yml, openapi/sap-analytics-cloud-content-network-api-openapi.yml,
-  openapi/sap-analytics-cloud-data-export-api-openapi.yml
-docs: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/4f43b54398fc4acaa5efa32badfe3df6.html
-note: SAP Analytics Cloud does not publish OAuth scope strings; access is governed by
-  tenant-configured OAuth client purposes (Interactive Usage or API Access) and Access
-  options such as Story Listing and User Provisioning, per the Manage OAuth Clients
-  documentation (https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/4f43b54398fc4acaa5efa32badfe3df6.html).
+generated: '2026-10-14'
+method: none
+source: openapi/sap-bi-tools-administration-api-openapi.yml, openapi/sap-bi-tools-calendars-api-openapi.yml,
+  openapi/sap-bi-tools-content-items-api-openapi.yml, openapi/sap-bi-tools-fact-data-api-openapi.yml,
+  openapi/sap-bi-tools-import-api-openapi.yml, openapi/sap-bi-tools-master-data-api-openapi.yml,
+  openapi/sap-bi-tools-metadata-api-openapi.yml, openapi/sap-bi-tools-resources-api-openapi.yml,
+  openapi/sap-bi-tools-stories-api-openapi.yml, openapi/sap-bi-tools-teams-api-openapi.yml,
+  openapi/sap-bi-tools-users-api-openapi.yml
 schemes:
 - name: oauth2
-  source: openapi/sap-analytics-cloud-api-openapi.yml
+  source: openapi/sap-bi-tools-administration-api-openapi.yml
   flows:
   - flow: authorizationCode
     authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
@@ -17,14 +16,77 @@ schemes:
   description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant
     flow.
 - name: oauth2
-  source: openapi/sap-analytics-cloud-content-network-api-openapi.yml
+  source: openapi/sap-bi-tools-calendars-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+    tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+  description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant
+    flow.
+- name: oauth2
+  source: openapi/sap-bi-tools-content-items-api-openapi.yml
   flows:
   - flow: authorizationCode
     authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
     tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
   description: OAuth 2.0 authentication using authorization code grant flow.
 - name: oauth2
-  source: openapi/sap-analytics-cloud-data-export-api-openapi.yml
+  source: openapi/sap-bi-tools-fact-data-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+    tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+  description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant
+    flow.
+- name: oauth2
+  source: openapi/sap-bi-tools-import-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+    tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+  description: OAuth 2.0 authentication using authorization code grant flow.
+- name: oauth2
+  source: openapi/sap-bi-tools-master-data-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+    tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+  description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant
+    flow.
+- name: oauth2
+  source: openapi/sap-bi-tools-metadata-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+    tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+  description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant
+    flow.
+- name: oauth2
+  source: openapi/sap-bi-tools-resources-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+    tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+  description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant
+    flow.
+- name: oauth2
+  source: openapi/sap-bi-tools-stories-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+    tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+  description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant
+    flow.
+- name: oauth2
+  source: openapi/sap-bi-tools-teams-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
+    tokenUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/token
+  description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant
+    flow.
+- name: oauth2
+  source: openapi/sap-bi-tools-users-api-openapi.yml
   flows:
   - flow: authorizationCode
     authorizationUrl: https://{tenant}.authentication.{region}.hana.ondemand.com/oauth/authorize
@@ -32,3 +94,5 @@ schemes:
   description: OAuth 2.0 authentication using SAML bearer assertion or authorization code grant
     flow.
 scopes: []
+note: The OAuth2 security scheme(s) in the OpenAPI declare no scopes, and no security requirement
+  references one.
