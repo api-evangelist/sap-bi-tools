@@ -49,6 +49,13 @@ paths:
           description: Model not found
 components:
   parameters:
+    ModelIdParam:
+      name: modelId
+      in: path
+      required: true
+      description: The unique provider (model) identifier
+      schema:
+        type: string
     FormatParam:
       name: $format
       in: query
@@ -59,13 +66,6 @@ components:
         - JSON
         - XML
         default: JSON
-    ModelIdParam:
-      name: modelId
-      in: path
-      required: true
-      description: The unique provider (model) identifier
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

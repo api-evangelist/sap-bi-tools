@@ -87,6 +87,18 @@ paths:
           description: Invalid or expired logon token
 components:
   schemas:
+    InfoStoreCollection:
+      type: object
+      description: A paginated collection of InfoStore entries
+      properties:
+        entries:
+          type: array
+          description: The list of InfoStore entries in this page
+          items:
+            $ref: '#/components/schemas/InfoStoreEntry'
+        __count:
+          type: integer
+          description: Total number of matching entries
     InfoStoreEntry:
       type: object
       description: Represents an object in the BI Platform CMS InfoStore repository. All managed objects including documents, folders, users, and groups are represented as InfoStore entries.
@@ -120,18 +132,6 @@ components:
         SI_PATH:
           type: string
           description: The full path to the object in the repository
-    InfoStoreCollection:
-      type: object
-      description: A paginated collection of InfoStore entries
-      properties:
-        entries:
-          type: array
-          description: The list of InfoStore entries in this page
-          items:
-            $ref: '#/components/schemas/InfoStoreEntry'
-        __count:
-          type: integer
-          description: Total number of matching entries
   parameters:
     PageSizeParam:
       name: pageSize

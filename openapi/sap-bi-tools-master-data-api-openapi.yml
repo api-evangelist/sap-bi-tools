@@ -78,20 +78,26 @@ paths:
         '404':
           description: Model or dimension not found
 components:
-  schemas:
-    ODataCollection:
-      type: object
-      description: A standard OData collection response wrapper
-      properties:
-        '@odata.context':
-          type: string
-          description: The OData context URL
-        value:
-          type: array
-          description: The collection of results
-          items:
-            type: object
   parameters:
+    ODataFilterParam:
+      name: $filter
+      in: query
+      description: OData filter expression to apply
+      schema:
+        type: string
+    ODataTopParam:
+      name: $top
+      in: query
+      description: Maximum number of records to return
+      schema:
+        type: integer
+    ModelIdParam:
+      name: modelId
+      in: path
+      required: true
+      description: The unique provider (model) identifier
+      schema:
+        type: string
     ODataSkipParam:
       name: $skip
       in: query
@@ -108,31 +114,25 @@ components:
         - JSON
         - XML
         default: JSON
-    ODataFilterParam:
-      name: $filter
-      in: query
-      description: OData filter expression to apply
-      schema:
-        type: string
     ODataSelectParam:
       name: $select
       in: query
       description: Comma-separated list of properties to include
       schema:
         type: string
-    ModelIdParam:
-      name: modelId
-      in: path
-      required: true
-      description: The unique provider (model) identifier
-      schema:
-        type: string
-    ODataTopParam:
-      name: $top
-      in: query
-      description: Maximum number of records to return
-      schema:
-        type: integer
+  schemas:
+    ODataCollection:
+      type: object
+      description: A standard OData collection response wrapper
+      properties:
+        '@odata.context':
+          type: string
+          description: The OData context URL
+        value:
+          type: array
+          description: The collection of results
+          items:
+            type: object
   securitySchemes:
     oauth2:
       type: oauth2
