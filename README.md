@@ -1,4 +1,4 @@
-# SAP BI Tools (sap-bi-tools)
+# SAP BI Tools
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,414 +66,255 @@
 
 Collection of SAP Business Intelligence tools and APIs for analytics, reporting, and data visualization.
 
-**APIs.json:** [https://api.sap.com/bi-tools](https://api.sap.com/bi-tools)
+**Areas:** Analytics · Business Intelligence · Data Visualization · Reporting · SAP
+
+## SAP BI Tools on APIs.io
+
+Everything profiled for SAP BI Tools is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/sap-bi-tools/](https://apis.io/providers/sap-bi-tools/)** — or go straight to one of the APIs or properties below.
+
+### APIs (26)
+
+- [SAP Analytics Cloud Data Export API](https://apis.io/apis/sap-bi-tools/sap-analytics-cloud-data-export-api/) — OData-based API for exporting fact data and master data from SAP Analytics Cloud models. Allows programmatic extraction of underlying data and metadata for…
+- [SAP Analytics Cloud Content Network REST API](https://apis.io/apis/sap-bi-tools/sap-analytics-cloud-content-network-rest-api/) — REST API for managing content in the SAP Analytics Cloud Content Network. Enables programmatic access to get, publish, and delete private and public content…
+- [SAP Analytics Cloud Analytics Designer API](https://apis.io/apis/sap-bi-tools/sap-analytics-cloud-analytics-designer-api/) — JavaScript-based API for building interactive analytic applications in SAP Analytics Cloud Analytics Designer. Provides scripting capabilities to control…
+- [SAP BusinessObjects BI Platform RESTful Web Services](https://apis.io/apis/sap-bi-tools/sap-businessobjects-bi-platform-restful-web-services/) — REST API for SAP BusinessObjects BI Platform for managing documents, users, and scheduling reports.
+- [SAP BusinessObjects Web Intelligence RESTful Web Services API](https://apis.io/apis/sap-bi-tools/sap-businessobjects-web-intelligence-restful-web-services-api/) — REST API for SAP BusinessObjects Web Intelligence for creating, modifying, and exporting Web Intelligence reports. Provides endpoints for report management,…
+- [SAP BusinessObjects BI Semantic Layer REST API](https://apis.io/apis/sap-bi-tools/sap-businessobjects-bi-semantic-layer-rest-api/) — REST API for working with SAP BusinessObjects BI Semantic Layer universes. Allows querying and managing universes, executing queries against semantic layer…
+- [SAP Crystal Reports RESTful Web Services API](https://apis.io/apis/sap-bi-tools/sap-crystal-reports-restful-web-services-api/) — RESTful API for SAP Crystal Reports for Enterprise that enables consuming and embedding Crystal Reports data in web and mobile applications. Supports…
+- [SAP Crystal Reports .NET SDK](https://apis.io/apis/sap-bi-tools/sap-crystal-reports-net-sdk/) — .NET SDK for integrating SAP Crystal Reports into Visual Studio applications. Enables developers to embed Crystal Reports into .NET web and desktop…
+- [SAP Lumira Discovery Extensions API](https://apis.io/apis/sap-bi-tools/sap-lumira-discovery-extensions-api/) — JavaScript API for creating custom visualizations and extensions in SAP Lumira.
+- [SAP Datasphere Consumption and Catalog API](https://apis.io/apis/sap-bi-tools/sap-datasphere-consumption-and-catalog-api/) — OData V4 API for browsing the SAP Datasphere catalog and consuming datasets and metadata from consumable data assets. Enables external applications to…
+- [SAP BI Tools Administration API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-administration-api/) — Administration service endpoints for discovering available namespaces and providers (models) on the SAP Analytics Cloud tenant.
+- [SAP BI Tools Authentication API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-authentication-api/) — Logon and logoff endpoints for obtaining and invalidating session tokens required for all subsequent API calls.
+- [SAP BI Tools Calendars API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-calendars-api/) — Manage calendar events and tasks used for planning workflows and scheduling in SAP Analytics Cloud.
+- [SAP BI Tools CMS Query API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-cms-query-api/) — Execute CMS queries against the BI Platform repository to search for objects using CMS query language syntax.
+- [SAP BI Tools Content Items API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-content-items-api/) — Manage content items in the Content Network including retrieving, publishing, and deleting both private and public content packages.
+- [SAP BI Tools Fact Data API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-fact-data-api/) — Provider service endpoints for retrieving fact data from specific models. Fact data includes the transactional records with associated dimension values and…
+- [SAP BI Tools Import API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-import-api/) — Import content items from the Content Network into the local SAP Analytics Cloud tenant.
+- [SAP BI Tools Inbox API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-inbox-api/) — Manage BI Inbox items including viewing received reports and scheduled instances.
+- [SAP BI Tools InfoStore API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-infostore-api/) — Browse and query the CMS InfoStore repository to access documents, folders, users, groups, and other BI Platform objects.
+- [SAP BI Tools Master Data API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-master-data-api/) — Provider service endpoints for retrieving master data from specific model dimensions. Master data includes the dimension member lists with their attributes…
+- [SAP BI Tools Metadata API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-metadata-api/) — Provider service endpoints for retrieving OData metadata documents describing the structure of models, dimensions, and measures.
+- [SAP BI Tools Resources API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-resources-api/) — Browse and manage resources within the SAP Analytics Cloud file repository including stories, models, and folders.
+- [SAP BI Tools Scheduling API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-scheduling-api/) — Schedule reports and documents for execution with configurable parameters, recurrence, and destination options.
+- [SAP BI Tools Stories API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-stories-api/) — Manage analytic stories including dashboards and reports. Stories are the primary visualization artifact in SAP Analytics Cloud.
+- [SAP BI Tools Teams API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-teams-api/) — SCIM 2.0 endpoints for managing teams and group memberships for access control in SAP Analytics Cloud.
+- [SAP BI Tools Users API](https://apis.io/apis/sap-bi-tools/sap-bi-tools-users-api/) — SCIM 2.0 endpoints for managing user accounts, provisioning, and deprovisioning in SAP Analytics Cloud.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Arazzo workflows (14)
+
+Multi-step workflows that chain operations into a business task.
+
+- [SAP BI Tools CMS Query Drilldown](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-cms-query-drilldown-workflow/)
+- [SAP BI Tools Create a SAC Team With a Member](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-create-team-with-member-workflow/)
+- [SAP BI Tools Export Dimension Master Data](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-export-dimension-master-data-workflow/)
+- [SAP BI Tools Export Model Fact Data](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-export-model-fact-data-workflow/)
+- [SAP BI Tools Import a Content Network Item](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-import-content-item-workflow/)
+- [SAP BI Tools List and Inspect a SAC Story](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-list-and-inspect-story-workflow/)
+- [SAP BI Tools Logon and Browse a Folder](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-logon-browse-folder-workflow/)
+- [SAP BI Tools Provision a SAC User](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-provision-scim-user-workflow/)
+- [SAP BI Tools Publish a Content Network Item](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-publish-content-item-workflow/)
+- [SAP BI Tools Query and Schedule a Document](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-query-and-schedule-document-workflow/)
+- [SAP BI Tools Retire a Content Network Item](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-retire-content-item-workflow/)
+- [SAP BI Tools Schedule and Poll the BI Inbox](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-schedule-and-poll-inbox-workflow/)
+- [SAP BI Tools Session Lifecycle](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-session-lifecycle-workflow/)
+- [SAP BI Tools Story and Resource Cross-Reference](https://apis.io/arazzos/sap-bi-tools/sap-bi-tools-story-resource-crossref-workflow/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Sap Bi Tools Agentic Access](https://apis.io/agentic-access/sap-bi-tools/sap-bi-tools-agentic-access/)
+
+#### JSON Schema (22)
+
+The data models the API reads and writes.
+
+- [CalendarEvent](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-calendarevent/)
+- [SAP Analytics Cloud Content Item](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-content-item/)
+- [ContentItem](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-contentitem/)
+- [ContentItemPublish](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-contentitempublish/)
+- [ImportOptions](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-importoptions/)
+- [ImportResult](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-importresult/)
+- [InfoStoreCollection](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-infostorecollection/)
+- [InfoStoreEntry](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-infostoreentry/)
+- [LogonRequest](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-logonrequest/)
+- [LogonResponse](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-logonresponse/)
+- [ModelReference](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-modelreference/)
+- [ODataCollection](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-odatacollection/)
+- [Provider](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-provider/)
+- [ProviderCollection](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-providercollection/)
+- [Resource](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-resource/)
+- [ScheduleRequest](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-schedulerequest/)
+- [ScheduleResponse](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-scheduleresponse/)
+- [ScimGroup](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-scimgroup/)
+- [ScimListResponse](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-scimlistresponse/)
+- [ScimUser](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-scimuser/)
+- [SAP Analytics Cloud Story](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-story/)
+- [SAP Analytics Cloud User](https://apis.io/schemas/sap-bi-tools/sap-bi-tools-user/)
 
-## Tags
+#### JSON Structure (3)
 
-- Analytics
-- Business Intelligence
-- Data Visualization
-- Reporting
-- SAP
+Data models expressed in JSON Structure.
 
-## Timestamps
+- [Sap Bi Tools Story Structure](https://apis.io/json-structure/sap-bi-tools/sap-bi-tools-story-structure/)
+- [Sap Bi Tools Structure](https://apis.io/json-structure/sap-bi-tools/sap-bi-tools-structure/)
+- [Sap Bi Tools User Structure](https://apis.io/json-structure/sap-bi-tools/sap-bi-tools-user-structure/)
 
-- **Created:** 2024-01-20
-- **Modified:** 2026-05-19
+#### JSON-LD (1)
 
-## APIs
+Linked-data contexts for the provider's vocabulary.
 
-### SAP Analytics Cloud API
+- [Sap Bi Tools Context](https://apis.io/jsonld/sap-bi-tools/sap-bi-tools-context/)
 
-RESTful API for SAP Analytics Cloud enabling data manipulation, story creation, and model management.
+#### Vocabulary (1)
 
-- **Human URL:** [https://help.sap.com/docs/SAP_ANALYTICS_CLOUD](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD)
-- **Base URL:** `https://api.sapanalytics.cloud`
+The provider's domain terms, defined.
 
-#### Tags
+- [SAP BI Tools Vocabulary](https://apis.io/vocabularies/sap-bi-tools/sap-bi-tools-vocabulary/)
 
-- Analytics
-- Cloud
-- Models
-- Stories
+#### Examples (2)
 
-#### Properties
+Example requests and responses.
 
-- [Documentation](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/)
-- [OpenAPI](https://api.sap.com/api/SACOpenAPI/overview) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Authentication](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/b4f4d1e6e7fb4c08b0964e0b6d14d849.html)
-- [Rate Limits](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/rate-limits)
-- [Reference](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/fc2c581619264a40a37b98c19753c542.html)
-- [Getting Started](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html)
-- [Changelog](https://www.sap.com/sea/products/data-cloud/cloud-analytics/features/release-highlights.html)
-- [OpenAPI](openapi/sap-analytics-cloud-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Sap Bi Tools Get Fact Data Example](https://apis.io/examples/sap-bi-tools/sap-bi-tools-get-fact-data-example/)
+- [Sap Bi Tools List Users Example](https://apis.io/examples/sap-bi-tools/sap-bi-tools-list-users-example/)
 
-### SAP Analytics Cloud Data Export API
+#### Collections (21)
 
-OData-based API for exporting fact data and master data from SAP Analytics Cloud models. Allows programmatic extraction of underlying data and metadata for integration with external systems and data pipelines.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html)
-- **Base URL:** `https://api.sapanalytics.cloud`
+- [SAP BI Tools SAP Analytics Cloud API](https://apis.io/collections/sap-bi-tools/open-sap-analytics-cloud-api/)
+- [SAP BI Tools SAP Analytics Cloud Content Network REST API](https://apis.io/collections/sap-bi-tools/open-sap-analytics-cloud-content-network-api/)
+- [SAP BI Tools SAP Analytics Cloud Data Export API](https://apis.io/collections/sap-bi-tools/open-sap-analytics-cloud-data-export-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-administration-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Authentication API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-authentication-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Calendars API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-calendars-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration CMS Query API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-cms-query-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Content Items API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-content-items-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Fact Data API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-fact-data-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Import API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-import-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Inbox API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-inbox-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration InfoStore API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-infostore-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Master Data API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-master-data-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Metadata API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-metadata-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Resources API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-resources-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Scheduling API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-scheduling-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Stories API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-stories-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Teams API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-teams-api/)
+- [SAP BI Tools SAP Analytics Cloud Administration Users API](https://apis.io/collections/sap-bi-tools/open-sap-bi-tools-users-api/)
+- [SAP BI Tools SAP BusinessObjects BI Platform RESTful Web Services](https://apis.io/collections/sap-bi-tools/open-sap-businessobjects-bi-platform-api/)
+- [SAP BI Tools SAP Analytics Cloud API](https://apis.io/collections/sap-bi-tools/postman-sap-analytics-cloud-api/)
 
-#### Tags
+#### Governance rules (2)
 
-- Analytics
-- Cloud
-- Data Export
-- OData
+Spectral rulesets for the provider's contracts.
 
-#### Properties
+- [SAP BI Tools — jsonschema rules](https://apis.io/rules/sap-bi-tools/sap-bi-tools-jsonschema-spectral-rules/)
+- [SAP BI Tools API Rules](https://apis.io/rules/sap-bi-tools/sap-bi-tools-rules/)
 
-- [Documentation](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/3ccfab3348dd407db089accb66cff9a2.html)
-- [GitHub Repository](https://github.com/SAP-samples/analytics-cloud-export-api-wrapper)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (3)
 
-### SAP Analytics Cloud Content Network REST API
+Authentication, trust centre, and vulnerability disclosure.
 
-REST API for managing content in the SAP Analytics Cloud Content Network. Enables programmatic access to get, publish, and delete private and public content items available through the Content Network.
+- [Sap Bi Tools Authentication](https://apis.io/security/sap-bi-tools/sap-bi-tools-authentication/)
+- [Sap Bi Tools Domain Security](https://apis.io/security/sap-bi-tools/sap-bi-tools-domain-security/)
+- [Sap Bi Tools Vulnerability Disclosure](https://apis.io/security/sap-bi-tools/sap-bi-tools-vulnerability-disclosure/)
 
-- **Human URL:** [https://help.sap.com/doc/9825c700f68e489ca5634a3da101a94c/release/en-US/ca804ae1c3874053a1e140e7c9cea019.pdf](https://help.sap.com/doc/9825c700f68e489ca5634a3da101a94c/release/en-US/ca804ae1c3874053a1e140e7c9cea019.pdf)
-- **Base URL:** `https://api.sapanalytics.cloud`
+#### OAuth scopes (1)
 
-#### Tags
+The permissions the API asks for.
 
-- Analytics
-- Cloud
-- Content Management
+- [Sap Bi Tools Scopes](https://apis.io/scopes/sap-bi-tools/sap-bi-tools-scopes/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://help.sap.com/doc/9825c700f68e489ca5634a3da101a94c/release/en-US/ca804ae1c3874053a1e140e7c9cea019.pdf)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### SAP Analytics Cloud Analytics Designer API
+- [Sap Bi Tools Plans Pricing](https://apis.io/plans/sap-bi-tools/sap-bi-tools-plans-pricing/)
 
-JavaScript-based API for building interactive analytic applications in SAP Analytics Cloud Analytics Designer. Provides scripting capabilities to control widgets, data sources, planning operations, and application behavior for embedded analytics scenarios.
+#### Rate limits (1)
 
-- **Human URL:** [https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html)
-
-#### Tags
-
-- Analytics
-- Application Design
-- Embedded Analytics
-- JavaScript
-
-#### Properties
-
-- [Documentation](https://help.sap.com/doc/958d4c11261f42e992e8d01a4c0dde25/release/en-US/index.html)
-- [Reference](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/fc2c581619264a40a37b98c19753c542.html)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### SAP BusinessObjects BI Platform RESTful Web Services
+- [Sap Bi Tools Rate Limits](https://apis.io/rate-limits/sap-bi-tools/sap-bi-tools-rate-limits/)
 
-REST API for SAP BusinessObjects BI Platform for managing documents, users, and scheduling reports.
+#### FinOps (1)
 
-- **Human URL:** [https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM)
-- **Base URL:** `https://server:port/biprws`
+What the API costs to run, by operation.
 
-#### Tags
-
-- BusinessObjects
-- Documents
-- Reports
-- Scheduling
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/)
-- [API Reference](https://help.sap.com/doc/e39d9c134f1f4634addd5161f93dbf25/4.3/en-US/RESTful_Web_Services_User_Guide.pdf)
-- [SDK](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/sdk)
-- [Authentication](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/e8c2e5877e9e44f9bfcc3085595b9208/authentication)
-- [A P I  Hub](https://api.sap.com/package/BIPlatformRESTfulAPI)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Sap Bi Tools Finops](https://apis.io/finops/sap-bi-tools/sap-bi-tools-finops/)
 
-### SAP BusinessObjects Web Intelligence RESTful Web Services API
+## Where to find this API
 
-REST API for SAP BusinessObjects Web Intelligence for creating, modifying, and exporting Web Intelligence reports. Provides endpoints for report management, data provider operations, and document scheduling separate from the general BI Platform REST API.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://help.sap.com/docs/SAP_BUSINESSOBJECTS_WEB_INTELLIGENCE/58f583a7643e48cf944cf554eb961f5b/45f8735d6e041014910aba7db0e91070.html](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_WEB_INTELLIGENCE/58f583a7643e48cf944cf554eb961f5b/45f8735d6e041014910aba7db0e91070.html)
-- **Base URL:** `https://server:port/biprws`
-
-#### Tags
-
-- BusinessObjects
-- Data Providers
-- Reports
-- Web Intelligence
-
-#### Properties
-
-- [Documentation](https://help.sap.com/doc/1eeee826c0154c62a5cbd29359ecbc18/4.3/en-US/sbo43_webi_restws_dg_en.pdf)
-- [Reference](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_WEB_INTELLIGENCE/58f583a7643e48cf944cf554eb961f5b/45f8735d6e041014910aba7db0e91070.html)
-- [Quickstart](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_WEB_INTELLIGENCE/58f583a7643e48cf944cf554eb961f5b/7da2e2d66f701014aaab767bb0e91070.html)
-- [A P I  Hub](https://api.sap.com/api/SAPWebIntelligence/resource)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### SAP BusinessObjects BI Semantic Layer REST API
-
-REST API for working with SAP BusinessObjects BI Semantic Layer universes. Allows querying and managing universes, executing queries against semantic layer data sources, and handling prompts and contexts programmatically.
-
-- **Human URL:** [https://help.sap.com/docs/SAP_BUSINESSOBJECTS_WEB_INTELLIGENCE/58f583a7643e48cf944cf554eb961f5b/ec54808e6fdb101497906a7cb0e91070.html](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_WEB_INTELLIGENCE/58f583a7643e48cf944cf554eb961f5b/ec54808e6fdb101497906a7cb0e91070.html)
-- **Base URL:** `https://server:port/biprws`
-
-#### Tags
-
-- BusinessObjects
-- Data Access
-- Semantic Layer
-- Universes
-
-#### Properties
-
-- [Documentation](https://help.sap.com/doc/a6296f37853c40388d5ada84c094d2cc/4.3.4/en-US/sbo43sp2_webisl_dev_guide_en.pdf)
-- [Reference](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_WEB_INTELLIGENCE/58f583a7643e48cf944cf554eb961f5b/ec54808e6fdb101497906a7cb0e91070.html)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### SAP Crystal Reports RESTful Web Services API
-
-RESTful API for SAP Crystal Reports for Enterprise that enables consuming and embedding Crystal Reports data in web and mobile applications. Supports retrieving report metadata, fetching data rows, setting parameters, and exporting reports in multiple formats.
-
-- **Human URL:** [https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/0945312ac81f4b63be258130d2938055/45cecf3f6e041014910aba7db0e91070.html](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/0945312ac81f4b63be258130d2938055/45cecf3f6e041014910aba7db0e91070.html)
-
-#### Tags
-
-- Crystal Reports
-- Embedded Analytics
-- Reporting
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/CRYSTAL_REPORTS/c5fb6213b96b4cc1bf43a55d68d9d87b/)
-- [S D K  Download](https://support.sap.com/en/product/analytics/crystal-reports.html)
-- [Developer  Guide](https://help.sap.com/doc/8f2e87893e944ec98a9c378aefdbbdd2/4.3.1/en-US/sbo43sp1_cr_restws_en.pdf)
-- [Reference](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/0945312ac81f4b63be258130d2938055/45cecf3f6e041014910aba7db0e91070.html)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### SAP Crystal Reports .NET SDK
-
-.NET SDK for integrating SAP Crystal Reports into Visual Studio applications. Enables developers to embed Crystal Reports into .NET web and desktop applications, programmatically create and modify reports, and manage report data sources and parameters.
-
-- **Human URL:** [https://help.sap.com/docs/SAP_CRYSTAL_REPORTS,_DEVELOPER_VERSION_FOR_MICROSOFT_VISUAL_STUDIO/0d6684e153174710b8b2eb114bb7f843/a2cb609cfb6949b6a67b2effe32a347e.html](https://help.sap.com/docs/SAP_CRYSTAL_REPORTS,_DEVELOPER_VERSION_FOR_MICROSOFT_VISUAL_STUDIO/0d6684e153174710b8b2eb114bb7f843/a2cb609cfb6949b6a67b2effe32a347e.html)
-
-#### Tags
-
-- .NET
-- Crystal Reports
-- SDK
-- Visual Studio
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/SAP_CRYSTAL_REPORTS,_DEVELOPER_VERSION_FOR_MICROSOFT_VISUAL_STUDIO/0d6684e153174710b8b2eb114bb7f843/a2cb609cfb6949b6a67b2effe32a347e.html)
-- [Community](https://pages.community.sap.com/topics/crystal-reports/visual-studio)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### SAP Lumira Discovery Extensions API
-
-JavaScript API for creating custom visualizations and extensions in SAP Lumira.
-
-- **Human URL:** [https://help.sap.com/docs/LUMIRA](https://help.sap.com/docs/LUMIRA)
-
-#### Tags
-
-- Extensions
-- JavaScript
-- Lumira
-- Visualization
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/LUMIRA/82b8ad67e9b74a48bad806dc52c96fcc/)
-- [Extension  A P I](https://help.sap.com/docs/LUMIRA/extensions-api)
-- [Samples](https://github.com/SAP/lumira-extension-viz)
-- [Developer  Guide](https://help.sap.com/doc/9d0bf4daa0cb41cbb630e093450b1bd8/2.3.0.0/en-US/lum_23SP00_ds_devguide_en.pdf)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### SAP HANA Cloud Data Lake Files REST API
-
-RESTful API for accessing and managing files in SAP HANA Cloud Data Lake file containers. Supports file operations, auditing file access, and managing data stored in the HANA Cloud Data Lake for BI and analytics workloads.
-
-- **Human URL:** [https://help.sap.com/docs/hana-cloud-data-lake](https://help.sap.com/docs/hana-cloud-data-lake)
-- **Base URL:** `https://api.hana.ondemand.com`
-
-#### Tags
-
-- Cloud
-- Data Access
-- Data Lake
-- HANA
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/hana-cloud-data-lake)
-- [OpenAPI](https://api.sap.com/api/HanaCloudDataLake/overview) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Getting Started](https://developers.sap.com/tutorials/data-lake-file-containers-restapi..html)
-- [Reference](https://help.sap.com/doc/9d084a41830f46d6904fd4c23cd4bbfa/QRC_3_2021/en-US/html/index.html)
-- [A P I  Hub](https://api.sap.com/package/SAPHanaCloud/rest)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### SAP Datasphere API
-
-API for SAP Datasphere (formerly SAP Data Warehouse Cloud) for data integration, modeling, and consumption. Provides REST and OData endpoints for managing spaces, connections, data products, and consuming relational and analytical models.
-
-- **Human URL:** [https://help.sap.com/docs/SAP_DATASPHERE](https://help.sap.com/docs/SAP_DATASPHERE)
-- **Base URL:** `https://datasphere-api.cfapps.eu10.hana.ondemand.com`
-
-#### Tags
-
-- Data Modeling
-- Data Warehouse
-- Datasphere
-- Integration
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/)
-- [API Reference](https://help.sap.com/docs/SAP_DATASPHERE/api-reference)
-- [OpenAPI](https://api.sap.com/api/Datasphere/overview) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [A P I  Hub](https://api.sap.com/package/sapdatasphere/overview)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### SAP Datasphere Consumption and Catalog API
-
-OData V4 API for browsing the SAP Datasphere catalog and consuming datasets and metadata from consumable data assets. Enables external applications to discover available spaces, access relational and analytical models, and retrieve data products programmatically.
-
-- **Human URL:** [https://api.sap.com/api/DatasphereCatalog/resource/SAP_Datasphere_Consumption_Catalog](https://api.sap.com/api/DatasphereCatalog/resource/SAP_Datasphere_Consumption_Catalog)
-- **Base URL:** `https://datasphere-api.cfapps.eu10.hana.ondemand.com`
-
-#### Tags
-
-- Catalog
-- Data Consumption
-- Datasphere
-- OData
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/SAP_DATASPHERE/43509d67b8b84e66a30851e832f66911/7a453609c8694b029493e7d87e0de60a.html)
-- [A P I  Hub](https://api.sap.com/package/sapdatasphere/odatav4)
-- [Postman Collection](collections/sap-analytics-cloud-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-content-network-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-content-network-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-analytics-cloud-data-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-analytics-cloud-data-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/sap-businessobjects-bi-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/sap-businessobjects-bi-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Portal](https://api.sap.com)
-- [Getting Started](https://developers.sap.com/topics/business-technology-platform..html)
-- [Documentation](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD)
-- [Authentication](https://help.sap.com/docs/authentication)
-- [Terms of Service](https://www.sap.com/about/legal/terms-of-use.html)
-- [Privacy Policy](https://www.sap.com/about/legal/privacy.html)
-- [Status Page](https://www.sap.com/about/trust-center/cloud-service-status.html)
-- [Support](https://support.sap.com)
-- [Community](https://community.sap.com)
-- [Blog](https://community.sap.com/t5/application-development-and-automation-blog-posts/bg-p/application-developmentblog-board)
-- [Learning](https://learning.sap.com)
-- [Changelog](https://pages.community.sap.com/topics/cloud-analytics/product-updates)
-- [GitHub Organization](https://github.com/SAP)
 - [Website](https://www.sap.com)
-- [Sign Up](https://developers.sap.com)
-- [S D Ks](https://developers.sap.com/topics/cloud-sdk.html)
-- [OpenAPI](openapi/sap-analytics-cloud-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sap-analytics-cloud-content-network-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sap-analytics-cloud-data-export-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/sap-businessobjects-bi-platform-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](json-schema/sap-bi-tools-story-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sap-bi-tools-user-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sap-bi-tools-content-item-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/sap-bi-tools-story-structure.json)
-- [JSON Structure](json-structure/sap-bi-tools-user-structure.json)
-- [JSON-LD](json-ld/sap-bi-tools-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Vocabulary](vocabulary/sap-bi-tools-vocabulary.yml)
-- [Spectral Rules](rules/sap-bi-tools-rules.yml)
+- [Documentation](https://help.sap.com/docs/SAP_ANALYTICS_CLOUD)
+- [Getting started](https://developers.sap.com/topics/business-technology-platform..html)
+- [Support](https://support.sap.com)
+- [Changelog](https://pages.community.sap.com/topics/cloud-analytics/product-updates)
+- [Blog](https://community.sap.com/t5/application-development-and-automation-blog-posts/bg-p/application-developmentblog-board)
+- [Terms of service](https://www.sap.com/about/legal/terms-of-use.html)
+- [Privacy policy](https://www.sap.com/about/legal/privacy.html)
+- [GitHub](https://github.com/SAP)
+- [Status](https://www.sap.com/about/trust-center/cloud-service-status.html)
 
-## Maintainers
+## API Evangelist rating
 
-**Email:** kin@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 52.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 63.0 |
+| Contract governance | 27.3 |
+| Operational transparency | 50.0 |
+| Developer ergonomics | 46.4 |
+| Access clarity | 39.5 |
+
+**Agent readiness 28.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 40.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/sap-bi-tools/](https://apis.io/providers/sap-bi-tools/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for SAP BI Tools: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/sap-bi-tools/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
